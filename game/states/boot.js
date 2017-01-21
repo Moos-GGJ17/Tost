@@ -24,6 +24,9 @@ States.Boot = {
 		this.game.load.image('NoteRed', 'assets/images/notes/red.png');
 		this.game.load.image('NoteYellow', 'assets/images/notes/yellow.png');
 		this.game.load.image('NoteWhite', 'assets/images/notes/white.png');
+		this.game.load.image('NoteLight', 'assets/images/notes/light.png');
+
+		this.game.load.audio('funkytown', 'assets/audio/songs/funkytown.mp3');
 	},
 	// Starts the game ;)
 	create: function(){
