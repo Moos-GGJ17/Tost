@@ -32,7 +32,7 @@ Player.prototype.initialize = function() {
 	this.body.setCircle(this.width / 2, 0, 0);
 	this.body.velocity.x = this.initialVelocity;
 
-	this.bottomLine = this.game.add.sprite(0, this.height + this.y, 'Blank');
+	this.bottomLine = this.game.add.sprite(0, this.height * 2 + this.y, 'Blank');
 	this.bottomLine.scale.x = this.game.width;
 	this.game.physics.arcade.enable(this.bottomLine);
 

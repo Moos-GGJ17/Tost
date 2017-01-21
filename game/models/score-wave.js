@@ -24,7 +24,7 @@ ScoreWave.prototype.initialize = function() {
     this.bmd.addToWorld();
 
     this.timer = this.game.time.create(false);
-    this.timer.repeat(0, 23, this.changeColorWithTime, this);
+    this.timer.repeat(500, 4, this.changeColor, this);
 }
 
 ScoreWave.prototype.update = function() {
@@ -61,18 +61,14 @@ ScoreWave.prototype.hitNote = function() {
 }
 
 ScoreWave.prototype.missNote = function() {
-	this.timer.start();
+	//this.timer.start();
+	this.game.time.events.repeat(Phaser.Timer.SECOND / 4, 2, this.changeColor, this);
 	this.score = Math.max(--this.score, 0);
 	if (this.score <= 0) {
 		this.gameOver = true;
 	}
 	this.game.chart.music.volume = this.score / this.MAX_SCORE;
-}
 
-ScoreWave.prototype.changeColorWithTime = function() {
-	if (this.count > 4) {
-		this.changeColor();
-	}
 }
 
 ScoreWave.prototype.changeColor = function() {
