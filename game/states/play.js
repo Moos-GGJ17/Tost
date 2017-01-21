@@ -19,7 +19,7 @@ States.Play = {
 		this.game.stage.backgroundColor = '0x000000';
 
 		// Sets the world bounds
-		this.game.world.setBounds(0, 0, 800, 600);
+		this.game.world.setBounds(0, 0, this.BOUNDS.x, this.BOUNDS.y);
 
 		this.game.player = new Player(this.game, this.BOUNDS.x / 2, this.BOUNDS.y * 3 / 4, 150);
 	},
