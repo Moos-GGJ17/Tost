@@ -27,12 +27,18 @@ States.Boot = {
 		this.game.load.image('NoteWhite', 'assets/images/notes/white.png');
 		this.game.load.image('NoteLight', 'assets/images/notes/light.png');
 
-		this.game.load.audio('funkytown', 'assets/audio/songs/funkytown.mp3');
+		this.game.load.image('ToastColor', 'assets/images/toast/color.png');
+		this.game.load.image('ToastGold', 'assets/images/toast/gold.png');
+		this.game.load.image('ToastGray', 'assets/images/toast/gray.png');
 
-		this.game.load.image('GameOver', 'assets/images/game-over.png');
+		this.game.load.image('GameOver', 'assets/images/ui/game-over.png');
+		this.game.load.image('Tosted', 'assets/images/ui/tosted.png');
+		this.game.load.image('Space', 'assets/images/ui/space.png');
 
-		//this.game.load.image('City', 'assets/images/backgrounds/city.gif');
 		this.game.load.spritesheet('City', 'assets/images/backgrounds/city.jpg', 424, 600);
+
+		this.game.load.audio('funkytown', 'assets/audio/songs/funkytown.mp3');
+		this.game.load.audio('ibiza', 'assets/audio/songs/ibiza.mp3');
 	},
 	// Starts the game ;)
 	create: function(){

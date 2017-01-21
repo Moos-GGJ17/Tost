@@ -4,6 +4,7 @@ function Note(game, x, y, velocity, tempo, color) {
 	this.game.add.existing(this);
 
 	this.tuned = false;
+	this.fail = false;
 	this.color = color;
 	this.tempo = tempo;
 	this.initialVelocity = velocity;
@@ -17,7 +18,7 @@ Note.prototype.initialize = function() {
 	this.game.physics.arcade.enable(this);
 	this.immovable = true;
 	this.checkWorldBounds = true;
-	//this.events.onOutOfBounds.add(this.missed, this);
+	this.events.onOutOfBounds.add(this.remove, this);
 
 	this.body.setCircle(this.width / 2, 0, 0);
 	this.body.velocity.y = this.initialVelocity;
@@ -33,8 +34,9 @@ Note.prototype.update = function() {
 		this.alpha -= 0.04;
 	}
 	if (this.alpha <= 0) {
-		this.light.destroy();
-		this.destroy();
+		//this.light.destroy();
+		//this.destroy();
+		this.remove();
 	}
 }
 
@@ -47,11 +49,17 @@ Note.prototype.hit = function() {
 }
 
 Note.prototype.missed = function() {
-	if (!this.tuned) {
+	if (!this.tuned && !this.fail) {
 		this.game.score.missNote();
-		this.light.destroy();
-		this.destroy();
+		this.fail = true;
+		//this.light.destroy();
+		//this.destroy();
 	}
+}
+
+Note.prototype.remove = function() {
+	this.light.destroy();
+	this.destroy();
 }
 
 Note.prototype.debug = function() {
