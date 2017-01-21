@@ -24,6 +24,9 @@ Player.prototype.initialize = function() {
 	this.body.setCircle(this.width / 2, 0, 0);
 	this.body.velocity.x = this.initialVelocity;
 
+	/*this.scale.x = 0.5;
+	this.scale.y = 0.5;*/
+
 	this.changeDirectionButton = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 	this.changeDirectionButton.onDown.add(this.changeDirection, this);
 
@@ -49,7 +52,7 @@ Player.prototype.update = function() {
 
     	this.trace.bmd.circle(this.width / 2 + this.history[i],
     		this.width / 2 + this.y + this.trace.data.sin[this.game.height - this.y - i],
-    		this.width / 8,
+    		(this.width / 2) - i * this.width / 2 / (this.game.height - this.y),
     		'rgba(255, 255, 255, ' + (0.8 - i / (this.game.height - this.y)));
     }
 
@@ -61,5 +64,5 @@ Player.prototype.changeDirection = function() {
 }
 
 Player.prototype.debug = function() {
-	this.game.debug.body(this);
+	//this.game.debug.body(this);
 }
