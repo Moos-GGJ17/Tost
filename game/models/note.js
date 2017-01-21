@@ -41,16 +41,19 @@ Note.prototype.update = function() {
 }
 
 Note.prototype.hit = function() {
-	this.game.player.changeColor(this.color);
-	this.loadTexture('NoteWhite');
-	this.tuned = true;
-	this.game.score.hitNote();
+	if (!this.tuned) {
+		this.game.player.changeColor(this.color);
+		this.loadTexture('NoteWhite');
+		this.tuned = true;
+		this.game.vitalWave.hitNote();
+		this.game.toasts.increaseScore();
+	}
 	//this.destroy();
 }
 
 Note.prototype.missed = function() {
 	if (!this.tuned && !this.fail) {
-		this.game.score.missNote();
+		this.game.vitalWave.missNote();
 		this.fail = true;
 		//this.light.destroy();
 		//this.destroy();

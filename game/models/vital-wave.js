@@ -1,10 +1,10 @@
-function ScoreWave(game, x, y, width, score, amplitude, color) {
+function VitalWave(game, x, y, width, life, amplitude, color) {
 	Phaser.Sprite.call(this, game, x, y,'Blank');
 	this.game = game;
 	this.game.add.existing(this);
 
-	this.MAX_SCORE = score;
-	this.score = this.MAX_SCORE;
+	this.MAX_LIFE = life;
+	this.life = this.MAX_LIFE;
 	this.amplitude = amplitude;
 	this.gameOver = false;
 	this.color = '#e0e0e0';
@@ -13,21 +13,21 @@ function ScoreWave(game, x, y, width, score, amplitude, color) {
 	this.initialize();
 }
 
-ScoreWave.prototype = Object.create(Phaser.Sprite.prototype);
-ScoreWave.prototype.constructor = Player;
+VitalWave.prototype = Object.create(Phaser.Sprite.prototype);
+VitalWave.prototype.constructor = Player;
 
-ScoreWave.prototype.initialize = function() {
+VitalWave.prototype.initialize = function() {
 	this.data = this.game.math.sinCosGenerator(this.game.width / 8, 1, 1, 10);
 
     //  Just so we can see the data
     this.bmd = this.game.add.bitmapData(this.game.width, this.game.height);
     this.bmd.addToWorld();
 
-    this.timer = this.game.time.create(false);
-    this.timer.repeat(500, 4, this.changeColor, this);
+    /*this.timer = this.game.time.create(false);
+    this.timer.repeat(500, 4, this.changeColor, this);*/
 }
 
-ScoreWave.prototype.update = function() {
+VitalWave.prototype.update = function() {
 	if (this.count > 4) {
 		this.count = 0;
 		this.bmd.clear();
@@ -36,12 +36,12 @@ ScoreWave.prototype.update = function() {
 		for (var i = 0; i < this.game.width; i++) {
 			currentWidth = Math.floor(Math.random() * this.traceWidth) + 1;
 	    	this.bmd.rect(i * 8,
-	    		this.y + this.data.sin[i] * this.score * this.amplitude,
+	    		this.y + this.data.sin[i] * this.life * this.amplitude,
 	    		currentWidth,
 	    		currentWidth,
 	    		this.color);
 	    	this.bmd.rect(i * 8,
-	    		this.y - this.data.sin[i] * this.score * this.amplitude,
+	    		this.y - this.data.sin[i] * this.life * this.amplitude,
 	    		currentWidth,
 	    		currentWidth,
 	    		this.color);
@@ -51,27 +51,26 @@ ScoreWave.prototype.update = function() {
 	} else {
 		this.count++;
 	}
-	console.log(this.score);
 }
 
-ScoreWave.prototype.hitNote = function() {
-	this.score += 0.1;
-	this.score = Math.min(this.score, this.MAX_SCORE);
-	this.game.chart.music.volume = this.score / this.MAX_SCORE;
+VitalWave.prototype.hitNote = function() {
+	this.life += 0.1;
+	this.life = Math.min(this.life, this.MAX_LIFE);
+	this.game.chart.music.volume = this.life / this.MAX_LIFE;
 }
 
-ScoreWave.prototype.missNote = function() {
+VitalWave.prototype.missNote = function() {
 	//this.timer.start();
 	this.game.time.events.repeat(Phaser.Timer.SECOND / 4, 2, this.changeColor, this);
-	this.score = Math.max(--this.score, 0);
-	if (this.score <= 0) {
+	this.life = Math.max(--this.life, 0);
+	if (this.life <= 0) {
 		this.gameOver = true;
 	}
-	this.game.chart.music.volume = this.score / this.MAX_SCORE;
+	this.game.chart.music.volume = this.life / this.MAX_LIFE;
 
 }
 
-ScoreWave.prototype.changeColor = function() {
+VitalWave.prototype.changeColor = function() {
 	switch (this.color) {
 		case '#e0e0e0':
 			this.color = '#ef5350';
