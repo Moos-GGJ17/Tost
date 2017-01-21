@@ -1,5 +1,5 @@
 function Player(game, x, y, velocity) {
-	Phaser.Sprite.call(this, game, x, y,'Player');
+	Phaser.Sprite.call(this, game, x, y,'WaveWhite');
 	this.game = game;
 	this.game.add.existing(this);
 
@@ -9,6 +9,15 @@ function Player(game, x, y, velocity) {
 	this.history = [];
 	for (var i = 0; i < this.game.height - y; i++) {
 		history[i] = x;
+	}
+
+	this.TRACE_COLORS = {
+		'Blue': '41, 98, 255',
+		'Cyan': '13, 115, 119',
+		'Gray': '117, 117, 117',
+		'Purple': '131, 68, 150',
+		'Red': '239, 83, 80',
+		'Yellow': '255, 206, 62'
 	}
 }
 
@@ -31,6 +40,7 @@ Player.prototype.initialize = function() {
 	this.changeDirectionButton.onDown.add(this.changeDirection, this);
 
 	this.trace = {};
+	this.trace.color = '224, 224, 224';
 	this.trace.data = this.game.math.sinCosGenerator((this.game.height - this.y) * 2, (this.game.height - this.y), 1, 1);
 	console.log(this.game.height - this.y);
 	console.log(this.trace.data);
@@ -38,6 +48,7 @@ Player.prototype.initialize = function() {
     //  Just so we can see the data
     this.trace.bmd = this.game.add.bitmapData(this.game.width, this.game.height);
     this.trace.bmd.addToWorld();
+    //this.game.playerTrace.add(this.trace.bmd);
 }
 
 Player.prototype.update = function() {
@@ -51,10 +62,10 @@ Player.prototype.update = function() {
     	}
 
     	this.trace.bmd.rect(this.width / 4 + this.history[i],
-    		this.width / 2 + this.y + this.trace.data.sin[this.game.height - this.y - i],
-    		(this.width / 2) - i * this.width / 2 / (this.game.height - this.y),
-    		(this.width / 2) - i * this.width / 2 / (this.game.height - this.y),
-    		'rgba(255, 255, 255, ' + (0.8 - i / (this.game.height - this.y)));
+    		this.width / 3 + this.y + this.trace.data.sin[this.game.height - this.y - i],
+    		(this.width * 3 / 5) - i * this.width * 3 / 5 / (this.game.height - this.y),
+    		(this.width * 3 / 5) - i * this.width * 3 / 5 / (this.game.height - this.y),
+    		'rgba(' + this.trace.color + ', ' + (0.8 - i / (this.game.height - this.y)));
     }
 
     Phaser.ArrayUtils.rotate(this.trace.data.cos);
@@ -62,6 +73,11 @@ Player.prototype.update = function() {
 
 Player.prototype.changeDirection = function() {
 	this.body.velocity.x *= -1;
+}
+
+Player.prototype.changeColor = function(color) {
+	this.loadTexture('Wave' + color);
+	this.trace.color = this.TRACE_COLORS[color];
 }
 
 Player.prototype.debug = function() {

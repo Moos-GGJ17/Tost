@@ -4,6 +4,7 @@ function Note(game, x, y, velocity, color) {
 	this.game.add.existing(this);
 
 	this.tuned = false;
+	this.color = color;
 	this.initialVelocity = velocity;
 	this.initialize();
 }
@@ -24,7 +25,7 @@ Note.prototype.initialize = function() {
 Note.prototype.update = function() {
 	this.game.physics.arcade.overlap(this, this.game.player, this.hit, null, this);
 	if (this.tuned) {
-		this.alpha -= 0.01;
+		this.alpha -= 0.04;
 	}
 	if (this.alpha <= 0) {
 		this.destroy();
@@ -33,6 +34,7 @@ Note.prototype.update = function() {
 
 Note.prototype.hit = function() {
 	//TO DO: scoring
+	this.game.player.changeColor(this.color);
 	this.loadTexture('NoteWhite');
 	this.tuned = true;
 	//this.destroy();

@@ -4,20 +4,21 @@ function Chart(game, tempo){
 	this.tempo = tempo;
 	this.timer = this.game.time.create(false);
 	this.createRandomNotes();
+	this.colors = ['Blue', 'Cyan', 'Gray', 'Purple', 'Red', 'Yellow']
 }
 
 Chart.prototype = Object.create(Phaser.Group.prototype);
 Chart.prototype.constructor = Chart;
 
 Chart.prototype.createNote = function (x, y, velocity, color) {
-	var note = new Note(this.game, Math.random() * 800, y, velocity, color);
+	var note = new Note(this.game, Math.random() * 800, y, velocity, this.colors[Math.floor(Math.random() * 6)]);
 	this.add(note);
 	console.log('Note created');
 	console.log(note);
 }
 
 Chart.prototype.createRandomNotes = function () {
-	this.timer.loop(this.tempo, this.createNote, this, Math.random() * 800, 0, 50, 'Cyan');
+	this.timer.loop(this.tempo, this.createNote, this, Math.random() * 800, 0, 50, 'Red');
 	this.timer.start();
 }
 
