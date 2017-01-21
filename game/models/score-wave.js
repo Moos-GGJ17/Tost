@@ -7,10 +7,10 @@ function ScoreWave(game, x, y, width, score, amplitude, color) {
 	this.score = this.MAX_SCORE;
 	this.amplitude = amplitude;
 	this.gameOver = false;
-	this.color = color;
+	this.color = '#e0e0e0';
 	this.traceWidth = width;
-	this.initialize();
 	this.count = 5;
+	this.initialize();
 }
 
 ScoreWave.prototype = Object.create(Phaser.Sprite.prototype);
@@ -22,6 +22,9 @@ ScoreWave.prototype.initialize = function() {
     //  Just so we can see the data
     this.bmd = this.game.add.bitmapData(this.game.width, this.game.height);
     this.bmd.addToWorld();
+
+    this.timer = this.game.time.create(false);
+    this.timer.repeat(0, 23, this.changeColorWithTime, this);
 }
 
 ScoreWave.prototype.update = function() {
@@ -48,15 +51,38 @@ ScoreWave.prototype.update = function() {
 	} else {
 		this.count++;
 	}
+	console.log(this.score);
 }
 
 ScoreWave.prototype.hitNote = function() {
-	this.score = Math.min(++this.score, this.MAX_SCORE);
+	this.score += 0.1;
+	this.score = Math.min(this.score, this.MAX_SCORE);
+	this.game.chart.music.volume = this.score / this.MAX_SCORE;
 }
 
 ScoreWave.prototype.missNote = function() {
+	this.timer.start();
 	this.score = Math.max(--this.score, 0);
 	if (this.score <= 0) {
 		this.gameOver = true;
+	}
+	this.game.chart.music.volume = this.score / this.MAX_SCORE;
+}
+
+ScoreWave.prototype.changeColorWithTime = function() {
+	if (this.count > 4) {
+		this.changeColor();
+	}
+}
+
+ScoreWave.prototype.changeColor = function() {
+	switch (this.color) {
+		case '#e0e0e0':
+			this.color = '#ef5350';
+			break;
+		case '#ef5350':
+			this.color = '#e0e0e0';
+			break;
+		default:
 	}
 }

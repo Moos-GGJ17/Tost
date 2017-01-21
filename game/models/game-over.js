@@ -19,15 +19,20 @@ GameOver.prototype.createTweens = function(x, y) {
 	this.tweens = {};
 	this.tweens.show = this.game.add.tween(this);
 	this.tweens.show.to( { 'x': x, 'y': y }, 2000, Phaser.Easing.Linear.None, false);
+	this.tweens.show.onComplete.add(this.enableInput, this);
 }
 
 GameOver.prototype.show = function() {
 	this.tweens.show.start();
-	this.restartButton = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
-	this.restartButton.onDown.add(this.restartGame, this);
 }
 
 GameOver.prototype.restartGame = function() {
 	this.game.chart.music.stop();
 	this.game.state.start('Play');
+}
+
+GameOver.prototype.enableInput = function() {
+	console.log('Enabling restart input');
+	this.restartButton = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+	this.restartButton.onDown.add(this.restartGame, this);
 }

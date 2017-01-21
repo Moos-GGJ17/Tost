@@ -29,9 +29,12 @@ Player.prototype.initialize = function() {
 	this.immovable = true;
 	this.checkWorldBounds = true;
 
-
 	this.body.setCircle(this.width / 2, 0, 0);
 	this.body.velocity.x = this.initialVelocity;
+
+	this.bottomLine = this.game.add.sprite(0, this.height + this.y, 'Blank');
+	this.bottomLine.scale.x = this.game.width;
+	this.game.physics.arcade.enable(this.bottomLine);
 
 	/*this.scale.x = 0.5;
 	this.scale.y = 0.5;*/
@@ -56,19 +59,21 @@ Player.prototype.initialize = function() {
 Player.prototype.update = function() {
 	this.trace.bmd.clear();
 	//this.trace.data = this.game.math.sinCosGenerator((this.game.height - this.y) * 2, this.game.height - this.y, 1, 1);
-    for (var i = this.game.height - this.y; i >= 0; i--) {
-    	if (i > 1) {
-    		this.history[i] = this.history[i - 1];
-    	} else {
-    		this.history[i] = this.x;
-    	}
+    if (!this.game.score.gameOver) {
+	    for (var i = this.game.height - this.y; i >= 0; i--) {
+	    	if (i > 1) {
+	    		this.history[i] = this.history[i - 1];
+	    	} else {
+	    		this.history[i] = this.x;
+	    	}
 
-    	this.trace.bmd.rect(this.width / 4 + this.history[i],
-    		this.width / 3 + this.y + this.trace.data.sin[this.game.height - this.y - i],
-    		(this.width * 3 / 5) - i * this.width * 3 / 5 / (this.game.height - this.y),
-    		(this.width * 3 / 5) - i * this.width * 3 / 5 / (this.game.height - this.y),
-    		'rgba(' + this.trace.color + ', ' + (0.8 - i / (this.game.height - this.y)));
-    }
+	    	this.trace.bmd.rect(this.width / 4 + this.history[i],
+	    		this.width / 3 + this.y + this.trace.data.sin[this.game.height - this.y - i],
+	    		(this.width * 3 / 5) - i * this.width * 3 / 5 / (this.game.height - this.y),
+	    		(this.width * 3 / 5) - i * this.width * 3 / 5 / (this.game.height - this.y),
+	    		'rgba(' + this.trace.color + ', ' + (0.8 - i / (this.game.height - this.y)));
+	    }
+	}
 
     if (this.x + this.width < 0) {
     	this.x = this.game.width;
@@ -78,7 +83,9 @@ Player.prototype.update = function() {
     }
 
     if (this.game.score.gameOver) {
-    	//this.changeDirectionButton.destroy();
+    	this.changeDirectionButton.onDown.remove(this.changeDirection, this);
+    	this.body.velocity.x = 0;
+    	this.body.velocity.y = -1000;
     }
 
     //Phaser.ArrayUtils.rotate(this.trace.data.cos);
@@ -96,4 +103,5 @@ Player.prototype.changeColor = function(color) {
 
 Player.prototype.debug = function() {
 	this.game.debug.body(this);
+	this.game.debug.body(this.bottomLine);
 }

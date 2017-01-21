@@ -31,7 +31,8 @@ States.Boot = {
 
 		this.game.load.image('GameOver', 'assets/images/game-over.png');
 
-		this.game.load.image('City', 'assets/images/backgrounds/city.gif');
+		//this.game.load.image('City', 'assets/images/backgrounds/city.gif');
+		this.game.load.spritesheet('City', 'assets/images/backgrounds/city.jpg', 424, 600);
 	},
 	// Starts the game ;)
 	create: function(){

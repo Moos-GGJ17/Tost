@@ -26,7 +26,6 @@ Chart.prototype.createNote = function () {
 		this.timer.stop();
 	} else {
 		if (this.notes[this.index] > 0) {
-			console.log('Creating note');
 			var note = new Note(this.game, this.positions[this.notes[this.index] - 1], 0, this.velocity, this.tempo, this.colors[this.notes[this.index] - 1]);
 			this.add(note);
 		}
@@ -59,7 +58,6 @@ Chart.prototype.createNoteWithTime = function () {
 			this.index++;
 		}
 		//this.index++;*/
-		console.log('Creating note');
 		var note = new Note(this.game, this.positions[this.notes[this.index] - 1], 0, this.velocity, this.tempo, this.colors[this.notes[this.index] - 1]);
 		this.add(note);
 		this.index++;
