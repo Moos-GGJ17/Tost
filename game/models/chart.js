@@ -4,7 +4,7 @@ function Chart(game, tempo){
 	this.tempo = tempo;
 	this.timer = this.game.time.create(false);
 	//this.createRandomNotes();
-	this.velocity = 200;
+	this.velocity = 400;
 	this.colors = ['Blue', 'Cyan', 'Gray', 'Purple', 'Red', 'Yellow'];
 	this.positions = [];
 	this.notes = [];

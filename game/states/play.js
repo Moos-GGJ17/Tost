@@ -103,7 +103,7 @@ States.Play = {
 		//this.game.playerTrace = this.game.add.sprite();
 		//trace.add(this.game.playerTrace);
 		this.game.player = new Player(this.game, this.BOUNDS.x / 2, this.BOUNDS.y * 3 / 4, 1000);
-		this.game.score = new ScoreWave(this.game, 0, 100, 7, 3, 7, '#ffffff');
+		this.game.score = new ScoreWave(this.game, 0, 100, 7, 5, 4, '#ffffff');
 		this.game.gameOver = new GameOver(this.game, this.game.world.width / 2, this.game.height / 3);
 	},
 
