@@ -43,11 +43,13 @@ Note.prototype.hit = function() {
 	this.game.player.changeColor(this.color);
 	this.loadTexture('NoteWhite');
 	this.tuned = true;
+	this.game.score.hitNote();
 	//this.destroy();
 }
 
 Note.prototype.missed = function() {
 	//TO DO: scoring
+	this.game.score.missNote();
 	this.light.destroy();
 	this.destroy();
 }

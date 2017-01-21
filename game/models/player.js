@@ -70,7 +70,15 @@ Player.prototype.update = function() {
     		'rgba(' + this.trace.color + ', ' + (0.8 - i / (this.game.height - this.y)));
     }
 
-    Phaser.ArrayUtils.rotate(this.trace.data.cos);
+    if (this.x + this.width < 0) {
+    	this.x = this.game.width;
+    }
+    if (this.x > this.game.width) {
+    	this.x = - this.width;
+    }
+
+    //Phaser.ArrayUtils.rotate(this.trace.data.cos);
+    //console.log(this.x);
 }
 
 Player.prototype.changeDirection = function() {

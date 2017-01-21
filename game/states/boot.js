@@ -7,7 +7,8 @@ var States = {};
 States.Boot = {
 	// Loads the assets.
 	preload: function(){
-		this.game.load.image('Player', 'assets/images/player.png');
+		//this.game.load.image('Player', 'assets/images/player.png');
+		this.game.load.image('Blank', 'assets/images/blank.png');
 
 		this.game.load.image('WaveWhite', 'assets/images/wave/white.png');
 		this.game.load.image('WaveBlue', 'assets/images/wave/blue.png');
