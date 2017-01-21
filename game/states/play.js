@@ -17,6 +17,7 @@ States.Play = {
 	create: function(){
 		// Sets the game background color
 		this.game.stage.backgroundColor = '0x000000';
+		this.game.add.tileSprite(0, 0, this.game.width, this.game.height, 'City'); 
 
 		// Sets the world bounds
 		this.game.world.setBounds(0, 0, this.BOUNDS.x, this.BOUNDS.y);
@@ -66,18 +67,24 @@ States.Play = {
 }
 
 );
-		}, 2850);
+		}, 0);
 		//var trace = this.game.add.group();
 		//this.game.playerTrace = this.game.add.sprite();
 		//trace.add(this.game.playerTrace);
 		this.game.player = new Player(this.game, this.BOUNDS.x / 2, this.BOUNDS.y * 3 / 4, 1000);
-		this.game.score = new ScoreWave(this.game, 0, 30, 5, 20, '#ffffff');
+		this.game.score = new ScoreWave(this.game, 0, 30, 5, 3, 7, '#ffffff');
+		this.game.gameOver = new GameOver(this.game, this.game.world.width / 2, this.game.height / 3);
 	},
 
 	// Updates all the game's objects.
 	update: function(){
 		this.game.player.update();
 		this.game.chart.update();
+
+		if (this.game.score.gameOver) {
+			//this.state.start('GameOver', true);
+			this.game.gameOver.show();
+		}
 	},
 
 	render: function() {

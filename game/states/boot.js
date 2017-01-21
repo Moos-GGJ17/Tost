@@ -28,6 +28,10 @@ States.Boot = {
 		this.game.load.image('NoteLight', 'assets/images/notes/light.png');
 
 		this.game.load.audio('funkytown', 'assets/audio/songs/funkytown.mp3');
+
+		this.game.load.image('GameOver', 'assets/images/game-over.png');
+
+		this.game.load.image('City', 'assets/images/backgrounds/city.gif');
 	},
 	// Starts the game ;)
 	create: function(){

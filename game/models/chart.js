@@ -93,7 +93,9 @@ Chart.prototype.loadWithTime = function (chart) {
 }*/
 
 Chart.prototype.update = function() {
-	this.callAll('update');
+	if (!this.game.score.gameOver) {
+		this.callAll('update');
+	}
 	//console.log(this.game.time.totalElapsedSeconds() - this.startTime);
 	if (this.play) {
 		if (this.game.time.totalElapsedSeconds() - this.startTime >= this.times[this.index] / 1000) {

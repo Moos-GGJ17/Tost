@@ -22,7 +22,6 @@ NoteLight.prototype.initialize = function() {
 	this.y = - (this.height - this.parent.height) / 2;
 	this.alpha = 0;
 	//this.body.velocity.y = this.parent.initialVelocity;
-	console.log('Parent velocity'+this.parent.initialVelocity);
 
 	this.createTweens();
 }
@@ -42,7 +41,6 @@ NoteLight.prototype.createTweens = function() {
 		aux.timer.loop(aux.tempo - 200, aux.tweens.shine.start, aux);
 	}, 100);*/
 	this.timer.loop((this.tempo - 200)*2, this.shine, this);
-	console.log(this.timer);
 	this.timer.start();
 }
 

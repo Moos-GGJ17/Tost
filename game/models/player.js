@@ -77,6 +77,10 @@ Player.prototype.update = function() {
     	this.x = - this.width;
     }
 
+    if (this.game.score.gameOver) {
+    	//this.changeDirectionButton.destroy();
+    }
+
     //Phaser.ArrayUtils.rotate(this.trace.data.cos);
     //console.log(this.x);
 }

@@ -1,10 +1,12 @@
-function ScoreWave(game, x, y, width, score, color) {
+function ScoreWave(game, x, y, width, score, amplitude, color) {
 	Phaser.Sprite.call(this, game, x, y,'Blank');
 	this.game = game;
 	this.game.add.existing(this);
 
 	this.MAX_SCORE = score;
 	this.score = this.MAX_SCORE;
+	this.amplitude = amplitude;
+	this.gameOver = false;
 	this.color = color;
 	this.traceWidth = width;
 	this.initialize();
@@ -31,12 +33,12 @@ ScoreWave.prototype.update = function() {
 		for (var i = 0; i < this.game.width; i++) {
 			currentWidth = Math.floor(Math.random() * this.traceWidth) + 1;
 	    	this.bmd.rect(i * 8,
-	    		this.y + this.data.sin[i] * this.score,
+	    		this.y + this.data.sin[i] * this.score * this.amplitude,
 	    		currentWidth,
 	    		currentWidth,
 	    		this.color);
 	    	this.bmd.rect(i * 8,
-	    		this.y - this.data.sin[i] * this.score,
+	    		this.y - this.data.sin[i] * this.score * this.amplitude,
 	    		currentWidth,
 	    		currentWidth,
 	    		this.color);
@@ -53,5 +55,8 @@ ScoreWave.prototype.hitNote = function() {
 }
 
 ScoreWave.prototype.missNote = function() {
-	this.score--;
+	this.score = Math.max(--this.score, 0);
+	if (this.score <= 0) {
+		this.gameOver = true;
+	}
 }
