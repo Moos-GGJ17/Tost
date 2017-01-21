@@ -11,6 +11,7 @@ GameOver.prototype.constructor = GameOver;
 
 GameOver.prototype.initialize = function(x, y) {
 	this.anchor.setTo(0.5, 0.5);
+	this.scale.setTo(2, 2);
 	this.y = -this.height / 2;
 	this.createTweens(x, y);
 }
@@ -32,7 +33,6 @@ GameOver.prototype.restartGame = function() {
 }
 
 GameOver.prototype.enableInput = function() {
-	console.log('Enabling restart input');
 	this.restartButton = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 	this.restartButton.onDown.add(this.restartGame, this);
 }

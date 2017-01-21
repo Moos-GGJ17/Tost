@@ -4,7 +4,7 @@ function Chart(game, tempo){
 	this.tempo = tempo;
 	this.timer = this.game.time.create(false);
 	//this.createRandomNotes();
-	this.velocity = 400;
+	this.velocity = 200;
 	this.colors = ['Blue', 'Cyan', 'Gray', 'Purple', 'Red', 'Yellow'];
 	this.positions = [];
 	this.notes = [];
@@ -38,6 +38,7 @@ Chart.prototype.load = function (chart) {
 	this.notes = chart.notes;
 	this.timer.loop(this.tempo, this.createNote, this);
 	this.timer.start();
+	//this.game.toasts.MAX_SCORE = chart.notes.length;
 	var music = this.game.add.audio(chart.filename);
 	this.music = music;
 	//this.music.startTime = -10000;
@@ -47,9 +48,12 @@ Chart.prototype.load = function (chart) {
 }
 
 Chart.prototype.createNoteWithTime = function () {
-	if (this.index > this.notes.length) {
+	if (this.index >= this.notes.length) {
 		//this.timer.stop();
 		this.music.stop();
+		/*this.game.toasts.center();
+		this.game.tosted.center();*/
+		this.game.time.events.repeat(Phaser.Timer.SECOND * this.game.world.height / this.velocity, 1, this.lastNote, this);
 	} else {
 		/*if (this.times[this.index] >= this.timer.ms) {
 			console.log('Creating note');
@@ -78,6 +82,7 @@ Chart.prototype.loadWithTime = function (chart) {
 	this.music.play();
 	this.play = true;
 	this.startTime = this.game.time.totalElapsedSeconds();
+	this.game.toasts.MAX_SCORE = chart.notes.length;
 	var aux = this;
 	console.log(this.times[0]);
 	/*setTimeout(function() {
@@ -91,7 +96,7 @@ Chart.prototype.loadWithTime = function (chart) {
 }*/
 
 Chart.prototype.update = function() {
-	if (!this.game.score.gameOver) {
+	if (!this.game.vitalWave.gameOver) {
 		this.callAll('update');
 	}
 	//console.log(this.game.time.totalElapsedSeconds() - this.startTime);
@@ -100,6 +105,10 @@ Chart.prototype.update = function() {
 			this.createNoteWithTime();
 		}
 	}
+}
+
+Chart.prototype.lastNote = function() {
+	this.game.toasts.finish();
 }
 
 Chart.prototype.debug = function() {

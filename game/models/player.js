@@ -59,7 +59,7 @@ Player.prototype.initialize = function() {
 Player.prototype.update = function() {
 	this.trace.bmd.clear();
 	//this.trace.data = this.game.math.sinCosGenerator((this.game.height - this.y) * 2, this.game.height - this.y, 1, 1);
-    if (!this.game.score.gameOver) {
+    if (!this.game.vitalWave.gameOver) {
 	    for (var i = this.game.height - this.y; i >= 0; i--) {
 	    	if (i > 1) {
 	    		this.history[i] = this.history[i - 1];
@@ -82,7 +82,7 @@ Player.prototype.update = function() {
     	this.x = - this.width;
     }
 
-    if (this.game.score.gameOver) {
+    if (this.game.vitalWave.gameOver || this.game.toasts.finished) {
     	this.changeDirectionButton.onDown.remove(this.changeDirection, this);
     	this.body.velocity.x = 0;
     	this.body.velocity.y = -1000;

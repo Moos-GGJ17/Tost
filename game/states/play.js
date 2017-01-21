@@ -103,8 +103,10 @@ States.Play = {
 		//this.game.playerTrace = this.game.add.sprite();
 		//trace.add(this.game.playerTrace);
 		this.game.player = new Player(this.game, this.BOUNDS.x / 2, this.BOUNDS.y * 3 / 4, 1000);
-		this.game.score = new ScoreWave(this.game, 0, 100, 7, 5, 4, '#ffffff');
+		this.game.vitalWave = new VitalWave(this.game, 0, 100, 7, 5, 4, '#ffffff');
 		this.game.gameOver = new GameOver(this.game, this.game.world.width / 2, this.game.height / 3);
+		this.game.tosted = new Tosted(this.game);
+		this.game.toasts = new Toasts(this.game, 0, 0, 0);
 	},
 
 	// Updates all the game's objects.
@@ -112,7 +114,7 @@ States.Play = {
 		this.game.player.update();
 		this.game.chart.update();
 
-		if (this.game.score.gameOver) {
+		if (this.game.vitalWave.gameOver) {
 			//this.state.start('GameOver', true);
 			this.game.gameOver.show();
 		}
