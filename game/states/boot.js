@@ -7,7 +7,8 @@ var States = {};
 States.Boot = {
 	// Loads the assets.
 	preload: function(){
-		this.game.load.image('Player', 'assets/images/player.png');
+		//this.game.load.image('Player', 'assets/images/player.png');
+		this.game.load.image('Blank', 'assets/images/blank.png');
 
 		this.game.load.image('WaveWhite', 'assets/images/wave/white.png');
 		this.game.load.image('WaveBlue', 'assets/images/wave/blue.png');
@@ -24,6 +25,14 @@ States.Boot = {
 		this.game.load.image('NoteRed', 'assets/images/notes/red.png');
 		this.game.load.image('NoteYellow', 'assets/images/notes/yellow.png');
 		this.game.load.image('NoteWhite', 'assets/images/notes/white.png');
+		this.game.load.image('NoteLight', 'assets/images/notes/light.png');
+
+		this.game.load.audio('funkytown', 'assets/audio/songs/funkytown.mp3');
+
+		this.game.load.image('GameOver', 'assets/images/game-over.png');
+
+		//this.game.load.image('City', 'assets/images/backgrounds/city.gif');
+		this.game.load.spritesheet('City', 'assets/images/backgrounds/city.jpg', 424, 600);
 	},
 	// Starts the game ;)
 	create: function(){
