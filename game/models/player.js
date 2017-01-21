@@ -50,8 +50,9 @@ Player.prototype.update = function() {
     		this.history[i] = this.x;
     	}
 
-    	this.trace.bmd.circle(this.width / 2 + this.history[i],
+    	this.trace.bmd.rect(this.width / 4 + this.history[i],
     		this.width / 2 + this.y + this.trace.data.sin[this.game.height - this.y - i],
+    		(this.width / 2) - i * this.width / 2 / (this.game.height - this.y),
     		(this.width / 2) - i * this.width / 2 / (this.game.height - this.y),
     		'rgba(255, 255, 255, ' + (0.8 - i / (this.game.height - this.y)));
     }
@@ -64,5 +65,5 @@ Player.prototype.changeDirection = function() {
 }
 
 Player.prototype.debug = function() {
-	//this.game.debug.body(this);
+	this.game.debug.body(this);
 }

@@ -21,15 +21,17 @@ States.Play = {
 		// Sets the world bounds
 		this.game.world.setBounds(0, 0, this.BOUNDS.x, this.BOUNDS.y);
 
+		this.game.chart = new Chart(this.game, 2000);
 		this.game.player = new Player(this.game, this.BOUNDS.x / 2, this.BOUNDS.y * 3 / 4, 150);
 	},
 
 	// Updates all the game's objects.
 	update: function(){
-		this.game.player.update();    
+		this.game.player.update();
 	},
 
 	render: function() {
-		this.game.player.debug();
+		//this.game.player.debug();
+		//this.game.chart.debug();
 	}
 };
