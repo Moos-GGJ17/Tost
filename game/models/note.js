@@ -36,9 +36,6 @@ Note.prototype.update = function() {
 		this.light.destroy();
 		this.destroy();
 	}
-
-	console.log('Note x' + this.x + ' y' + this.y);
-	console.log('Light x' + this.light.x + ' y' + this.light.y);
 }
 
 Note.prototype.hit = function() {
