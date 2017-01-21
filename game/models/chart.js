@@ -4,17 +4,34 @@ function Chart(game, tempo){
 	this.tempo = tempo;
 	this.timer = this.game.time.create(false);
 	this.createRandomNotes();
-	this.colors = ['Blue', 'Cyan', 'Gray', 'Purple', 'Red', 'Yellow']
+	this.velocity = 50;
+	this.colors = ['Blue', 'Cyan', 'Gray', 'Purple', 'Red', 'Yellow'];
+	this.positions = [];
+	this.notes = [];
+	this.index = 0;
+	for (var i = 0; i < 6; i++) {
+		this.positions[i] = this.game.world.width * (i + 1) / 8;
+	}
 }
 
 Chart.prototype = Object.create(Phaser.Group.prototype);
 Chart.prototype.constructor = Chart;
 
-Chart.prototype.createNote = function (x, y, velocity, color) {
-	var note = new Note(this.game, Math.random() * 800, y, velocity, this.colors[Math.floor(Math.random() * 6)]);
-	this.add(note);
-	console.log('Note created');
-	console.log(note);
+Chart.prototype.createNote = function () {
+	if (index > this.notes.length) {
+		this.timer.stop();
+	} else {
+		var note = new Note(this.game, this.positions[this.notes[index]], 0, this.velocity, this.colors[this.notes[index]]);
+		this.add(note);
+		this.index++;
+	}
+}
+
+Chart.prototype.load = function (chart) {
+	this.tempo = 1000 * 60 / chart.bpm;
+	this.notes = chart.notes;
+	this.timer.loop(this.tempo, this.createNode, this);
+	this.timer.start();
 }
 
 Chart.prototype.createRandomNotes = function () {

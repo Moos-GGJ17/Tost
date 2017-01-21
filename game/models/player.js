@@ -49,6 +49,8 @@ Player.prototype.initialize = function() {
     this.trace.bmd = this.game.add.bitmapData(this.game.width, this.game.height);
     this.trace.bmd.addToWorld();
     //this.game.playerTrace.add(this.trace.bmd);
+    
+    this.game.world.bringToTop(this);
 }
 
 Player.prototype.update = function() {

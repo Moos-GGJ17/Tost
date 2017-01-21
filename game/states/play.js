@@ -22,6 +22,9 @@ States.Play = {
 		this.game.world.setBounds(0, 0, this.BOUNDS.x, this.BOUNDS.y);
 
 		this.game.chart = new Chart(this.game, 2000);
+		//var trace = this.game.add.group();
+		//this.game.playerTrace = this.game.add.sprite();
+		//trace.add(this.game.playerTrace);
 		this.game.player = new Player(this.game, this.BOUNDS.x / 2, this.BOUNDS.y * 3 / 4, 150);
 	},
 
