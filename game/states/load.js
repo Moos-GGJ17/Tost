@@ -35,8 +35,8 @@ States.Load = {
 		this.game.load.image('Tosted', 'assets/images/ui/tosted.png');
 		this.game.load.image('Space', 'assets/images/ui/space.png');
 
-		this.game.load.spritesheet('CityDay', 'assets/images/backgrounds/city-day.jpg', 424, 600);
-		this.game.load.spritesheet('CityNight', 'assets/images/backgrounds/city-night.jpg', 424, 600);
+		this.game.load.spritesheet('CityDay', 'assets/images/backgrounds/city-day-8.jpg', 424, 600);
+		this.game.load.spritesheet('CityNight', 'assets/images/backgrounds/city-night-8.jpg', 424, 600);
 
 		this.game.load.audio('funkytown', 'assets/audio/songs/funkytown.mp3');
 		this.game.load.audio('ibiza', 'assets/audio/songs/ibiza.mp3');

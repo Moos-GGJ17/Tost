@@ -1,4 +1,4 @@
-{
+Songs.funkytown = {
 	"name" : "Funkytown",
 	"artist" : "Lipps Inc.",
 	"filename": "funkytown",

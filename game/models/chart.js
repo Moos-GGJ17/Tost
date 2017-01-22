@@ -50,7 +50,7 @@ Chart.prototype.load = function (chart) {
 }
 
 Chart.prototype.createNoteWithTime = function () {
-	console.log(this.index  + '<' + this.notes.length);
+	//console.log(this.index  + '<' + this.notes.length);
 	if (this.index >= this.notes.length - 3) {
 		//this.timer.stop();
 		//this.music.stop();
@@ -105,6 +105,7 @@ Chart.prototype.update = function() {
 	//console.log(this.game.time.totalElapsedSeconds() - this.startTime);
 	if (this.play) {
 		if (this.game.time.totalElapsedSeconds() - this.startTime >= this.times[this.index] / 1000) {
+		//if (this.music.currentTime >= this.times[this.index]) {
 			this.createNoteWithTime();
 		}
 	}
