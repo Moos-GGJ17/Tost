@@ -82,10 +82,11 @@ Chart.prototype.loadWithTime = function (chart) {
 	//this.timer.loop(1, this.createNoteWithTime, this);
 	//this.timer.start();
 	this.music = this.game.add.audio(chart.filename);
-	var aux = this.music;
+	/*var aux = this.music;
 	setTimeout(function() {
 		aux.play();
-	}, (this.game.world.width * 3 / 4) / this.game.chart.velocity * 1000);
+	}, (this.game.world.width * 3 / 4) / this.game.chart.velocity * 1000 + 1000);*/
+	this.game.time.events.repeat((this.game.world.width * 3 / 4) / this.game.chart.velocity * 1000 + 1000, 1, this.playMusic, this);
 	//this.music.play();
 	this.play = true;
 	this.startTime = this.game.time.totalElapsedSeconds();
@@ -95,6 +96,10 @@ Chart.prototype.loadWithTime = function (chart) {
 	/*setTimeout(function() {
 		aux.createNoteWithTime();
 	}, this.times[0] + 1800);*/
+}
+
+Chart.prototype.playMusic = function() {
+	this.music.play();
 }
 
 /*Chart.prototype.createRandomNotes = function () {

@@ -87,4 +87,9 @@ VitalWave.prototype.changeColor = function() {
 			break;
 		default:
 	}
+	if (this.game.chart.music.volume > 0) {
+		this.game.chart.music.volume = 0;
+	} else {
+		this.game.chart.music.volume = this.life / this.MAX_LIFE;
+	}
 }
