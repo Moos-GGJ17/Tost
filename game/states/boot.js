@@ -6,7 +6,7 @@ var States = {};
  */
 States.Boot = {
 	preload: function() {
-		this.game.load.spritesheet('Loading', 'assets/images/loading.jpg', 800, 600);
+		this.game.load.spritesheet('Loading', 'assets/images/loading.png', 800, 600);
 	},
 
 	create: function() {
