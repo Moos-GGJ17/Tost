@@ -52,7 +52,7 @@ PowerupFast.prototype.playSound = function() {
 }
 
 PowerupFast.prototype.apply = function() {
-	this.game.player.setPowerup(this.key);
+	this.game.player.setPowerup(this.key, 'Yellow');
 	this.game.player.body.velocity.x *= 2;
 	this.game.time.events.repeat(Phaser.Timer.SECOND * 10, 1, this.cease, this);
 }

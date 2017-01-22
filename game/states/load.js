@@ -55,12 +55,13 @@ States.Load = {
 		this.game.load.image('GameOver', 'assets/images/ui/game-over.png');
 		this.game.load.image('Tosted', 'assets/images/ui/tosted.png');
 		this.game.load.image('Instructions', 'assets/images/ui/instructions.png');
+		this.game.load.image('InstructionsSpace', 'assets/images/ui/instructions-space.png');
 		this.game.load.spritesheet('Space', 'assets/images/ui/space.png', 395, 393);
 
-		this.game.load.image('Funkytown', 'assets/images/songs/funkytown.png');
-		this.game.load.image('Ibiza', 'assets/images/songs/ibiza.png');
-		this.game.load.image('Sorry', 'assets/images/songs/sorry.png');
-		this.game.load.image('Never', 'assets/images/songs/never.png');
+		this.game.load.image('funkytownCassette', 'assets/images/songs/funkytown.png');
+		this.game.load.image('ibizaCassette', 'assets/images/songs/ibiza.png');
+		this.game.load.image('sorryCassette', 'assets/images/songs/sorry.png');
+		this.game.load.image('neverCassette', 'assets/images/songs/never.png');
 
 		this.game.load.audio('powerup', 'assets/audio/powerup.wav');
 		this.game.load.audio('error', 'assets/audio/error.wav');
@@ -72,7 +73,7 @@ States.Load = {
 	// Starts the game ;)
 	create: function(){
 		this.game.autoPlay = false;
-		//this.state.start('Intro');
-		this.state.start('Play');
+		this.state.start('Intro');
+		//this.state.start('Play');
 	}
 };

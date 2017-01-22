@@ -111,18 +111,20 @@ Player.prototype.changeColor = function(color) {
 	this.lastColor = color;
 	if (!this.hasPowerup) {
 		this.loadTexture('Wave' + color);
+		this.trace.color = this.TRACE_COLORS[color];
 	}
-	this.trace.color = this.TRACE_COLORS[color];
 }
 
-Player.prototype.setPowerup = function(powerup) {
+Player.prototype.setPowerup = function(powerup, color) {
 	this.loadTexture(powerup);
+	this.trace.color = this.TRACE_COLORS[color];
 	this.hasPowerup = true;
 }
 
 Player.prototype.removePowerup = function() {
 	this.hasPowerup = false;
 	this.loadTexture('Wave' + this.lastColor);
+	this.trace.color = this.TRACE_COLORS[this.lastColor];
 }
 
 Player.prototype.debug = function() {

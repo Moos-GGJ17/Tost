@@ -40,7 +40,7 @@ GameOver.prototype.restartGame = function() {
 		//this.pressSpace.destroy();
 		this.game.pressSpace.alpha = 0;
 		this.game.autoPlay = true;
-		this.game.state.start('Play');
+		this.game.state.start('Intro');
 		//this.game.state.start('Intro');
 	}
 }

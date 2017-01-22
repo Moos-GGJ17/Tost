@@ -5,7 +5,7 @@ Game = {
   States: States
 };
 
-Songs = {};
+Songs = []
 
 // Initializes the Phaser game.
 window.game = game = new Phaser.Game(800, 600, Phaser.AUTO, '');
