@@ -23,6 +23,8 @@ Objective? You've got this ball that moves constantly on zig-zag (it's also a Wa
 
 * **I Took A Pill In Ibiza (Seeb Remix)** by *Mike Posner*
 
+All being covered by [8 Bit Universe](https://www.youtube.com/user/8BitUniverseMusic)
+
 ## Requirements
 
 Just go to [HERE](http://tost-ggj2017.herokuapp.com), wait for it, PLAY!
