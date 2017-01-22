@@ -45,9 +45,9 @@ States.Play = {
 		this.instructions = this.game.add.sprite(this.game.world.width / 2, this.game.world.height / 3, 'Instructions');
 		this.instructions.anchor.setTo(0.5, 0);
 
-		this.instructions = this.game.add.sprite(this.game.world.width / 2, this.game.world.height *7 / 8, 'InstructionsSpace');
-		this.instructions.anchor.setTo(0.5, 0);
-		this.instructions.scale.setTo(0.5, 0.5);
+		this.instructionsSpace = this.game.add.sprite(this.game.world.width / 2, this.game.world.height *7 / 8, 'InstructionsSpace');
+		this.instructionsSpace.anchor.setTo(0.5, 0);
+		this.instructionsSpace.scale.setTo(0.5, 0.5);
 
 		// Sets the world bounds
 		this.game.world.setBounds(0, 0, this.BOUNDS.x, this.BOUNDS.y);
@@ -85,6 +85,7 @@ States.Play = {
 			//this.pressSpace.destroy();
 			this.game.pressSpace.alpha = 0;
 			this.instructions.destroy();
+			this.instructionsSpace.destroy();
 			aux.game.chart.loadWithTime(Songs[this.game.trackIndex]);
 		}
 	},

@@ -40,7 +40,7 @@ States.Intro = {
 		this.logoImage = this.game.add.sprite(this.game.world.centerX, this.game.world.height, 'Logo');
 		this.logoImage.anchor.x = 0.5;
 		this.logoImage.anchor.y = 1;
-		this.logoImage.scale.setTo(0.25, 0.25);
+		this.logoImage.scale.setTo(0.28, 0.28);
 
 		this.instr1 = this.game.add.sprite(this.game.world.centerX, 20, 'Instr1');
 		this.instr1.anchor.x = 0.5;
