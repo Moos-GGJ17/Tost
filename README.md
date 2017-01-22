@@ -15,10 +15,13 @@ You've got:
 Objective? You've got this ball that moves constantly on zig-zag (it's also a Wave). With it, you'll try to collect as many lights as you can by hitting the Space button, that will make the ball bounce and change its direction. Challenging....but you won't give up ;)
 
 ## Featuring
-**Funkytown** by *Lipps Inc.*
-**Never Gonna Give You Up** by *Rick Astley*
-**Sorry** by *Justin Bieber*
-**I Took A Pill In Ibiza (Seeb Remix)** by *Mike Posner*
+* **Funkytown** by *Lipps Inc.*
+
+* **Never Gonna Give You Up** by *Rick Astley*
+
+* **Sorry** by *Justin Bieber*
+
+* **I Took A Pill In Ibiza (Seeb Remix)** by *Mike Posner*
 
 ## Requirements
 
@@ -32,5 +35,10 @@ Just go to [HERE](http://tost-ggj2017.herokuapp.com), wait for it, PLAY!
 * **Allan León Mendieta** - [Allan@Github](https://github.com/AllanLeon)
 * **Franco Montiel Sandoval** - [Franco@Github](https://github.com/francomontiel)
 * **Rodrigo Torrico Del Castillo** - [Rodrigo@Github](https://github.com/whiletruedothis)
+
+## Special thanks to:
+* [8 Bit Universe](https://www.youtube.com/user/8BitUniverseMusic) for the official soundtrack of this game.
+* [Audacity](http://www.audacityteam.org/) for the great help at making the charts.
+* [Google](https://www.google.com) for giving us fast results for tools and docs, without them we wouldn't make it.
 
 ###Thanks to *you*....for playing
