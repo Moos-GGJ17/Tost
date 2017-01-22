@@ -51,12 +51,12 @@ Chart.prototype.load = function (chart) {
 
 Chart.prototype.createNoteWithTime = function () {
 	console.log(this.index  + '<' + this.notes.length);
-	if (this.index >= this.notes.length) {
+	if (this.index >= this.notes.length - 3) {
 		//this.timer.stop();
-		this.music.stop();
+		//this.music.stop();
 		/*this.game.toasts.center();
 		this.game.tosted.center();*/
-		this.game.time.events.repeat(Phaser.Timer.SECOND * this.game.world.height / this.velocity, 1, this.lastNote, this);
+		this.game.time.events.repeat(2 * Phaser.Timer.SECOND * this.game.world.height / this.velocity, 1, this.lastNote, this);
 	} else if (!this.game.vitalWave.gameOver) {
 		/*if (this.times[this.index] >= this.timer.ms) {
 			console.log('Creating note');
@@ -111,6 +111,7 @@ Chart.prototype.update = function() {
 }
 
 Chart.prototype.lastNote = function() {
+	this.music.fadeOut(2000);
 	this.game.toasts.finish();
 }
 
