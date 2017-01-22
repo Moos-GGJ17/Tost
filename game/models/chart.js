@@ -18,6 +18,8 @@ function Chart(game, tempo){
 	for (var i = 0; i < 6; i++) {
 		this.positions[i] = this.game.world.width * (i + 1) / 8;
 	}
+
+	this.powerups = new Powerups(this.game);
 }
 
 Chart.prototype = Object.create(Phaser.Group.prototype);
@@ -108,8 +110,11 @@ Chart.prototype.playMusic = function() {
 }*/
 
 Chart.prototype.update = function() {
-	if (!this.game.vitalWave.gameOver) {
+	if (!this.game.vitalWave.gameOver && !this.game.toasts.finished) {
 		this.callAll('update');
+		this.powerups.update();
+	} else {
+		this.powerups.stop();
 	}
 	//console.log(this.game.time.totalElapsedSeconds() - this.startTime);
 	if (this.play) {
