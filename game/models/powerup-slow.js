@@ -52,11 +52,13 @@ PowerupSlow.prototype.playSound = function() {
 }
 
 PowerupSlow.prototype.apply = function() {
-	this.game.player.body.velocity.x /= 1.5;
+	this.game.player.setPowerup(this.key);
+	this.game.player.body.velocity.x /= 2;
 	this.game.time.events.repeat(Phaser.Timer.SECOND * 10, 1, this.cease, this);
 }
 
 PowerupSlow.prototype.cease = function() {
-	this.game.player.body.velocity.x *= 1.5;
+	this.game.player.removePowerup();
+	this.game.player.body.velocity.x *= 2;
 	this.destroy();
 }

@@ -11,6 +11,9 @@ function Player(game, x, y, velocity) {
 		history[i] = x;
 	}
 
+	this.hasPowerup = false;
+	this.lastColor;
+
 	this.TRACE_COLORS = {
 		'Blue': '41, 98, 255',
 		'Cyan': '13, 115, 119',
@@ -97,8 +100,21 @@ Player.prototype.changeDirection = function() {
 }
 
 Player.prototype.changeColor = function(color) {
-	this.loadTexture('Wave' + color);
+	this.lastColor = color;
+	if (!this.hasPowerup) {
+		this.loadTexture('Wave' + color);
+	}
 	this.trace.color = this.TRACE_COLORS[color];
+}
+
+Player.prototype.setPowerup = function(powerup) {
+	this.loadTexture(powerup);
+	this.hasPowerup = true;
+}
+
+Player.prototype.removePowerup = function() {
+	this.hasPowerup = false;
+	this.loadTexture('Wave' + this.lastColor);
 }
 
 Player.prototype.debug = function() {
