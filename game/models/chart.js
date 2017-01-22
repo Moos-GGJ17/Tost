@@ -18,6 +18,8 @@ function Chart(game, tempo){
 	for (var i = 0; i < 6; i++) {
 		this.positions[i] = this.game.world.width * (i + 1) / 8;
 	}
+
+	this.powerups = new Powerups(this.game);
 }
 
 Chart.prototype = Object.create(Phaser.Group.prototype);
@@ -82,15 +84,24 @@ Chart.prototype.loadWithTime = function (chart) {
 	//this.timer.loop(1, this.createNoteWithTime, this);
 	//this.timer.start();
 	this.music = this.game.add.audio(chart.filename);
-	this.music.play();
+	/*var aux = this.music;
+	setTimeout(function() {
+		aux.play();
+	}, (this.game.world.width * 3 / 4) / this.game.chart.velocity * 1000 + 1000);*/
+	this.game.time.events.repeat((this.game.world.width * 3 / 4) / this.game.chart.velocity * 1000 - 750, 1, this.playMusic, this);
+	//this.music.play();
 	this.play = true;
 	this.startTime = this.game.time.totalElapsedSeconds();
 	this.game.toasts.MAX_SCORE = chart.notes.length;
-	var aux = this;
-	console.log(this.times[0]);
+	//var aux = this;
+	//console.log(this.times[0]);
 	/*setTimeout(function() {
 		aux.createNoteWithTime();
 	}, this.times[0] + 1800);*/
+}
+
+Chart.prototype.playMusic = function() {
+	this.music.play();
 }
 
 /*Chart.prototype.createRandomNotes = function () {
@@ -99,8 +110,11 @@ Chart.prototype.loadWithTime = function (chart) {
 }*/
 
 Chart.prototype.update = function() {
-	if (!this.game.vitalWave.gameOver) {
+	if (!this.game.vitalWave.gameOver && !this.game.toasts.finished) {
 		this.callAll('update');
+		this.powerups.update();
+	} else {
+		this.powerups.stop();
 	}
 	//console.log(this.game.time.totalElapsedSeconds() - this.startTime);
 	if (this.play) {
