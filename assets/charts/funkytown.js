@@ -1,4 +1,4 @@
-Songs.funkytown = {
+Songs.push({
 	"name" : "Funkytown",
 	"artist" : "Lipps Inc.",
 	"filename": "funkytown",
@@ -35,4 +35,4 @@ Songs.funkytown = {
 		50830,51070,51320,51560,51800,52300,52770,53020,53270,53510,53750,
 		60830,61080
 	]
-}
+});

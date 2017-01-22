@@ -52,7 +52,7 @@ PowerupSlow.prototype.playSound = function() {
 }
 
 PowerupSlow.prototype.apply = function() {
-	this.game.player.setPowerup(this.key);
+	this.game.player.setPowerup(this.key, 'Blue');
 	this.game.player.body.velocity.x /= 2;
 	this.game.time.events.repeat(Phaser.Timer.SECOND * 10, 1, this.cease, this);
 }

@@ -45,9 +45,17 @@ States.Play = {
 		this.instructions = this.game.add.sprite(this.game.world.width / 2, this.game.world.height / 3, 'Instructions');
 		this.instructions.anchor.setTo(0.5, 0);
 
+		this.instructions = this.game.add.sprite(this.game.world.width / 2, this.game.world.height *7 / 8, 'InstructionsSpace');
+		this.instructions.anchor.setTo(0.5, 0);
+		this.instructions.scale.setTo(0.5, 0.5);
+
 		// Sets the world bounds
 		this.game.world.setBounds(0, 0, this.BOUNDS.x, this.BOUNDS.y);
 
+		this.game.time.events.add(2 * Phaser.Timer.SECOND, this.setInput, this);
+	},
+
+	setInput: function() {
 		this.playButton = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 		this.playButton.onDown.add(this.play, this);
 		if (this.game.autoPlay) {
@@ -75,7 +83,7 @@ States.Play = {
 		//this.pressSpace.destroy();
 		this.game.pressSpace.alpha = 0;
 		this.instructions.destroy();
-		aux.game.chart.loadWithTime(Songs.never);
+		aux.game.chart.loadWithTime(Songs[this.game.trackIndex]);
 	},
 
 	// Updates all the game's objects.
