@@ -7,7 +7,7 @@ function Cassette(game, x, y, data) {
 	this.data = data;
 
 	this.music = this.game.add.audio(this.data.filename);
-	this.music.addMarker('Preview', 20, 5, 1, true);
+	this.music.addMarker('Preview', 20, 15, 1, true);
 	this.music.play('Preview');
 
 	this.createTweens();
@@ -57,7 +57,7 @@ Cassette.prototype.finishedHide = function() {
 	this.music.stop();
 	this.music.destroy();
 	this.music = this.game.add.audio(this.data.filename);
-	this.music.addMarker('Preview', 20, 5, 1, true);
+	this.music.addMarker('Preview', 20, 15, 1, true);
 	this.music.fadeIn(1000, true, 'Preview');
 	this.updateImage();
 	this.show();
