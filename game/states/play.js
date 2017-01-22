@@ -48,7 +48,7 @@ States.Play = {
 		this.game.chart = new Chart(this.game, 2000);
 		var aux = this;
 		//setTimeout(function() {
-			aux.game.chart.loadWithTime(Songs.funkytown);
+			
 		//}, (this.game.world.width * 3 / 4) / this.game.chart.velocity * 1000);
 		//var trace = this.game.add.group();
 		//this.game.playerTrace = this.game.add.sprite();
@@ -62,6 +62,7 @@ States.Play = {
 		this.playButton.onDown.remove(this.play, this);
 		//this.pressSpace.destroy();
 		this.game.pressSpace.alpha = 0;
+		aux.game.chart.loadWithTime(Songs.funkytown);
 	},
 
 	// Updates all the game's objects.
