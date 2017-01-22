@@ -34,6 +34,7 @@ Tosted.prototype.center = function() {
 Tosted.prototype.restartGame = function() {
 	this.game.chart.music.stop();
 	this.restartButton.onDown.remove(this.restartGame, this);
+	this.game.input.pointer1.onDown.remove(this.restartGame, this);
 	//this.pressSpace.destroy();
 	this.game.pressSpace.alpha = 0;
 	this.game.autoPlay = true;
@@ -41,7 +42,8 @@ Tosted.prototype.restartGame = function() {
 }
 
 Tosted.prototype.enableInput = function() {
-	this.restartButton = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+	this.restartButton = this.game.input.pointer1.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 	this.restartButton.onDown.add(this.restartGame, this);
+	this.game.input.pointer1.onDown.add(this.restartGame, this);
 	this.game.pressSpace.alpha = 1;
 }

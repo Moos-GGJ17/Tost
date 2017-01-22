@@ -45,13 +45,13 @@ States.Intro = {
 		this.instr2.anchor.y = 0;
 		this.instr2.scale.setTo(0.7, 0.7);
 
-		this.spaceButton = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+		this.spaceButton = this.game.input.pointer1.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 	},
 
 	update: function() {
-		if (this.spaceButton.isDown && this.spaceButton.duration >= 1000) {
+		if ((this.spaceButton.isDown || this.game.input.pointer1.isDown) && this.spaceButton.duration >= 1000) {
 			this.state.start('Play');
-		} else if (this.spaceButton.isDown) {
+		} else if (this.spaceButton.isDown || this.game.input.pointer1.isDown) {
 			
 		}
 	}

@@ -44,6 +44,7 @@ Player.prototype.initialize = function() {
 
 	this.changeDirectionButton = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 	this.changeDirectionButton.onDown.add(this.changeDirection, this);
+	this.game.input.onDown.add(this.changeDirectionTouch, this);
 
 	this.trace = {};
 	this.trace.color = '224, 224, 224';
@@ -87,6 +88,7 @@ Player.prototype.update = function() {
 
     if (this.game.vitalWave.gameOver || this.game.toasts.finished) {
     	this.changeDirectionButton.onDown.remove(this.changeDirection, this);
+		this.game.input.onDown.remove(this.changeDirection, this);
     	this.body.velocity.x = 0;
     	this.body.velocity.y = -1000;
     }
@@ -97,6 +99,12 @@ Player.prototype.update = function() {
 
 Player.prototype.changeDirection = function() {
 	this.body.velocity.x *= -1;
+}
+
+Player.prototype.changeDirectionTouch = function() {
+	if (this.game.input.activePointer == this.game.input.pointer1) {
+		this.body.velocity.x *= -1;
+	}
 }
 
 Player.prototype.changeColor = function(color) {

@@ -50,32 +50,36 @@ States.Play = {
 
 		this.playButton = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 		this.playButton.onDown.add(this.play, this);
+		this.game.input.onDown.add(this.play, this);
 		if (this.game.autoPlay) {
 			this.play();
 		}
 	},
 
 	play: function() {
-		this.game.chart = new Chart(this.game, 2000);
-		var aux = this;
-		//setTimeout(function() {
+		if ((this.game.input.activePointer == this.game.input.pointer1) || this.playButton.isDown) {
+			this.game.chart = new Chart(this.game, 2000);
+			var aux = this;
+			//setTimeout(function() {
+				
+			//}, (this.game.world.width * 3 / 4) / this.game.chart.velocity * 1000);
+			//var trace = this.game.add.group();
+			//this.game.playerTrace = this.game.add.sprite();
+			//trace.add(this.game.playerTrace);
+			this.game.player = new Player(this.game, this.BOUNDS.x / 2, this.BOUNDS.y * 3 / 4, 1000);
+			this.game.vitalWave = new VitalWave(this.game, 0, 100, 15, 5, 5, '#ffffff');
+			this.game.tosted = new Tosted(this.game);
+			this.game.toasts = new Toasts(this.game, 0, 0, 0);
+			this.game.gameOver = new GameOver(this.game, this.game.world.width / 2, this.game.height / 3);
 			
-		//}, (this.game.world.width * 3 / 4) / this.game.chart.velocity * 1000);
-		//var trace = this.game.add.group();
-		//this.game.playerTrace = this.game.add.sprite();
-		//trace.add(this.game.playerTrace);
-		this.game.player = new Player(this.game, this.BOUNDS.x / 2, this.BOUNDS.y * 3 / 4, 1000);
-		this.game.vitalWave = new VitalWave(this.game, 0, 100, 15, 5, 5, '#ffffff');
-		this.game.tosted = new Tosted(this.game);
-		this.game.toasts = new Toasts(this.game, 0, 0, 0);
-		this.game.gameOver = new GameOver(this.game, this.game.world.width / 2, this.game.height / 3);
-		
-		this.started = true;
-		this.playButton.onDown.remove(this.play, this);
-		//this.pressSpace.destroy();
-		this.game.pressSpace.alpha = 0;
-		this.instructions.destroy();
-		aux.game.chart.loadWithTime(Songs.never);
+			this.started = true;
+			this.playButton.onDown.remove(this.play, this);
+			this.game.input.onDown.remove(this.play, this);
+			//this.pressSpace.destroy();
+			this.game.pressSpace.alpha = 0;
+			this.instructions.destroy();
+			aux.game.chart.loadWithTime(Songs.never);
+		}
 	},
 
 	// Updates all the game's objects.
