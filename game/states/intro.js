@@ -45,7 +45,7 @@ States.Intro = {
 		this.instr2.anchor.y = 0;
 		this.instr2.scale.setTo(0.7, 0.7);
 
-		this.spaceButton = this.game.input.pointer1.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+		this.spaceButton = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 	},
 
 	update: function() {
