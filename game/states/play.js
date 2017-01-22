@@ -19,7 +19,7 @@ States.Play = {
 		// Sets the game background color
 		this.game.stage.backgroundColor = '0x000000';
 		var currentDate = new Date();
-		if (currentDate.getHours() > 18 && currentDate.getHours() < 6) {
+		if (currentDate.getHours() > 18 || currentDate.getHours() < 6) {
 			this.background = this.game.add.sprite(0, 0, 'CityNight');
 		} else {
 			this.background = this.game.add.sprite(0, 0, 'CityDay');
