@@ -39,6 +39,8 @@ States.Boot = {
 
 		this.game.load.audio('funkytown', 'assets/audio/songs/funkytown.mp3');
 		this.game.load.audio('ibiza', 'assets/audio/songs/ibiza.mp3');
+		this.game.load.audio('error', 'assets/audio/error.wav');
+		this.game.load.audio('win', 'assets/audio/win.wav');
 	},
 	// Starts the game ;)
 	create: function(){

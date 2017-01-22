@@ -11,8 +11,10 @@ function Chart(game, tempo){
 	this.index = 0;
 	this.startTime = 99999999;
 	this.play = false;
-
 	this.music;
+	this.errorAudio = this.game.add.audio('error');
+	this.errorAudio.volume = 1;
+
 	for (var i = 0; i < 6; i++) {
 		this.positions[i] = this.game.world.width * (i + 1) / 8;
 	}
@@ -43,7 +45,7 @@ Chart.prototype.load = function (chart) {
 	this.music = music;
 	//this.music.startTime = -10000;
 	//setTimeout(function() {
-		this.music.play();
+		//this.music.play();
 	//}, 1000);
 }
 
@@ -54,7 +56,7 @@ Chart.prototype.createNoteWithTime = function () {
 		/*this.game.toasts.center();
 		this.game.tosted.center();*/
 		this.game.time.events.repeat(Phaser.Timer.SECOND * this.game.world.height / this.velocity, 1, this.lastNote, this);
-	} else {
+	} else if (!this.game.vitalWave.gameOver) {
 		/*if (this.times[this.index] >= this.timer.ms) {
 			console.log('Creating note');
 			var note = new Note(this.game, this.positions[this.notes[this.index] - 1], 0, this.velocity, this.tempo, this.colors[this.notes[this.index] - 1]);

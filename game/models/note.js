@@ -55,6 +55,7 @@ Note.prototype.missed = function() {
 	if (!this.tuned && !this.fail) {
 		this.game.vitalWave.missNote();
 		this.fail = true;
+		this.game.chart.errorAudio.play();
 		//this.light.destroy();
 		//this.destroy();
 	}

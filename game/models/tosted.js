@@ -20,6 +20,7 @@ Tosted.prototype.createTweens = function() {
 
 Tosted.prototype.center = function() {
 	this.tweens.center.start();
+	this.game.add.audio('win').play();
 }
 
 Tosted.prototype.restartGame = function() {
