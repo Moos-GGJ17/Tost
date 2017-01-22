@@ -48,7 +48,7 @@ Toasts.prototype.createTweens = function() {
 	this.tweens.enlarge = this.game.add.tween(this.scale);
 	this.tweens.enlarge.to( { x : 1, y : 1 }, 500, Phaser.Easing.Linear.None, false);
 	this.tweens.center = this.game.add.tween(this);
-	this.tweens.center.to( { x : this.game.world.width / 2, y : this.game.world.height / 2 }, 500, Phaser.Easing.Linear.None, false);
+	this.tweens.center.to( { x : this.game.world.width / 2, y : this.game.world.height / 3 + this.game.tosted.height / 2}, 500, Phaser.Easing.Linear.None, false);
 }
 
 Toasts.prototype.center = function() {

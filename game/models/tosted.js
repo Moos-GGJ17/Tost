@@ -22,7 +22,7 @@ Tosted.prototype.constructor = Tosted;
 Tosted.prototype.createTweens = function() {
 	this.tweens = {};
 	this.tweens.center = this.game.add.tween(this);
-	this.tweens.center.to( { x : this.game.world.width / 2, y : this.game.world.height / 2 - this.height * 2 / 3}, 500, Phaser.Easing.Linear.None, false);
+	this.tweens.center.to( { x : this.game.world.width / 2, y : this.game.world.height / 3}, 500, Phaser.Easing.Linear.None, false);
 	this.tweens.center.onComplete.add(this.enableInput, this);
 }
 

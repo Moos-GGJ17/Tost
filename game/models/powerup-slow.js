@@ -36,6 +36,7 @@ PowerupSlow.prototype.hit = function() {
 	if (!this.captured) {
 		this.captured = true;
 		this.tweens.disappear.start();
+		this.playSound();
 		this.apply();
 	}
 }
@@ -44,6 +45,10 @@ PowerupSlow.prototype.destroyIfNotCaptured = function() {
 	if (!this.captured) {
 		this.destroy();
 	}
+}
+
+PowerupSlow.prototype.playSound = function() {
+	this.game.add.audio('powerup').play();
 }
 
 PowerupSlow.prototype.apply = function() {
