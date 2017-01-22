@@ -53,7 +53,7 @@ Chart.prototype.load = function (chart) {
 
 Chart.prototype.createNoteWithTime = function () {
 	//console.log(this.index  + '<' + this.notes.length);
-	if (this.index >= this.notes.length - 3) {
+	if (this.index >= this.notes.length) {
 		//this.timer.stop();
 		//this.music.stop();
 		/*this.game.toasts.center();
@@ -114,7 +114,7 @@ Chart.prototype.update = function() {
 		this.callAll('update');
 		this.powerups.update();
 	} else {
-		this.powerups.stop();
+		//this.powerups.stop();
 	}
 	//console.log(this.game.time.totalElapsedSeconds() - this.startTime);
 	if (this.play) {
@@ -127,6 +127,7 @@ Chart.prototype.update = function() {
 
 Chart.prototype.lastNote = function() {
 	this.music.fadeOut(2000);
+	this.powerups.stop();
 	this.game.toasts.finish();
 }
 

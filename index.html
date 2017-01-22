@@ -2,9 +2,20 @@
 <html style="margin: auto; width: 62%;">
 <head>
 	<title>Tost | Moos@GGJ2017</title>
-	<link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet"> 
+	<!--<link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">-->
+	<style type="text/css">
+		@font-face {
+  		font-family: '8-BIT WONDER';
+  		font-style: normal;
+  		font-weight: 400;
+  		src: local('8-BIT WONDER'),
+       		local('8-BIT WONDER'),
+       		url(assets/fonts/8-BIT WONDER.ttf) format('truetype');
+	}
+	</style>
 
 	<script type="text/javascript" src="lib/phaser.min.js" ></script>
+	<script type="text/javascript" src="lib/fontfaceobserver.js" ></script>
 
 	<script type="text/javascript" src="game/models/player.js" ></script>
 	<script type="text/javascript" src="game/models/note-light.js" ></script>
@@ -20,6 +31,7 @@
 
 	<script type="text/javascript" src="game/states/boot.js" ></script>
 	<script type="text/javascript" src="game/states/load.js" ></script>
+	<script type="text/javascript" src="game/models/custom-loader.js" ></script>
 	<script type="text/javascript" src="game/states/play.js" ></script>
 	<script type="text/javascript" src="game/main.js" ></script>
 

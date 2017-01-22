@@ -2,6 +2,10 @@
  * Loads all the necessary assets before starting the game.
  */
 States.Load = {
+	init: function() {
+		this.game.load = new CustomLoader(game);
+	},
+
 	// Loads the assets.
 	preload: function(){
 		var background = this.game.add.sprite(0, 0, 'Loading');
@@ -11,8 +15,10 @@ States.Load = {
 		this.game.load.audio('funkytown', 'assets/audio/songs/funkytown.mp3');
 		this.game.load.audio('ibiza', 'assets/audio/songs/ibiza.mp3');
 
-		this.game.load.spritesheet('CityDay', 'assets/images/backgrounds/city-day-8.png', 424, 600);
+		this.game.load.spritesheet('CityDay', 'assets/images/backgrounds/city-day-8.jpg', 424, 600);
 		this.game.load.spritesheet('CityNight', 'assets/images/backgrounds/city-night-8.jpg', 424, 600);
+		this.game.load.spritesheet('CityDayGray', 'assets/images/backgrounds/city-day-gray-8.jpg', 424, 600);
+		this.game.load.spritesheet('CityNightGray', 'assets/images/backgrounds/city-night-gray-8.jpg', 424, 600);
 
 		this.game.load.image('Blank', 'assets/images/blank.png');
 
@@ -47,15 +53,18 @@ States.Load = {
 		this.game.load.image('Funkytown', 'assets/images/songs/funkytown.png');
 		this.game.load.image('Ibiza', 'assets/images/songs/ibiza.png');
 		this.game.load.image('Sorry', 'assets/images/songs/sorry.png');
+		this.game.load.image('Never', 'assets/images/songs/never.png');
 
 		this.game.load.audio('powerup', 'assets/audio/powerup.wav');
 		this.game.load.audio('error', 'assets/audio/error.wav');
 		this.game.load.audio('win', 'assets/audio/win.wav');
 		this.game.load.audio('lost', 'assets/audio/lost.wav');
+
+		//this.game.load.webfont('8bit', '8-BIT WONDER');
 	},
 	// Starts the game ;)
 	create: function(){
-		this.game.autoPlay = false;
+  		this.game.autoPlay = false;
 		this.state.start('Play');
 	}
 };
