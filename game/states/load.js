@@ -14,6 +14,10 @@ States.Load = {
 		this.game.load.spritesheet('CityDay', 'assets/images/backgrounds/city-day-8.png', 424, 600);
 		this.game.load.spritesheet('CityNight', 'assets/images/backgrounds/city-night-8.jpg', 424, 600);
 
+		this.game.load.image('Logo', 'assets/images/intro.png');
+		this.game.load.image('Instr1', 'assets/images/ui/intro1.png');
+		this.game.load.image('Instr2', 'assets/images/ui/intro2.png');
+
 		this.game.load.image('Blank', 'assets/images/blank.png');
 
 		this.game.load.image('WaveWhite', 'assets/images/wave/white.png');
@@ -56,6 +60,7 @@ States.Load = {
 	// Starts the game ;)
 	create: function(){
 		this.game.autoPlay = false;
-		this.state.start('Play');
+		this.state.start('Intro');
+		//this.state.start('Play');
 	}
 };

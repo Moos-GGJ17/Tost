@@ -23,9 +23,7 @@ States.Play = {
 			this.background = this.game.add.sprite(0, 0, 'CityNight');
 		} else {
 			this.background = this.game.add.sprite(0, 0, 'CityDay');
-		}		
-		this.background.animations.add('Play');
-		this.background.animations.play('Play', 5, true);
+		}
 		this.background.scale.setTo(this.game.width / this.background.width, this.game.height / this.background.height);
 
 		this.game.pressSpace = this.game.add.sprite(this.game.world.width / 2, this.game.world.height * 3 / 4, 'Space');
