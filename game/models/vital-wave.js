@@ -64,10 +64,17 @@ VitalWave.prototype.missNote = function() {
 	this.game.time.events.repeat(Phaser.Timer.SECOND / 4, 2, this.changeColor, this);
 	this.life = Math.max(--this.life, 0);
 	if (this.life <= 0) {
+		this.playGameOverMusic();
 		this.gameOver = true;
 	}
 	this.game.chart.music.volume = this.life / this.MAX_LIFE;
+}
 
+VitalWave.prototype.playGameOverMusic = function() {
+	if (!this.gameOver) {
+		this.gameOver = true;
+		this.game.add.audio('lost').play();
+	}
 }
 
 VitalWave.prototype.changeColor = function() {

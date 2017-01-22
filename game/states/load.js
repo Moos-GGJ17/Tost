@@ -42,6 +42,7 @@ States.Load = {
 		this.game.load.audio('ibiza', 'assets/audio/songs/ibiza.mp3');
 		this.game.load.audio('error', 'assets/audio/error.wav');
 		this.game.load.audio('win', 'assets/audio/win.wav');
+		this.game.load.audio('lost', 'assets/audio/lost.wav');
 	},
 	// Starts the game ;)
 	create: function(){
