@@ -56,14 +56,14 @@ States.Intro = {
 	},
 
 	update: function() {
-		if (this.spaceButton.isDown && this.spaceButton.duration >= 1000) {
+		if ((this.spaceButton.isDown && this.spaceButton.duration >= 1000) || (this.game.input.pointer1.isDown && this.game.input.pointer1.duration >= 1000)) {
 			this.game.trackIndex --;
 			if (this.game.trackIndex < 0) {
 				this.game.trackIndex = Songs.length - 1;
 			}
 			this.cassette.hide(Songs[this.game.trackIndex]);
 			this.state.start('Play');
-		} else if (this.spaceButton.isDown && !this.changedSong) {
+		} else if ((this.spaceButton.isDown || this.game.input.pointer1.isDown) && !this.changedSong) {
 			this.changedSong = true;
 			this.game.trackIndex = (this.game.trackIndex + 1) % Songs.length;
 			this.cassette.hide(Songs[this.game.trackIndex]);
