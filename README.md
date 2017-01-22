@@ -33,6 +33,8 @@ Just go to [HERE](http://tost-ggj2017.herokuapp.com), wait for it, PLAY!
 
 * [Phaser](https://github.com/photonstorm/phaser/tree/v2.6.2#phaser---html5-game-framework) - The JavaScript framework used
 
+* and 1631 code lines written by our team (Updated on 22-Jan-17 18:29 (GMT -4)).
+
 ## Authors
 * **Allan León Mendieta** - [Allan@Github](https://github.com/AllanLeon)
 * **Franco Montiel Sandoval** - [Franco@Github](https://github.com/francomontiel)
@@ -40,6 +42,7 @@ Just go to [HERE](http://tost-ggj2017.herokuapp.com), wait for it, PLAY!
 
 ## Special thanks to:
 * [8 Bit Universe](https://www.youtube.com/user/8BitUniverseMusic) for the official soundtrack of this game.
+* [1041uuu](https://www.patreon.com/1041uuu) for the sexiest 8-bit background image ever.
 * [Audacity](http://www.audacityteam.org/) for the great help at making the charts.
 * [Google](https://www.google.com) for giving us fast results for tools and docs, without them we wouldn't make it.
 
