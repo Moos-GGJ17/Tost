@@ -28,24 +28,28 @@ States.Play = {
 		this.background.animations.play('Play', 5, true);
 		this.background.scale.setTo(this.game.width / this.background.width, this.game.height / this.background.height);
 
-		this.pressSpace = this.game.add.sprite(this.game.world.width / 2, this.game.world.height / 2, 'Space');
-		this.pressSpace.anchor.setTo(0.5, 0.5);
-		this.pressSpace.animations.add('Press');
-		this.pressSpace.animations.play('Press', 3, true);
+		this.game.pressSpace = this.game.add.sprite(this.game.world.width / 2, this.game.world.height * 3 / 4, 'Space');
+		this.game.pressSpace.anchor.setTo(0.5, 0.5);
+		this.game.pressSpace.scale.setTo(0.5, 0.5);
+		this.game.pressSpace.animations.add('Press');
+		this.game.pressSpace.animations.play('Press', 3, true);
 
 		// Sets the world bounds
 		this.game.world.setBounds(0, 0, this.BOUNDS.x, this.BOUNDS.y);
 
 		this.playButton = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 		this.playButton.onDown.add(this.play, this);
+		if (this.game.autoPlay) {
+			this.play();
+		}
 	},
 
 	play: function() {
 		this.game.chart = new Chart(this.game, 2000);
 		var aux = this;
-		setTimeout(function() {
+		//setTimeout(function() {
 			aux.game.chart.loadWithTime(Songs.funkytown);
-		}, (this.game.world.width * 3 / 4) / this.game.chart.velocity * 1000);
+		//}, (this.game.world.width * 3 / 4) / this.game.chart.velocity * 1000);
 		//var trace = this.game.add.group();
 		//this.game.playerTrace = this.game.add.sprite();
 		//trace.add(this.game.playerTrace);
@@ -56,7 +60,8 @@ States.Play = {
 		this.game.tosted = new Tosted(this.game);
 		this.started = true;
 		this.playButton.onDown.remove(this.play, this);
-		this.pressSpace.destroy();
+		//this.pressSpace.destroy();
+		this.game.pressSpace.alpha = 0;
 	},
 
 	// Updates all the game's objects.

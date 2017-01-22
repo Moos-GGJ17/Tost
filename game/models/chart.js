@@ -82,12 +82,16 @@ Chart.prototype.loadWithTime = function (chart) {
 	//this.timer.loop(1, this.createNoteWithTime, this);
 	//this.timer.start();
 	this.music = this.game.add.audio(chart.filename);
-	this.music.play();
+	var aux = this.music;
+	setTimeout(function() {
+		aux.play();
+	}, (this.game.world.width * 3 / 4) / this.game.chart.velocity * 1000);
+	//this.music.play();
 	this.play = true;
 	this.startTime = this.game.time.totalElapsedSeconds();
 	this.game.toasts.MAX_SCORE = chart.notes.length;
-	var aux = this;
-	console.log(this.times[0]);
+	//var aux = this;
+	//console.log(this.times[0]);
 	/*setTimeout(function() {
 		aux.createNoteWithTime();
 	}, this.times[0] + 1800);*/

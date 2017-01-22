@@ -46,6 +46,7 @@ States.Load = {
 	},
 	// Starts the game ;)
 	create: function(){
+		this.game.autoPlay = false;
 		this.state.start('Play');
 	}
 };

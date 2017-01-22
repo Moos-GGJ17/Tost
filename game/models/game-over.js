@@ -15,10 +15,10 @@ GameOver.prototype.initialize = function(x, y) {
 	this.y = -this.height / 2;
 	this.createTweens(x, y);
 
-	this.pressSpace = this.game.add.sprite(this.game.world.width / 2, this.game.world.height / 2, 'Space');
+	/*this.pressSpace = this.game.add.sprite(this.game.world.width / 2, this.game.world.height / 2, 'Space');
 	this.pressSpace.anchor.setTo(0.5, 0.5);
 	this.pressSpace.animations.add('Press');
-	this.pressSpace.animations.play('Press', 3, true);
+	this.pressSpace.animations.play('Press', 3, true);*/
 }
 
 GameOver.prototype.createTweens = function(x, y) {
@@ -35,11 +35,14 @@ GameOver.prototype.show = function() {
 GameOver.prototype.restartGame = function() {
 	this.game.chart.music.stop();
 	this.restartButton.onDown.remove(this.restartGame, this);
-	this.pressSpace.destroy();
+	//this.pressSpace.destroy();
+	this.game.pressSpace.alpha = 0;
+	this.game.autoPlay = true;
 	this.game.state.start('Play');
 }
 
 GameOver.prototype.enableInput = function() {
 	this.restartButton = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 	this.restartButton.onDown.add(this.restartGame, this);
+	this.game.pressSpace.alpha = 1;
 }
