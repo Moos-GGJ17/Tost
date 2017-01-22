@@ -40,7 +40,7 @@ Toasts.prototype.increaseScore = function() {
 	} else if (this.score / this.MAX_SCORE > 0.30) {
 		this.first.color();
 	}
-	console.log(this.score);
+	//console.log(this.score);
 }
 
 Toasts.prototype.createTweens = function() {
