@@ -17,7 +17,7 @@ States.Play = {
 	create: function(){
 		// Sets the game background color
 		this.game.stage.backgroundColor = '0x000000';
-		this.background = this.game.add.sprite(0, 0, 'City');
+		this.background = this.game.add.sprite(0, 0, 'CityDay');
 		this.background.animations.add('Play');
 		this.background.animations.play('Play', 8, true);
 		this.background.scale.setTo(this.game.width / this.background.width, this.game.height / this.background.height);

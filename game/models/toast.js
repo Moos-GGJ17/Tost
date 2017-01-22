@@ -57,7 +57,7 @@ Toasts.prototype.center = function() {
 }
 
 Toasts.prototype.finish = function() {
-	if (!this.game.vitalWave.gameOver) {
+	if (!this.game.vitalWave.gameOver && !this.finished) {
 		this.finished = true;
 		this.center();
 		this.game.tosted.center();
