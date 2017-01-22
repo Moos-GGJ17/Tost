@@ -88,7 +88,7 @@ Chart.prototype.loadWithTime = function (chart) {
 	setTimeout(function() {
 		aux.play();
 	}, (this.game.world.width * 3 / 4) / this.game.chart.velocity * 1000 + 1000);*/
-	this.game.time.events.repeat((this.game.world.width * 3 / 4) / this.game.chart.velocity * 1000, 1, this.playMusic, this);
+	this.game.time.events.repeat((this.game.world.width * 3 / 4) / this.game.chart.velocity * 1000 - 750, 1, this.playMusic, this);
 	//this.music.play();
 	this.play = true;
 	this.startTime = this.game.time.totalElapsedSeconds();
