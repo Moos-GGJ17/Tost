@@ -1,4 +1,4 @@
-{
+Songs.ibiza = {
 	"name" : "I Took A Pill In Ibiza (Seeb Remix)",
 	"artist" : "Mike Posner",
 	"filename": "ibiza",

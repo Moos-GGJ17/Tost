@@ -105,6 +105,7 @@ Chart.prototype.update = function() {
 	//console.log(this.game.time.totalElapsedSeconds() - this.startTime);
 	if (this.play) {
 		if (this.game.time.totalElapsedSeconds() - this.startTime >= this.times[this.index] / 1000) {
+		//if (this.music.currentTime >= this.times[this.index]) {
 			this.createNoteWithTime();
 		}
 	}
