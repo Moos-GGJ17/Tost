@@ -12,7 +12,7 @@ Powerups.prototype = Object.create(Phaser.Group.prototype);
 Powerups.prototype.constructor = Powerups;
 
 Powerups.prototype.createRandom = function() {
-	var type = Math.floor(Math.random() * 1);
+	var type = Math.floor(Math.random() * 2);
 	var x = Math.random() * this.game.width * 3 / 4 + this.game.width / 8;
 	var velocity = Math.random() * 50 + this.game.chart.velocity - 25;
 	var powerup;

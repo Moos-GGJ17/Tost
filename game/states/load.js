@@ -34,7 +34,7 @@ States.Load = {
 		this.game.load.image('NoteLight', 'assets/images/notes/light.png');
 
 		this.game.load.image('PowerupSlow', 'assets/images/powerups/slow.png');
-		this.game.load.image('PowerupFast', 'assets/images/powerups/fast.png');	
+		this.game.load.image('PowerupFast', 'assets/images/powerups/slow.png');	
 
 		this.game.load.image('ToastColor', 'assets/images/toast/color.png');
 		this.game.load.image('ToastGold', 'assets/images/toast/gold.png');
