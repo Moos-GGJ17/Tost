@@ -10,6 +10,16 @@ function VitalWave(game, x, y, width, life, amplitude, color) {
 	this.color = '#e0e0e0';
 	this.traceWidth = width;
 	this.count = 5;
+
+	this.TRACE_COLORS = [
+		'41, 98, 255',
+		'13, 115, 119',
+		'117, 117, 117',
+		'131, 68, 150',
+		'255, 206, 62',
+		'224, 224, 224'
+	];
+
 	this.initialize();
 }
 
@@ -17,7 +27,7 @@ VitalWave.prototype = Object.create(Phaser.Sprite.prototype);
 VitalWave.prototype.constructor = Player;
 
 VitalWave.prototype.initialize = function() {
-	this.data = this.game.math.sinCosGenerator(this.game.width / 8, 1, 1, 10);
+	this.data = this.game.math.sinCosGenerator(this.game.width / 16, 1, 1, 10);
 
     //  Just so we can see the data
     this.bmd = this.game.add.bitmapData(this.game.width, this.game.height);
@@ -35,16 +45,18 @@ VitalWave.prototype.update = function() {
 
 		for (var i = 0; i < this.game.width; i++) {
 			currentWidth = Math.floor(Math.random() * this.traceWidth) + 1;
-	    	this.bmd.rect(i * 8,
+	    	this.bmd.rect(i * 16,
 	    		this.y + this.data.sin[i] * this.life * this.amplitude,
 	    		currentWidth,
 	    		currentWidth,
 	    		this.color);
-	    	this.bmd.rect(i * 8,
+	    		//'rgb(' + this.TRACE_COLORS[Math.floor(Math.random() * 6)] + ')');
+	    	this.bmd.rect(i * 16,
 	    		this.y - this.data.sin[i] * this.life * this.amplitude,
 	    		currentWidth,
 	    		currentWidth,
 	    		this.color);
+	    		//'rgb(' + this.TRACE_COLORS[Math.floor(Math.random() * 6)] + ')');
 	    }
 
 	    Phaser.ArrayUtils.rotate(this.data.sin);
@@ -54,7 +66,7 @@ VitalWave.prototype.update = function() {
 }
 
 VitalWave.prototype.hitNote = function() {
-	this.life += 0.1;
+	this.life += 0.2;
 	this.life = Math.min(this.life, this.MAX_LIFE);
 	this.game.chart.music.volume = this.life / this.MAX_LIFE;
 }
@@ -65,7 +77,7 @@ VitalWave.prototype.missNote = function() {
 	this.life = Math.max(--this.life, 0);
 	if (this.life <= 0) {
 		this.playGameOverMusic();
-		this.gameOver = true;
+		//this.gameOver = true;
 	}
 	this.game.chart.music.volume = this.life / this.MAX_LIFE;
 }

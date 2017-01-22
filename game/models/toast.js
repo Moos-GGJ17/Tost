@@ -8,6 +8,7 @@ function Toasts(game, x, y, score) {
 	this.MAX_SCORE = score;
 	this.score = 0;
 	this.finished = false;
+	this.gold = false;
 	this.createTweens();
 }
 
@@ -19,6 +20,22 @@ Toasts.prototype.createToasts = function() {
 	this.first.x = - this.first.width * 3 / 2 - 10;
 	this.second = new Toast(this.game, - this.first.width / 2, 0);
 	this.third = new Toast(this.game, this.first.width / 2 + 10, 0);
+
+	this.first.alpha = 0;
+	this.second.alpha = 0;
+	this.third.alpha = 0;
+
+	var numbersStyle = {
+		font: "48px Arial",
+		fill: "#e0e0e0",
+		boundsAlignH: "center",
+		boundsAlignV: "middle"
+	}
+	//this.numbers = this.game.add.text(- this.first.width * 3 / 2 - 10, 0, "00000", numbersStyle);
+	this.numbers = this.game.add.text(10, 0, "0", numbersStyle);
+	/*this.numbers.font = 'Arial';
+    this.numbers.fontSize = 48;
+    this.numbers.fill = "#e0e0e0";*/
 
 	this.x = this.first.width * 3 / 4 + 5;
 	this.add(this.first);
@@ -33,6 +50,7 @@ Toasts.prototype.increaseScore = function() {
 		this.first.gold();
 		this.second.gold();
 		this.third.gold();
+		this.gold = true;
 	} else if (this.score / this.MAX_SCORE > 0.90) {
 		this.third.color();
 	} else if (this.score / this.MAX_SCORE > 0.60) {
@@ -54,6 +72,14 @@ Toasts.prototype.createTweens = function() {
 Toasts.prototype.center = function() {
 	this.tweens.enlarge.start();
 	this.tweens.center.start();
+	this.numbers.setTextBounds(this.game.world.width / 2 - this.first.width / 2 - 5, this.game.world.height / 3 + this.game.tosted.height / 2, this.first.width, this.first.height);
+	console.log(this.score);
+	console.log(this.MAX_SCORE);
+	this.numbers.text = Math.round(this.score * 100 / this.MAX_SCORE) + '%';
+	this.numbers.fontSize = 32;
+	if (this.gold) {
+		this.numbers.fill = "#000000";
+	}
 }
 
 Toasts.prototype.finish = function() {
@@ -61,6 +87,16 @@ Toasts.prototype.finish = function() {
 		this.finished = true;
 		this.center();
 		this.game.tosted.center();
+		this.first.alpha = 1;
+		this.second.alpha = 1;
+		this.third.alpha = 1;
+		//this.numbers.alpha = 0;
+	}
+}
+
+Toasts.prototype.update = function() {
+	if (!this.game.vitalWave.gameOver && !this.finished) {
+		this.numbers.text = this.score + '';
 	}
 }
 
