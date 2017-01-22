@@ -33,9 +33,6 @@ States.Play = {
 		this.background.animations.add('Play');
 		this.background.animations.play('Play', 5, true);
 		this.background.scale.setTo(this.game.width / this.background.width, this.game.height / this.background.height);
-
-		this.backgroundGray.animations.add('Play');
-		this.backgroundGray.animations.play('Play', 5, true);
 		this.backgroundGray.scale.setTo(this.game.width / this.backgroundGray.width, this.game.height / this.backgroundGray.height);
 		this.backgroundGray.alpha = 0;
 
