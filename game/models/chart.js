@@ -50,7 +50,7 @@ Chart.prototype.load = function (chart) {
 }
 
 Chart.prototype.createNoteWithTime = function () {
-	console.log(this.index  + '<' + this.notes.length);
+	//console.log(this.index  + '<' + this.notes.length);
 	if (this.index >= this.notes.length - 3) {
 		//this.timer.stop();
 		//this.music.stop();

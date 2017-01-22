@@ -17,7 +17,12 @@ States.Play = {
 	create: function(){
 		// Sets the game background color
 		this.game.stage.backgroundColor = '0x000000';
-		this.background = this.game.add.sprite(0, 0, 'CityDay');
+		var currentDate = new Date();
+		if (currentDate.getHours() > 18) {
+			this.background = this.game.add.sprite(0, 0, 'CityNight');
+		} else {
+			this.background = this.game.add.sprite(0, 0, 'CityDay');
+		}		
 		this.background.animations.add('Play');
 		this.background.animations.play('Play', 8, true);
 		this.background.scale.setTo(this.game.width / this.background.width, this.game.height / this.background.height);
@@ -71,7 +76,7 @@ States.Play = {
 
 
 );
-		}, 0);
+		}, 2250);
 		//var trace = this.game.add.group();
 		//this.game.playerTrace = this.game.add.sprite();
 		//trace.add(this.game.playerTrace);
