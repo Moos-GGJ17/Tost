@@ -33,7 +33,7 @@ States.Load = {
 
 		this.game.load.image('GameOver', 'assets/images/ui/game-over.png');
 		this.game.load.image('Tosted', 'assets/images/ui/tosted.png');
-		this.game.load.image('Space', 'assets/images/ui/space.png');
+		this.game.load.spritesheet('Space', 'assets/images/ui/space.png', 395, 393);
 
 		this.game.load.spritesheet('CityDay', 'assets/images/backgrounds/city-day-8.jpg', 424, 600);
 		this.game.load.spritesheet('CityNight', 'assets/images/backgrounds/city-night-8.jpg', 424, 600);

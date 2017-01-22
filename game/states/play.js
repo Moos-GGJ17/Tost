@@ -10,6 +10,7 @@ States.Play = {
 			x: 800,
 			y: 600
 		};
+		this.started = false;
 	},
 	
 
@@ -27,10 +28,16 @@ States.Play = {
 		this.background.animations.play('Play', 5, true);
 		this.background.scale.setTo(this.game.width / this.background.width, this.game.height / this.background.height);
 
+		this.pressSpace = this.game.add.sprite(this.game.world.width / 2, this.game.world.height / 2, 'Space');
+		this.pressSpace.anchor.setTo(0.5, 0.5);
+		this.pressSpace.animations.add('Press');
+		this.pressSpace.animations.play('Press', 3, true);
+
 		// Sets the world bounds
 		this.game.world.setBounds(0, 0, this.BOUNDS.x, this.BOUNDS.y);
 
-		
+		this.playButton = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+		this.playButton.onDown.add(this.play, this);
 	},
 
 	play: function() {
@@ -47,16 +54,21 @@ States.Play = {
 		this.game.toasts = new Toasts(this.game, 0, 0, 0);
 		this.game.gameOver = new GameOver(this.game, this.game.world.width / 2, this.game.height / 3);
 		this.game.tosted = new Tosted(this.game);
-	}
+		this.started = true;
+		this.playButton.onDown.remove(this.play, this);
+		this.pressSpace.destroy();
+	},
 
 	// Updates all the game's objects.
 	update: function(){
-		this.game.player.update();
-		this.game.chart.update();
+		if (this.started) {
+			this.game.player.update();
+			this.game.chart.update();
 
-		if (this.game.vitalWave.gameOver) {
-			//this.state.start('GameOver', true);
-			this.game.gameOver.show();
+			if (this.game.vitalWave.gameOver) {
+				//this.state.start('GameOver', true);
+				this.game.gameOver.show();
+			}
 		}
 	},
 
