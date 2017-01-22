@@ -72,7 +72,7 @@ Toasts.prototype.createTweens = function() {
 Toasts.prototype.center = function() {
 	this.tweens.enlarge.start();
 	this.tweens.center.start();
-	this.numbers.setTextBounds(this.game.world.width / 2 - this.first.width / 2 - 10, this.game.world.height / 3 + this.game.tosted.height / 2, this.first.width, this.first.height);
+	this.numbers.setTextBounds(this.game.world.width / 2 - this.first.width / 2 - 5, this.game.world.height / 3 + this.game.tosted.height / 2, this.first.width, this.first.height);
 	console.log(this.score);
 	console.log(this.MAX_SCORE);
 	this.numbers.text = Math.round(this.score * 100 / this.MAX_SCORE) + '%';

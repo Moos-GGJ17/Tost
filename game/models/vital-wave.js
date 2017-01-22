@@ -66,7 +66,7 @@ VitalWave.prototype.update = function() {
 }
 
 VitalWave.prototype.hitNote = function() {
-	this.life += 0.1;
+	this.life += 0.2;
 	this.life = Math.min(this.life, this.MAX_LIFE);
 	this.game.chart.music.volume = this.life / this.MAX_LIFE;
 }
@@ -77,7 +77,7 @@ VitalWave.prototype.missNote = function() {
 	this.life = Math.max(--this.life, 0);
 	if (this.life <= 0) {
 		this.playGameOverMusic();
-		this.gameOver = true;
+		//this.gameOver = true;
 	}
 	this.game.chart.music.volume = this.life / this.MAX_LIFE;
 }

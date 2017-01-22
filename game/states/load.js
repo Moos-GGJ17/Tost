@@ -14,6 +14,8 @@ States.Load = {
 
 		this.game.load.audio('funkytown', 'assets/audio/songs/funkytown.mp3');
 		this.game.load.audio('ibiza', 'assets/audio/songs/ibiza.mp3');
+		this.game.load.audio('sorry', 'assets/audio/songs/sorry.mp3');
+		this.game.load.audio('never', 'assets/audio/songs/never.mp3');
 
 		this.game.load.spritesheet('CityDay', 'assets/images/backgrounds/city-day-8.jpg', 424, 600);
 		this.game.load.spritesheet('CityNight', 'assets/images/backgrounds/city-night-8.jpg', 424, 600);
@@ -40,7 +42,7 @@ States.Load = {
 		this.game.load.image('NoteLight', 'assets/images/notes/light.png');
 
 		this.game.load.image('PowerupSlow', 'assets/images/powerups/slow.png');
-		this.game.load.image('PowerupFast', 'assets/images/powerups/slow.png');	
+		this.game.load.image('PowerupFast', 'assets/images/powerups/fast.png');	
 
 		this.game.load.image('ToastColor', 'assets/images/toast/color.png');
 		this.game.load.image('ToastGold', 'assets/images/toast/gold.png');
@@ -48,6 +50,7 @@ States.Load = {
 
 		this.game.load.image('GameOver', 'assets/images/ui/game-over.png');
 		this.game.load.image('Tosted', 'assets/images/ui/tosted.png');
+		this.game.load.image('Instructions', 'assets/images/ui/instructions.png');
 		this.game.load.spritesheet('Space', 'assets/images/ui/space.png', 395, 393);
 
 		this.game.load.image('Funkytown', 'assets/images/songs/funkytown.png');

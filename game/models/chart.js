@@ -114,7 +114,7 @@ Chart.prototype.update = function() {
 		this.callAll('update');
 		this.powerups.update();
 	} else {
-		//this.powerups.stop();
+		this.powerups.stop();
 	}
 	//console.log(this.game.time.totalElapsedSeconds() - this.startTime);
 	if (this.play) {

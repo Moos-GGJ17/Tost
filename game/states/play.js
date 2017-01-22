@@ -45,6 +45,9 @@ States.Play = {
 		this.game.pressSpace.animations.add('Press');
 		this.game.pressSpace.animations.play('Press', 3, true);
 
+		this.instructions = this.game.add.sprite(this.game.world.width / 2, this.game.world.height / 3, 'Instructions');
+		this.instructions.anchor.setTo(0.5, 0);
+
 		// Sets the world bounds
 		this.game.world.setBounds(0, 0, this.BOUNDS.x, this.BOUNDS.y);
 
@@ -74,7 +77,8 @@ States.Play = {
 		this.playButton.onDown.remove(this.play, this);
 		//this.pressSpace.destroy();
 		this.game.pressSpace.alpha = 0;
-		aux.game.chart.loadWithTime(Songs.funkytown);
+		this.instructions.destroy();
+		aux.game.chart.loadWithTime(Songs.never);
 	},
 
 	// Updates all the game's objects.
