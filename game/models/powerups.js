@@ -17,7 +17,7 @@ Powerups.prototype.createRandom = function() {
 	var velocity = Math.random() * 50 + this.game.chart.velocity - 25;
 	var powerup;
 
-	console.log('Creating powerup' + type);
+	//console.log('Creating powerup' + type);
 
 	switch (type) {
 		case 0:
@@ -38,5 +38,7 @@ Powerups.prototype.update = function() {
 }
 
 Powerups.prototype.stop = function() {
-	this.timer.stop();
+	if (this.timer.running) {
+		this.timer.stop();
+	}
 }

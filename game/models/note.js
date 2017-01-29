@@ -43,7 +43,7 @@ Note.prototype.update = function() {
 Note.prototype.hit = function() {
 	if (!this.tuned) {
 		this.game.player.changeColor(this.color);
-		this.loadTexture('NoteWhite');
+		this.changeColorToWhite();
 		this.tuned = true;
 		this.game.vitalWave.hitNote();
 		this.game.toasts.increaseScore();
@@ -56,9 +56,14 @@ Note.prototype.missed = function() {
 		this.game.vitalWave.missNote();
 		this.fail = true;
 		this.game.chart.errorAudio.play();
+		this.changeColorToWhite();
 		//this.light.destroy();
 		//this.destroy();
 	}
+}
+
+Note.prototype.changeColorToWhite = function() {
+	this.loadTexture('NoteWhite');
 }
 
 Note.prototype.remove = function() {

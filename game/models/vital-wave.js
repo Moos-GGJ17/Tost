@@ -84,6 +84,7 @@ VitalWave.prototype.missNote = function() {
 
 VitalWave.prototype.playGameOverMusic = function() {
 	if (!this.gameOver) {
+		this.game.chart.callAll('changeColorToWhite');
 		this.gameOver = true;
 		this.game.add.audio('lost').play();
 	}
