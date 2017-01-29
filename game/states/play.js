@@ -66,7 +66,7 @@ States.Play = {
 
 	play: function() {
 		if ((this.game.input.activePointer == this.game.input.pointer1) || this.playButton.isDown) {
-			this.game.chart = new Chart(this.game, 2000);
+			
 			var aux = this;
 			//setTimeout(function() {
 				
@@ -80,13 +80,14 @@ States.Play = {
 			this.game.toasts = new Toasts(this.game, 0, 0, 0);
 			this.game.gameOver = new GameOver(this.game, this.game.world.width / 2, this.game.height / 3);
 			this.started = true;
+			this.game.chart = new Chart(this.game, 2000);
 			this.playButton.onDown.remove(this.play, this);
 			this.game.input.onDown.remove(this.play, this);
 			//this.pressSpace.destroy();
 			this.game.pressSpace.alpha = 0;
 			this.instructions.destroy();
 			this.instructionsSpace.destroy();
-			aux.game.chart.loadWithTime(Songs[this.game.trackIndex]);
+			aux.game.chart.loadChart(Songs[this.game.trackIndex]);
 		}
 	},
 

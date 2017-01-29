@@ -3,132 +3,105 @@ function Chart(game, tempo){
 	this.game = game;
 	this.tempo = tempo;
 	this.timer = this.game.time.create(false);
-	//this.createRandomNotes();
 	this.velocity = 200;
 	this.colors = ['Blue', 'Cyan', 'Gray', 'Purple', 'Red', 'Yellow'];
 	this.positions = [];
 	this.notes = [];
-	this.index = 0;
 	this.startTime = 99999999;
-	this.play = false;
+	this.isCreatingNotes = false;
 	this.music;
 	this.errorAudio = this.game.add.audio('error');
-	this.errorAudio.volume = 1;
 
 	for (var i = 0; i < 6; i++) {
 		this.positions[i] = this.game.world.width * (i + 1) / 8;
 	}
 
+	this.playMusicTimeout = this.game.player.y / this.velocity * 1000;
+
 	this.powerups = new Powerups(this.game);
+
+	this.noteToCreate = 0;
+	this.currentNote = null;
 }
 
 Chart.prototype = Object.create(Phaser.Group.prototype);
 Chart.prototype.constructor = Chart;
 
 Chart.prototype.createNote = function () {
-	if (this.index > this.notes.length) {
-		this.timer.stop();
-	} else {
-		if (this.notes[this.index] > 0) {
-			var note = new Note(this.game, this.positions[this.notes[this.index] - 1], 0, this.velocity, this.tempo, this.colors[this.notes[this.index] - 1]);
-			this.add(note);
-		}
-		this.index++;
-	}
-}
-
-Chart.prototype.load = function (chart) {
-	this.tempo = 1000 * 60 / chart.bpm;
-	this.notes = chart.notes;
-	this.timer.loop(this.tempo, this.createNote, this);
-	this.timer.start();
-	//this.game.toasts.MAX_SCORE = chart.notes.length;
-	var music = this.game.add.audio(chart.filename);
-	this.music = music;
-	//this.music.startTime = -10000;
-	//setTimeout(function() {
-		//this.music.play();
-	//}, 1000);
-}
-
-Chart.prototype.createNoteWithTime = function () {
 	//console.log(this.index  + '<' + this.notes.length);
-	if (this.index >= this.notes.length) {
-		//this.timer.stop();
-		//this.music.stop();
-		/*this.game.toasts.center();
-		this.game.tosted.center();*/
-		this.game.time.events.repeat(2 * Phaser.Timer.SECOND * this.game.world.height / this.velocity, 1, this.lastNote, this);
-	} else if (!this.game.vitalWave.gameOver) {
-		/*if (this.times[this.index] >= this.timer.ms) {
-			console.log('Creating note');
-			var note = new Note(this.game, this.positions[this.notes[this.index] - 1], 0, this.velocity, this.tempo, this.colors[this.notes[this.index] - 1]);
-			this.add(note);
-			this.index++;
-		}
-		//this.index++;*/
-		var note = new Note(this.game, this.positions[this.notes[this.index] - 1], 0, this.velocity, this.tempo, this.colors[this.notes[this.index] - 1]);
-		this.add(note);
-		this.index++;
-		//var aux = this;
-		/*setTimeout(function() {
-			aux.createNoteWithTime();
-		}, this.times[this.index] - this.times[this.index - 1]);*/
+	//if (this.index >= this.notes.length) {
+	/*if (this.notes.length == 0) {
+		this.isCreatingNotes = false;
+		this.game.time.events.add(2 * Phaser.Timer.SECOND * this.game.world.height / this.velocity, this.lastNote, this);
+	} else */if (!this.game.vitalWave.gameOver) {
+		this.noteToCreate = this.notes.shift() - 1;
+		this.currentNote = new Note(this.game, this.positions[this.noteToCreate], 0, this.velocity, this.tempo, this.colors[this.noteToCreate]);
+		this.add(this.currentNote);
+		//this.index++;
+	}
+
+	if (this.notes.length == 0) {
+		this.isCreatingNotes = false;
+		this.powerups.stop();
+		this.music.fadeOut(this.playMusicTimeout * 2);
+		this.game.time.events.add(this.playMusicTimeout * 2, this.lastNote, this);
 	}
 }
 
-Chart.prototype.loadWithTime = function (chart) {
+Chart.prototype.loadChart = function (chart) {
 	this.tempo = 1000 * 60 / chart.bpm;
 	this.notes = chart.notes;
 	this.times = chart.times;
-	//this.timer.loop(1, this.createNoteWithTime, this);
-	//this.timer.start();
 	this.music = this.game.add.audio(chart.filename);
-	/*var aux = this.music;
-	setTimeout(function() {
-		aux.play();
-	}, (this.game.world.width * 3 / 4) / this.game.chart.velocity * 1000 + 1000);*/
-	this.game.time.events.repeat((this.game.world.width * 3 / 4) / this.game.chart.velocity * 1000 - 750, 1, this.playMusic, this);
-	//this.music.play();
-	this.play = true;
+	//this.game.time.events.repeat((this.game.world.width * 3 / 4) / this.game.chart.velocity * 1000 - 750, 1, this.playMusic, this);
+	this.game.time.events.add(this.playMusicTimeout, this.playMusic, this);
+	this.isCreatingNotes = true;
 	this.startTime = this.game.time.totalElapsedSeconds();
 	this.game.toasts.MAX_SCORE = chart.notes.length;
-	//var aux = this;
-	//console.log(this.times[0]);
-	/*setTimeout(function() {
-		aux.createNoteWithTime();
-	}, this.times[0] + 1800);*/
 }
 
 Chart.prototype.playMusic = function() {
 	this.music.play();
 }
 
-/*Chart.prototype.createRandomNotes = function () {
-	this.timer.loop(this.tempo, this.createNote, this, Math.random() * 800, 0, 50, 'Red');
-	this.timer.start();
-}*/
-
 Chart.prototype.update = function() {
 	if (!this.game.vitalWave.gameOver && !this.game.toasts.finished) {
 		this.callAll('update');
-		this.powerups.update();
-	} else {
-		this.powerups.stop();
-	}
-	//console.log(this.game.time.totalElapsedSeconds() - this.startTime);
-	if (this.play) {
-		if (this.game.time.totalElapsedSeconds() - this.startTime >= this.times[this.index] / 1000) {
-		//if (this.music.currentTime >= this.times[this.index]) {
-			this.createNoteWithTime();
+		
+
+		if (this.isCreatingNotes) {
+			this.powerups.update();
+			if (!this.music.isPlaying) {
+				if (this.game.time.totalElapsedSeconds() - this.startTime >= this.times[this.index] / 1000) {
+					this.times.shift();
+					this.createNote();
+				}
+			} else {
+				//console.log('CurTime' + this.music.currentTime);
+				//console.log('Timeout' + this.playMusicTimeout);
+				//console.log('Next' + this.times[this.index]);
+				//if (this.music.currentTime + this.playMusicTimeout >= this.times[this.index]) {
+				if (this.music.currentTime + this.playMusicTimeout >= this.times[0]) {
+					this.times.shift();
+					this.createNote();
+				}
+			}
 		}
 	}
+	//console.log(this.game.time.totalElapsedSeconds() - this.startTime);
+	/*if (this.play) {
+		if (this.game.time.totalElapsedSeconds() - this.startTime >= this.times[this.index] / 1000) {
+		//if (this.music.currentTime >= this.times[this.index]) {
+			this.createNote();
+		}
+	}*/
+	
 }
 
 Chart.prototype.lastNote = function() {
-	this.music.fadeOut(2000);
-	this.powerups.stop();
-	this.game.toasts.finish();
+	if (!this.game.vitalWave.gameOver) {
+		this.game.toasts.finish();
+	}
 }
 
 Chart.prototype.debug = function() {
