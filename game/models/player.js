@@ -49,8 +49,8 @@ Player.prototype.initialize = function() {
 	this.trace = {};
 	this.trace.color = '224, 224, 224';
 	this.trace.data = this.game.math.sinCosGenerator((this.game.height - this.y) * 2, (this.game.height - this.y), 1, 1);
-	console.log(this.game.height - this.y);
-	console.log(this.trace.data);
+	//console.log(this.game.height - this.y);
+	//console.log(this.trace.data);
 
     //  Just so we can see the data
     this.trace.bmd = this.game.add.bitmapData(this.game.width, this.game.height);

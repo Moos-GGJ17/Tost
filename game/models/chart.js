@@ -72,7 +72,8 @@ Chart.prototype.update = function() {
 		if (this.isCreatingNotes) {
 			this.powerups.update();
 			if (!this.music.isPlaying) {
-				if (this.game.time.totalElapsedSeconds() - this.startTime >= this.times[this.index] / 1000) {
+				//console.log(this.game.time.totalElapsedSeconds() - this.startTime + '>' + this.times[0] / 1000);
+				if (this.game.time.totalElapsedSeconds() - this.startTime >= this.times[0] / 1000) {
 					this.times.shift();
 					this.createNote();
 				}
@@ -87,6 +88,8 @@ Chart.prototype.update = function() {
 				}
 			}
 		}
+	} else {
+		this.powerups.stop();
 	}
 	//console.log(this.game.time.totalElapsedSeconds() - this.startTime);
 	/*if (this.play) {
