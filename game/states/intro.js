@@ -62,7 +62,7 @@ States.Intro = {
 				this.game.trackIndex = Songs.length - 1;
 			}
 			this.cassette.hide(Songs[this.game.trackIndex]);
-			this.state.start('Play');
+			this.startPlaying();
 		} else if ((this.spaceButton.isDown || this.game.input.pointer1.isDown) && !this.changedSong) {
 			this.changedSong = true;
 			this.game.trackIndex = (this.game.trackIndex + 1) % Songs.length;
@@ -72,5 +72,10 @@ States.Intro = {
 
 	clearSongChange: function() {
 		this.changedSong = false;
+	},
+
+	startPlaying: function() {
+		this.cassette.music.stop();
+		this.state.start('Play');
 	}
 };
