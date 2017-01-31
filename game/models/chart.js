@@ -10,6 +10,7 @@ function Chart(game, tempo){
 	this.startTime = 99999999;
 	this.isCreatingNotes = false;
 	this.music;
+	this.musicAlreadyPlayed = false;
 	this.errorAudio = this.game.add.audio('error');
 
 	for (var i = 0; i < 6; i++) {
@@ -62,6 +63,8 @@ Chart.prototype.loadChart = function (chart) {
 
 Chart.prototype.playMusic = function() {
 	this.music.play();
+	this.game.onPause.add(this.music.pause, this.music);
+	this.game.onResume.add(this.music.resume, this.music);
 }
 
 Chart.prototype.update = function() {
@@ -71,7 +74,7 @@ Chart.prototype.update = function() {
 
 		if (this.isCreatingNotes) {
 			this.powerups.update();
-			if (!this.music.isPlaying) {
+			if (!this.music.isPlaying && !this.musicAlreadyPlayed) {
 				//console.log(this.game.time.totalElapsedSeconds() - this.startTime + '>' + this.times[0] / 1000);
 				if (this.game.time.totalElapsedSeconds() - this.startTime >= this.times[0] / 1000) {
 					this.times.shift();
@@ -82,6 +85,7 @@ Chart.prototype.update = function() {
 				//console.log('Timeout' + this.playMusicTimeout);
 				//console.log('Next' + this.times[this.index]);
 				//if (this.music.currentTime + this.playMusicTimeout >= this.times[this.index]) {
+				this.musicAlreadyPlayed = true;
 				if (this.music.currentTime + this.playMusicTimeout >= this.times[0]) {
 					this.times.shift();
 					this.createNote();
