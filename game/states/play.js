@@ -67,7 +67,6 @@ States.Play = {
 	play: function() {
 		if ((this.game.input.activePointer == this.game.input.pointer1) || this.playButton.isDown) {
 			
-			var aux = this;
 			//setTimeout(function() {
 				
 			//}, (this.game.world.width * 3 / 4) / this.game.chart.velocity * 1000);
@@ -87,7 +86,7 @@ States.Play = {
 			this.game.pressSpace.alpha = 0;
 			this.instructions.destroy();
 			this.instructionsSpace.destroy();
-			aux.game.chart.loadChart(Songs[this.game.trackIndex]);
+			this.game.chart.loadChart(Songs[this.game.trackIndex]);
 		}
 	},
 
