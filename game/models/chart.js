@@ -51,8 +51,8 @@ Chart.prototype.createNote = function () {
 
 Chart.prototype.loadChart = function (chart) {
 	this.tempo = 1000 * 60 / chart.bpm;
-	this.notes = chart.notes;
-	this.times = chart.times;
+	this.notes = chart.notes.slice();
+	this.times = chart.times.slice();
 	this.music = this.game.add.audio(chart.filename);
 	//this.game.time.events.repeat((this.game.world.width * 3 / 4) / this.game.chart.velocity * 1000 - 750, 1, this.playMusic, this);
 	this.game.time.events.add(this.playMusicTimeout, this.playMusic, this);
