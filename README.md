@@ -15,6 +15,10 @@ You've got:
 Objective? You've got this ball that moves constantly on zig-zag (it's also a Wave). With it, you'll try to collect as many lights as you can by hitting the Space button, that will make the ball bounce and change its direction. Challenging....but you won't give up ;)
 
 ## Featuring
+*Coming soon...*
+
+* **Pumped up Kicks** by *Foster The People*
+
 * **Funkytown** by *Lipps Inc.*
 
 * **Never Gonna Give You Up** by *Rick Astley*
@@ -23,11 +27,10 @@ Objective? You've got this ball that moves constantly on zig-zag (it's also a Wa
 
 * **I Took A Pill In Ibiza (Seeb Remix)** by *Mike Posner*
 
-All being covered by [8 Bit Universe](https://www.youtube.com/user/8BitUniverseMusic)
-
 ## Requirements
 
-Just go to [HERE](http://tost-ggj2017.herokuapp.com), wait for it, PLAY!
+~~Just go to [HERE](http://tost-ggj2017.herokuapp.com), wait for it, PLAY!~~
+Soon it will be available again!!!
 
 ## Built With
 
@@ -41,8 +44,7 @@ Just go to [HERE](http://tost-ggj2017.herokuapp.com), wait for it, PLAY!
 * **Rodrigo Torrico Del Castillo** - [Rodrigo@Github](https://github.com/whiletruedothis)
 
 ## Special thanks to:
-* [8 Bit Universe](https://www.youtube.com/user/8BitUniverseMusic) for the official soundtrack of this game.
-* [1041uuu](https://www.patreon.com/1041uuu) for the sexiest 8-bit background image ever.
+* **David Delgadillo Peralta**
 * [Audacity](http://www.audacityteam.org/) for the great help at making the charts.
 * [Google](https://www.google.com) for giving us fast results for tools and docs, without them we wouldn't make it.
 
