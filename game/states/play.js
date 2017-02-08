@@ -73,6 +73,7 @@ States.Play = {
 			//var trace = this.game.add.group();
 			//this.game.playerTrace = this.game.add.sprite();
 			//trace.add(this.game.playerTrace);
+			ChartData.calculatePositions(this.game.width);
 			this.game.player = new Player(this.game, this.BOUNDS.x / 2, this.BOUNDS.y * 3 / 4, 1000);
 			this.game.vitalWave = new VitalWave(this.game, 0, 100, 15, 5, 5, '#ffffff');
 			this.game.tosted = new Tosted(this.game);
@@ -86,7 +87,7 @@ States.Play = {
 			this.game.pressSpace.alpha = 0;
 			this.instructions.destroy();
 			this.instructionsSpace.destroy();
-			this.game.chart.loadChart(Songs[this.game.trackIndex]);
+			this.game.chart.load(Songs[this.game.trackIndex]);
 		}
 	},
 

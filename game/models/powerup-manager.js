@@ -8,7 +8,6 @@ function PowerupManager(game) {
 	// Create a timer with a loop that generates a new powerup after 15 seconds
 	this.powerupCreationTimer = this.game.time.create(false);
 	this.powerupCreationTimer.loop(Phaser.Timer.SECOND * 15, this.generateRandomPowerup, this);
-	this.powerupCreationTimer.start();
 }
 
 PowerupManager.prototype = Object.create(Phaser.Group.prototype);
@@ -36,6 +35,10 @@ PowerupManager.prototype.generateRandomPowerup = function() {
 	if (powerup) {
 		this.add(powerup);
 	}
+}
+
+PowerupManager.prototype.startCreatingPowerups = function() {
+	this.powerupCreationTimer.start();
 }
 
 PowerupManager.prototype.update = function() {
