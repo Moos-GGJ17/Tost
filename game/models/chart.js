@@ -19,7 +19,7 @@ function Chart(game, tempo){
 
 	this.playMusicTimeout = this.game.player.y / this.velocity * 1000;
 
-	this.powerups = new Powerups(this.game);
+	this.powerups = new PowerupManager(this.game);
 
 	this.noteToCreate = 0;
 	this.currentNote = null;
