@@ -9,8 +9,6 @@ function PowerupManager(game) {
 	this.powerupCreationTimer = this.game.time.create(false);
 	this.powerupCreationTimer.loop(Phaser.Timer.SECOND * 15, this.generateRandomPowerup, this);
 	this.powerupCreationTimer.start();
-
-	console.log('Testing new manager');
 }
 
 PowerupManager.prototype = Object.create(Phaser.Group.prototype);

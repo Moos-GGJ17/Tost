@@ -1,13 +1,14 @@
+// Represents a chart note that the player must catch.
 function Note(game, x, y, velocity, tempo, color) {
 	Phaser.Sprite.call(this, game, x, y,'Note' + color);
 	this.game = game;
 	this.game.add.existing(this);
 
-	this.tuned = false;
-	this.fail = false;
+	this.isTuned = false; // True if player catched it
+	this.isLost = false; // True if player can't catch it anymore
 	this.color = color;
 	this.tempo = tempo;
-	this.initialVelocity = velocity;
+	this.defaultVelocity = velocity;
 	this.initialize();
 }
 
@@ -15,50 +16,60 @@ Note.prototype = Object.create(Phaser.Sprite.prototype);
 Note.prototype.constructor = Note;
 
 Note.prototype.initialize = function() {
+	// Arcade physics basic configuration
 	this.game.physics.arcade.enable(this);
 	this.immovable = true;
+	this.body.setCircle(this.width / 2, 0, 0); // Circular body with same size as the sprite
+	this.body.velocity.y = this.defaultVelocity;
+
+	this.light = new NoteLight(this.game, this); // Light that blinks based on tempo
+	this.game.world.bringToTop(this); // Bring note in top of light
+
+	// Destroy when out of bounds
 	this.checkWorldBounds = true;
-	this.events.onOutOfBounds.add(this.remove, this);
+	this.events.onOutOfBounds.add(this.deepDestroy, this);
 
-	this.body.setCircle(this.width / 2, 0, 0);
-	this.body.velocity.y = this.initialVelocity;
+	this.createTweens();
+}
 
-	this.light = new NoteLight(this.game, this);
-	this.game.world.bringToTop(this);
+Note.prototype.createTweens = function() {
+	this.tweens = {};
+
+	// Smoothly disappear from screen in 500 ms, and then destroy the note
+	this.tweens.disappear = this.game.add.tween(this);
+	this.tweens.disappear.to( { alpha: 0 }, 500, Phaser.Easing.Linear.None, false);
+	this.tweens.disappear.onComplete.add(this.deepDestroy, this);
 }
 
 Note.prototype.update = function() {
-	this.game.physics.arcade.overlap(this, this.game.player, this.hit, null, this);
-	this.game.physics.arcade.overlap(this, this.game.player.bottomLine, this.missed, null, this);
-	if (this.tuned) {
-		this.alpha -= 0.04;
-	}
-	if (this.alpha <= 0) {
-		//this.light.destroy();
-		//this.destroy();
-		this.remove();
-	}
+	// Check for collision with player
+	this.game.physics.arcade.overlap(this, this.game.player, this.playerHit, null, this);
+	//Check if player can't catch it no more
+	this.game.physics.arcade.overlap(this, this.game.player.bottomLine, this.miss, null, this);
 }
 
-Note.prototype.hit = function() {
-	if (!this.tuned) {
-		this.game.player.changeColor(this.color);
+Note.prototype.playerHit = function() {
+	if (!this.isTuned) {
+		// Mark note as tuned and start the tween to destroy it
+		this.isTuned = true;
 		this.changeColorToWhite();
-		this.tuned = true;
-		this.game.vitalWave.hitNote();
-		this.game.toasts.increaseScore();
+		this.tweens.disappear.start();
+
+		this.game.player.changeColor(this.color); // Player changes it's head color based on the hit note
+		this.game.vitalWave.hitNote(); // Notify player health of note hit
+		this.game.toasts.increaseScore(); // Notify score of note hit
 	}
-	//this.destroy();
 }
 
-Note.prototype.missed = function() {
-	if (!this.tuned && !this.fail) {
-		this.game.vitalWave.missNote();
-		this.fail = true;
+// Player can't catch the note no more
+Note.prototype.miss = function() {
+	if (!this.isTuned && !this.isLost) {
+		// Mark note as lost
+		this.isLost = true;
+		this.changeColorToWhite();
 		this.game.chart.errorAudio.play();
-		this.changeColorToWhite();
-		//this.light.destroy();
-		//this.destroy();
+		
+		this.game.vitalWave.missNote(); // Notify player health of missed note
 	}
 }
 
@@ -66,7 +77,8 @@ Note.prototype.changeColorToWhite = function() {
 	this.loadTexture('NoteWhite');
 }
 
-Note.prototype.remove = function() {
+// Destroys the note and it's respective light
+Note.prototype.deepDestroy = function() {
 	this.light.destroy();
 	this.destroy();
 }

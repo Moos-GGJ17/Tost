@@ -7,22 +7,22 @@ function Powerup(game, x, y, velocity, type) {
 	this.game.add.existing(this);
 	this.defaultVelocity = velocity;
 	
+	this.isCaptured = false; // Player didn't catch it yet
 	this.initialize();
 }
 
 Powerup.prototype = Object.create(Phaser.Sprite.prototype);
 Powerup.prototype.constructor = Powerup;
 
-Powerup.prototype.initialize = function() {	
-	this.isCaptured = false; // Player didn't catch it yet
-
+Powerup.prototype.initialize = function() {
 	// Arcade physics basic configuration
 	this.game.physics.arcade.enable(this);
 	this.immovable = true;
-	this.checkWorldBounds = true;
 	this.body.setCircle(this.width / 2, 0, 0); // Circular body with same size as the sprite
 	this.body.velocity.y = this.defaultVelocity;
 
+	// Destroy when out of bounds
+	this.checkWorldBounds = true;
 	this.events.onOutOfBounds.add(this.destroyIfNotCaptured, this);
 
 	this.createTweens();
