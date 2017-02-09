@@ -28,13 +28,13 @@ States.Load = {
 
 		this.game.load.image('Blank', 'assets/images/blank.png');
 
-		this.game.load.image('WaveWhite', 'assets/images/wave/white.png');
-		this.game.load.image('WaveBlue', 'assets/images/wave/blue.png');
-		this.game.load.image('WaveCyan', 'assets/images/wave/cyan.png');
-		this.game.load.image('WaveGray', 'assets/images/wave/gray.png');
-		this.game.load.image('WavePurple', 'assets/images/wave/purple.png');
-		this.game.load.image('WaveRed', 'assets/images/wave/red.png');
-		this.game.load.image('WaveYellow', 'assets/images/wave/yellow.png');
+		this.game.load.image('PlayerWhite', 'assets/images/player/white.png');
+		this.game.load.image('PlayerBlue', 'assets/images/player/blue.png');
+		this.game.load.image('PlayerCyan', 'assets/images/player/cyan.png');
+		this.game.load.image('PlayerGray', 'assets/images/player/gray.png');
+		this.game.load.image('PlayerPurple', 'assets/images/player/purple.png');
+		this.game.load.image('PlayerRed', 'assets/images/player/red.png');
+		this.game.load.image('PlayerYellow', 'assets/images/player/yellow.png');
 
 		this.game.load.image('NoteBlue', 'assets/images/notes/blue.png');
 		this.game.load.image('NoteCyan', 'assets/images/notes/cyan.png');

@@ -74,13 +74,14 @@ States.Play = {
 			//this.game.playerTrace = this.game.add.sprite();
 			//trace.add(this.game.playerTrace);
 			ChartData.calculatePositions(this.game.width);
-			this.game.player = new Player(this.game, this.BOUNDS.x / 2, this.BOUNDS.y * 3 / 4, 1000);
 			this.game.vitalWave = new VitalWave(this.game, 0, 100, 15, 5, 5, '#ffffff');
 			this.game.tosted = new Tosted(this.game);
 			this.game.toasts = new Toasts(this.game, 0, 0, 0);
 			this.game.gameOver = new GameOver(this.game, this.game.world.width / 2, this.game.height / 3);
 			this.started = true;
+			this.game.player = new Player(this.game, this.BOUNDS.x / 2, this.BOUNDS.y * 3 / 4, 1000);
 			this.game.chart = new Chart(this.game, 2000);
+			
 			this.playButton.onDown.remove(this.play, this);
 			this.game.input.onDown.remove(this.play, this);
 			//this.pressSpace.destroy();
@@ -94,8 +95,8 @@ States.Play = {
 	// Updates all the game's objects.
 	update: function(){
 		if (this.started) {
-			this.game.player.update();
 			this.game.chart.update();
+			this.game.player.update();
 
 			if (this.game.vitalWave.gameOver) {
 				//this.state.start('GameOver', true);
