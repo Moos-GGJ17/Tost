@@ -6,6 +6,9 @@ function Chart(game) {
 	this.noteVelocity = 200; // y-velocity of the notes
 	this.tempoMS = 0; // [ms] based on the bpm of the song that is currently playing
 	this.chartLoadedTime = 0; // [s] time of the computer when the notes started being created
+
+	this.numberOfNotesHit = 0;
+	this.gameState = ChartData.GAME_STATE['PAUSE'];
 	
 	this.music = null; // audio of the song that is currently playing
 	this.errorAudio = this.game.add.audio('error');
@@ -44,9 +47,10 @@ Chart.prototype.load = function (chart) {
 	this.chartLoadedTime = this.game.time.totalElapsedSeconds();
 	
 	// Sets the max score based on the amount of notes to be created
-	this.game.toasts.MAX_SCORE = chart.notes.length;
+	ChartData.setMaxNumberOfNotes(chart.notes.length);
 
 	this.started = true;
+	this.gameState = ChartData.GAME_STATE['PLAYING'];
 }
 
 // Creates the next note in the chart
@@ -128,16 +132,58 @@ Chart.prototype.update = function() {
 }
 
 Chart.prototype.gameHasEnded = function() {
-	return this.game.vitalWave.gameOver || this.game.toasts.finished;
+	return this.gameState === ChartData.GAME_STATE.WIN || this.gameState === ChartData.GAME_STATE.LOSE;
 }
 
 // Show win screen if player didn't lost
-Chart.prototype.showWinScreen = function() {
+/*Chart.prototype.showWinScreen = function() {
 	if (!this.game.vitalWave.gameOver) {
 		this.game.toasts.finish();
 	}
-}
+}*/
 
 Chart.prototype.debug = function() {
 	this.callAll('debug');
+}
+
+Chart.prototype.setVolume = function(volume) {
+	this.music.volume = volume;
+}
+
+// Increase number of notes hit by 1
+Chart.prototype.hitNote = function() {
+	this.numberOfNotesHit++;
+}
+
+Chart.prototype.missNote = function() {
+	this.game.time.events.repeat(Phaser.Timer.SECOND / 4, 2, this.switchVolume, this);
+}
+
+Chart.prototype.switchVolume = function() {
+	if (this.music.volume > 0) {
+		this.music.volume = 0;
+	} else {
+		this.music.volume = this.game.player.calculateLifePercentage();
+	}
+}
+
+Chart.prototype.calculateNotesHitPercentage = function() {
+	return this.numberOfNotesHit / ChartData.maxNumberOfNotes;
+}
+
+Chart.prototype.showWinScreen = function() {
+	if (this.gameState != ChartData.GAME_STATE['WIN']) {
+		this.gameState = ChartData.GAME_STATE['WIN'];
+		this.game.toasts.show();
+		this.game.add.audio('lost').play();
+	};
+}
+
+Chart.prototype.lose = function() {
+	if (this.gameState != ChartData.GAME_STATE['LOSE']) {
+		this.gameState = ChartData.GAME_STATE['LOSE'];
+		this.callAll('changeColorToWhite');
+		this.game.add.audio('lost').play();
+		this.game.gameOver.show();
+	}
 }

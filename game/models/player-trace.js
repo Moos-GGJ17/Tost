@@ -2,7 +2,7 @@
 function PlayerTrace(game, player, color) {
 	this.game = game;
     this.player = player;
-	this.color = PlayerData.colors[color];
+	this.color = PlayerData.COLORS_RGB[color];
 
     // Calulates sin between the screen and player bounds to draw the trace with
 	this.data = this.game.math.sinCosGenerator((this.game.height - this.player.y) * 2, (this.game.height - this.player.y), 1, 1);
@@ -19,8 +19,6 @@ function PlayerTrace(game, player, color) {
         height: 0,
         fillStyle: ''
     };
-
-    console.log('New trace');
 }
 
 PlayerTrace.prototype = Object.create(Phaser.Sprite.prototype);
@@ -57,5 +55,5 @@ PlayerTrace.prototype.update = function() {
 }
 
 PlayerTrace.prototype.changeColor = function(color) {
-     this.color = PlayerData.colors[color];
+     this.color = PlayerData.COLORS_RGB[color];
 }

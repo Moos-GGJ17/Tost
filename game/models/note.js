@@ -56,8 +56,10 @@ Note.prototype.playerHit = function() {
 		this.tweens.disappear.start();
 
 		this.game.player.changeColor(this.color); // Player changes it's head color based on the hit note
-		this.game.vitalWave.hitNote(); // Notify player health of note hit
-		this.game.toasts.increaseScore(); // Notify score of note hit
+		this.game.player.increaseLifeBy(ChartData.LIFE_GAIN_WHEN_NOTE_HIT); // Increase player life
+		this.game.chart.setVolume(this.game.player.calculateLifePercentage()); // Change song volume
+		this.game.player.increaseScoreBy(ChartData.SCORE_TO_INCREASE_WHEN_NOTE_HIT); // Increase player score
+		this.game.chart.hitNote(); // Increase number of notes hit by 1
 	}
 }
 
@@ -69,7 +71,10 @@ Note.prototype.miss = function() {
 		this.changeColorToWhite();
 		this.game.chart.errorAudio.play();
 		
-		this.game.vitalWave.missNote(); // Notify player health of missed note
+		this.game.vitalWave.missNote(); // Notify vital wave of note miss
+		this.game.chart.missNote();
+		this.game.player.decreaseLifeBy(ChartData.LIFE_LOSS_WHEN_NOTE_MISS); // Decrease player life
+		this.game.chart.setVolume(this.game.player.calculateLifePercentage()); // Change song volume
 	}
 }
 

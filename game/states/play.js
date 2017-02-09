@@ -74,9 +74,9 @@ States.Play = {
 			//this.game.playerTrace = this.game.add.sprite();
 			//trace.add(this.game.playerTrace);
 			ChartData.calculatePositions(this.game.width);
-			this.game.vitalWave = new VitalWave(this.game, 0, 100, 15, 5, 5, '#ffffff');
+			this.game.vitalWave = new VitalWave(this.game, 0, 100);
 			this.game.tosted = new Tosted(this.game);
-			this.game.toasts = new Toasts(this.game, 0, 0, 0);
+			this.game.toasts = new Toasts(this.game, 0, 0);
 			this.game.gameOver = new GameOver(this.game, this.game.world.width / 2, this.game.height / 3);
 			this.started = true;
 			this.game.player = new Player(this.game, this.BOUNDS.x / 2, this.BOUNDS.y * 3 / 4, 1000);
@@ -98,13 +98,8 @@ States.Play = {
 			this.game.chart.update();
 			this.game.player.update();
 
-			if (this.game.vitalWave.gameOver) {
-				//this.state.start('GameOver', true);
-				this.game.gameOver.show();
-			}
-
-			if (this.game.vitalWave.life < this.game.vitalWave.MAX_LIFE - 1) {
-				this.backgroundGray.alpha = 1 - this.game.vitalWave.life / (this.game.vitalWave.MAX_LIFE - 1);
+			if (this.game.player.life < PlayerData.MAX_LIFE - 1) {
+				this.backgroundGray.alpha = 1 - this.game.player.life / (PlayerData.MAX_LIFE - 1);
 			}
 
 			this.game.toasts.update();

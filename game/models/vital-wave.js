@@ -1,24 +1,15 @@
-function VitalWave(game, x, y, width, life, amplitude, color) {
+function VitalWave(game, x, y) {
 	Phaser.Sprite.call(this, game, x, y,'Blank');
 	this.game = game;
 	this.game.add.existing(this);
 
-	this.MAX_LIFE = life;
-	this.life = this.MAX_LIFE;
-	this.amplitude = amplitude;
-	this.gameOver = false;
-	this.color = '#e0e0e0';
-	this.traceWidth = width;
-	this.count = 5;
+	this.AMPLITUDE = 5;
+	this.MAX_TRACE_WIDTH = 15;
+	this.ANIMATION_TIMEOUT = 100;
+	this.WAVE_LENGTH = 16;
+	this.WAVE_FREQUENCY = 10;
 
-	this.TRACE_COLORS = [
-		'41, 98, 255',
-		'13, 115, 119',
-		'117, 117, 117',
-		'131, 68, 150',
-		'255, 206, 62',
-		'224, 224, 224'
-	];
+	this.color = PlayerData.COLORS_RGB.White;
 
 	this.initialize();
 }
@@ -27,82 +18,43 @@ VitalWave.prototype = Object.create(Phaser.Sprite.prototype);
 VitalWave.prototype.constructor = Player;
 
 VitalWave.prototype.initialize = function() {
-	this.data = this.game.math.sinCosGenerator(this.game.width / 16, 1, 1, 10);
+	this.data = this.game.math.sinCosGenerator(this.game.width / this.WAVE_LENGTH, 1, 1, this.WAVE_FREQUENCY);
 
-    //  Just so we can see the data
     this.bmd = this.game.add.bitmapData(this.game.width, this.game.height);
     this.bmd.addToWorld();
 
-    /*this.timer = this.game.time.create(false);
-    this.timer.repeat(500, 4, this.changeColor, this);*/
+	this.game.time.events.loop(this.ANIMATION_TIMEOUT, this.redraw, this);
 }
 
-VitalWave.prototype.update = function() {
-	if (this.count > 4) {
-		this.count = 0;
-		this.bmd.clear();
-		var currentWidth = 0;
+VitalWave.prototype.redraw = function() {
+	this.bmd.clear();
+	var currentWidth = 0;
 
-		for (var i = 0; i < this.game.width; i++) {
-			currentWidth = Math.floor(Math.random() * this.traceWidth) + 1;
-	    	this.bmd.rect(i * 16,
-	    		this.y + this.data.sin[i] * this.life * this.amplitude,
-	    		currentWidth,
-	    		currentWidth,
-	    		this.color);
-	    		//'rgb(' + this.TRACE_COLORS[Math.floor(Math.random() * 6)] + ')');
-	    	this.bmd.rect(i * 16,
-	    		this.y - this.data.sin[i] * this.life * this.amplitude,
-	    		currentWidth,
-	    		currentWidth,
-	    		this.color);
-	    		//'rgb(' + this.TRACE_COLORS[Math.floor(Math.random() * 6)] + ')');
-	    }
-
-	    Phaser.ArrayUtils.rotate(this.data.sin);
-	} else {
-		this.count++;
+	for (var i = 0; i < this.WAVE_LENGTH * this.WAVE_FREQUENCY; i++) {
+		currentWidth = Math.floor(Math.random() * this.MAX_TRACE_WIDTH) + 1;
+		this.bmd.rect(i * this.WAVE_LENGTH,
+			this.y + this.data.sin[i] * this.game.player.life * this.AMPLITUDE,
+			currentWidth,
+			currentWidth,
+			'rgb(' + this.color + ')');
+		this.bmd.rect(i * this.WAVE_LENGTH,
+			this.y - this.data.sin[i] * this.game.player.life * this.AMPLITUDE,
+			currentWidth,
+			currentWidth,
+			'rgb(' + this.color + ')');
 	}
-}
 
-VitalWave.prototype.hitNote = function() {
-	this.life += 0.2;
-	this.life = Math.min(this.life, this.MAX_LIFE);
-	this.game.chart.music.volume = this.life / this.MAX_LIFE;
+	Phaser.ArrayUtils.rotate(this.data.sin);
 }
 
 VitalWave.prototype.missNote = function() {
-	//this.timer.start();
-	this.game.time.events.repeat(Phaser.Timer.SECOND / 4, 2, this.changeColor, this);
-	this.life = Math.max(--this.life, 0);
-	if (this.life <= 0) {
-		this.playGameOverMusic();
-		//this.gameOver = true;
-	}
-	this.game.chart.music.volume = this.life / this.MAX_LIFE;
+	this.game.time.events.repeat(Phaser.Timer.SECOND / 4, 2, this.switchColorsBetweenRedAndWhite, this);
 }
 
-VitalWave.prototype.playGameOverMusic = function() {
-	if (!this.gameOver) {
-		this.game.chart.callAll('changeColorToWhite');
-		this.gameOver = true;
-		this.game.add.audio('lost').play();
-	}
-}
-
-VitalWave.prototype.changeColor = function() {
-	switch (this.color) {
-		case '#e0e0e0':
-			this.color = '#ef5350';
-			break;
-		case '#ef5350':
-			this.color = '#e0e0e0';
-			break;
-		default:
-	}
-	if (this.game.chart.music.volume > 0) {
-		this.game.chart.music.volume = 0;
+VitalWave.prototype.switchColorsBetweenRedAndWhite = function() {
+	if (this.color === PlayerData.COLORS_RGB['White']) {
+		this.color = PlayerData.COLORS_RGB['Red'];
 	} else {
-		this.game.chart.music.volume = this.life / this.MAX_LIFE;
+		this.color = PlayerData.COLORS_RGB['White'];
 	}
 }

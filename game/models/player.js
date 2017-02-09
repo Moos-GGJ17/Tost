@@ -7,6 +7,8 @@ function Player(game, x, y, velocity) {
 	this.defaultHorizontalVelocity = velocity;
 	this.hasPowerup = false;
 	this.lastColor = 'White'; // To recover the last color after the powerup effect ceases
+	this.life = PlayerData.MAX_LIFE;
+	this.score = 0;
 
 	// Used to save the last x-positions of the player, to draw the trace
 	this.xPositionsHistory = [];
@@ -62,16 +64,12 @@ Player.prototype.update = function() {
     }
 
 	// Disable input and make the player move up if the game has ended
-    if (this.gameHasEnded()) {
+    if (this.game.chart.gameHasEnded()) {
     	this.changeDirectionButton.onDown.remove(this.changeDirection, this);
 		this.game.input.onDown.remove(this.changeDirection, this);
     	this.body.velocity.x = 0;
     	this.body.velocity.y = -1000;
     }
-}
-
-Player.prototype.gameHasEnded = function() {
-	return this.game.vitalWave.gameOver || this.game.toasts.finished;
 }
 
 Player.prototype.changeDirection = function() {
@@ -104,6 +102,26 @@ Player.prototype.removePowerupSpriteAndColor = function() {
 	this.hasPowerup = false;
 	this.loadTexture('Player' + this.lastColor);
 	this.trace.changeColor(this.lastColor);
+}
+
+Player.prototype.increaseLifeBy = function(amountToIncrease) {
+	this.life += amountToIncrease;
+	this.life = Math.min(this.life, PlayerData.MAX_LIFE);
+}
+
+Player.prototype.decreaseLifeBy = function(amountToDecrease) {
+	this.life -= amountToDecrease;
+	if (this.life <= 0) {
+		this.game.chart.lose();
+	}
+}
+
+Player.prototype.increaseScoreBy = function(amountToIncrease) {
+	this.score += amountToIncrease;
+}
+
+Player.prototype.calculateLifePercentage = function() {
+	return this.life / PlayerData.MAX_LIFE;
 }
 
 Player.prototype.debug = function() {

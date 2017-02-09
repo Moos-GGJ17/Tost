@@ -1,13 +1,10 @@
-function Toasts(game, x, y, score) {
+function Toasts(game, x, y) {
 	Phaser.Group.call(this, game);
 	this.x = x;
 	this.y = y;
 	this.game = game;
 	this.game.add.existing(this);
 	this.createToasts();
-	this.MAX_SCORE = score;
-	this.score = 0;
-	this.finished = false;
 	this.gold = false;
 	this.createTweens();
 }
@@ -44,21 +41,20 @@ Toasts.prototype.createToasts = function() {
 	this.scale.set(0.5, 0.5);
 }
 
-Toasts.prototype.increaseScore = function() {
-	this.score++;
-	if (this.score / this.MAX_SCORE > 0.95) {
+//Buggy approach, needs fixing to only paint at the end
+Toasts.prototype.paintToasts = function() {
+	if (this.game.chart.calculateNotesHitPercentage() > 0.95) {
 		this.first.gold();
 		this.second.gold();
 		this.third.gold();
 		this.gold = true;
-	} else if (this.score / this.MAX_SCORE > 0.90) {
+	} else if (this.game.chart.calculateNotesHitPercentage() > 0.90) {
 		this.third.color();
-	} else if (this.score / this.MAX_SCORE > 0.60) {
+	} else if (this.game.chart.calculateNotesHitPercentage() > 0.60) {
 		this.second.color();
-	} else if (this.score / this.MAX_SCORE > 0.30) {
+	} else if (this.game.chart.calculateNotesHitPercentage() > 0.30) {
 		this.first.color();
 	}
-	//console.log(this.score);
 }
 
 Toasts.prototype.createTweens = function() {
@@ -75,28 +71,25 @@ Toasts.prototype.center = function() {
 	this.numbers.setTextBounds(this.game.world.width / 2 - this.first.width / 2 - 5, this.game.world.height / 3 + this.game.tosted.height / 2, this.first.width, this.first.height);
 	//console.log(this.score);
 	//console.log(this.MAX_SCORE);
-	this.numbers.text = Math.round(this.score * 100 / this.MAX_SCORE) + '%';
+	//this.numbers.text = Math.round(this.score * 100 / this.MAX_SCORE) + '%';
 	this.numbers.fontSize = 32;
 	if (this.gold) {
 		this.numbers.fill = "#000000";
 	}
 }
 
-Toasts.prototype.finish = function() {
-	if (!this.game.vitalWave.gameOver && !this.finished) {
-		this.finished = true;
-		this.center();
-		this.game.tosted.center();
-		this.first.alpha = 1;
-		this.second.alpha = 1;
-		this.third.alpha = 1;
-		//this.numbers.alpha = 0;
-	}
+Toasts.prototype.show = function() {
+	this.paintToasts();
+	this.center();
+	this.game.tosted.center();
+	this.first.alpha = 1;
+	this.second.alpha = 1;
+	this.third.alpha = 1;
 }
 
 Toasts.prototype.update = function() {
-	if (!this.game.vitalWave.gameOver && !this.finished) {
-		this.numbers.text = this.score + '';
+	if (this.game.chart.gameState === ChartData.GAME_STATE['PLAYING']) {
+		this.numbers.text = this.game.player.score + '';
 	}
 }
 
