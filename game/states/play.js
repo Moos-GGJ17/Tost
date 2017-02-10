@@ -76,7 +76,7 @@ States.Play = {
 			ChartData.calculatePositions(this.game.width);
 			this.game.vitalWave = new VitalWave(this.game, 0, 100);
 			this.game.tosted = new EndGameMessage(this.game, 'Tosted');
-			this.game.toasts = new Toasts(this.game, 0, 0);
+			this.game.scoreUI = new ScoreUI(this.game);
 			this.game.gameOver = new EndGameMessage(this.game, 'GameOver');
 			this.started = true;
 			this.game.player = new Player(this.game, this.BOUNDS.x / 2, this.BOUNDS.y * 3 / 4, 1000);
@@ -102,7 +102,7 @@ States.Play = {
 				this.backgroundGray.alpha = 1 - this.game.player.life / (PlayerData.MAX_LIFE - 1);
 			}
 
-			this.game.toasts.update();
+			this.game.scoreUI.update();
 		}
 	},
 

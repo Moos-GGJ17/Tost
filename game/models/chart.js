@@ -26,6 +26,8 @@ function Chart(game) {
 	this.noteToCreateIndex = 0;
 	this.currentNoteBeingCreated = null;
 
+	this.volumeDown = false;
+
 	this.powerups = new PowerupManager(this.game);
 }
 
@@ -135,13 +137,6 @@ Chart.prototype.gameHasEnded = function() {
 	return this.gameState === ChartData.GAME_STATE.WIN || this.gameState === ChartData.GAME_STATE.LOSE;
 }
 
-// Show win screen if player didn't lost
-/*Chart.prototype.showWinScreen = function() {
-	if (!this.game.vitalWave.gameOver) {
-		this.game.toasts.finish();
-	}
-}*/
-
 Chart.prototype.debug = function() {
 	this.callAll('debug');
 }
@@ -160,21 +155,24 @@ Chart.prototype.missNote = function() {
 }
 
 Chart.prototype.switchVolume = function() {
-	if (this.music.volume > 0) {
+	if (!this.volumeDown) {
 		this.music.volume = 0;
+		this.volumeDown = true;
 	} else {
 		this.music.volume = this.game.player.calculateLifePercentage();
+		this.volumeDown = false;
 	}
 }
 
 Chart.prototype.calculateNotesHitPercentage = function() {
-	return this.numberOfNotesHit / ChartData.maxNumberOfNotes;
+	return 100 * this.numberOfNotesHit / ChartData.maxNumberOfNotes;
 }
 
+// Show win screen if player didn't lose
 Chart.prototype.showWinScreen = function() {
 	if (this.gameState != ChartData.GAME_STATE['WIN']) {
 		this.gameState = ChartData.GAME_STATE['WIN'];
-		this.game.toasts.show();
+		this.game.scoreUI.displayToastsAndCenterText();
 		this.game.tosted.center();
 		this.game.add.audio('win').play();
 	};

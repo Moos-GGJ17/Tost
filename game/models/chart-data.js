@@ -28,3 +28,10 @@ ChartData.GAME_STATE = {
 	'PLAYING': 'Playing',
 	'PAUSE': 'Pause'
 }
+
+ChartData.SCORE_BASE = {
+	'GOLD': 95,
+	'THREE_TOASTS': 85,
+	'TWO_TOASTS': 60,
+	'ONE_TOAST': 30
+}
