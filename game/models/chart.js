@@ -175,7 +175,8 @@ Chart.prototype.showWinScreen = function() {
 	if (this.gameState != ChartData.GAME_STATE['WIN']) {
 		this.gameState = ChartData.GAME_STATE['WIN'];
 		this.game.toasts.show();
-		this.game.add.audio('lost').play();
+		this.game.tosted.center();
+		this.game.add.audio('win').play();
 	};
 }
 
@@ -183,8 +184,8 @@ Chart.prototype.lose = function() {
 	if (this.gameState != ChartData.GAME_STATE['LOSE']) {
 		this.gameState = ChartData.GAME_STATE['LOSE'];
 		this.callAll('changeColorToWhite');
+		this.game.gameOver.center();
 		this.game.add.audio('lost').play();
-		this.game.gameOver.show();
 	}
 }
 

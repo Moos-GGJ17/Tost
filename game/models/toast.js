@@ -81,7 +81,7 @@ Toasts.prototype.center = function() {
 Toasts.prototype.show = function() {
 	this.paintToasts();
 	this.center();
-	this.game.tosted.center();
+	
 	this.first.alpha = 1;
 	this.second.alpha = 1;
 	this.third.alpha = 1;
