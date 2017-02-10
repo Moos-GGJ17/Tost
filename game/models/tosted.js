@@ -38,7 +38,6 @@ Tosted.prototype.restartGame = function() {
 		this.game.input.onDown.remove(this.restartGame, this);
 		//this.pressSpace.destroy();
 		this.game.pressSpace.alpha = 0;
-		this.game.autoPlay = true;
 		this.game.state.start('Intro');
 		//this.game.state.start('Intro');
 	}

@@ -187,3 +187,12 @@ Chart.prototype.lose = function() {
 		this.game.gameOver.show();
 	}
 }
+
+// Stops and destroys everything related to the chart
+Chart.prototype.stop = function() {
+	this.music.stop();
+	this.music.destroy();
+	this.powerups.destroy();
+	this.callAll('destroy');
+	this.destroy();
+}

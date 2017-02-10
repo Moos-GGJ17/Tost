@@ -59,9 +59,9 @@ States.Play = {
 		this.playButton = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 		this.playButton.onDown.add(this.play, this);
 		this.game.input.onDown.add(this.play, this);
-		if (this.game.autoPlay) {
+		/*if (this.game.autoPlay) {
 			this.play();
-		}
+		}*/
 	},
 
 	play: function() {
