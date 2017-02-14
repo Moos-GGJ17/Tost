@@ -9,8 +9,16 @@ Game = {
 // Should be changed after the API and web server are implemented
 Songs = [];
 
+var GAME_BOUNDS = {
+  x: 800,
+  y: 600
+};
+
 // Initializes the Phaser game.
-window.game = game = new Phaser.Game(800, 600, Phaser.AUTO, '');
+window.game = game = new Phaser.Game(GAME_BOUNDS.x, GAME_BOUNDS.y, Phaser.AUTO, '');
+
+// Calculate the horizontal positions where the notes will be displayed
+ChartData.calculateNotePositions(GAME_BOUNDS.x);
 
 // Adds the necessary states to the game.
 game.state.add('Boot', Game.States.Boot);

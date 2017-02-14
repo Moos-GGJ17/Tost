@@ -63,9 +63,9 @@ States.Load = {
 		this.game.load.image('SongSelectInstr2', 'assets/images/ui/song-selection/instructions-2.png');
 		this.game.load.image('GameOver', 'assets/images/ui/game-over.png');
 		this.game.load.image('Tosted', 'assets/images/ui/tosted.png');
-		this.game.load.image('Instructions', 'assets/images/ui/instructions.png');
-		this.game.load.image('InstructionsSpace', 'assets/images/ui/instructions-space.png');
-		this.game.load.spritesheet('Space', 'assets/images/ui/space.png', 395, 393);
+		this.game.load.image('GameplayInstr1', 'assets/images/ui/instructions.png');
+		this.game.load.image('GameplayInstr2', 'assets/images/ui/instructions-space.png');
+		this.game.load.spritesheet('PressSpace', 'assets/images/ui/space.png', 395, 393);
 
 		// Songs cassettes
 		this.game.load.image('funkytownCassette', 'assets/images/songs/funkytown.png');
@@ -78,7 +78,6 @@ States.Load = {
 		this.game.load.audio('error', 'assets/audio/error.wav');
 		this.game.load.audio('win', 'assets/audio/win.wav');
 		this.game.load.audio('lost', 'assets/audio/lost.wav');
-
 	},
 
 	// Shows the main menu/song selection screen after all the assets loaded properly

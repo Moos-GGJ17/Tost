@@ -26,7 +26,7 @@ PowerupTypes.slow.apply = function() {
 }
 
 PowerupTypes.slow.cease = function() {
-	this.game.player.removePowerupSpritAndColor(); // Decreases player speed
+	this.game.player.removePowerupSpriteAndColor(); // Decreases player speed
 	this.game.player.body.velocity.x *= 2; // Remove powerup sprite from player
 	this.destroy();
 }

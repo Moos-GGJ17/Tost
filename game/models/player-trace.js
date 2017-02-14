@@ -25,6 +25,12 @@ PlayerTrace.prototype = Object.create(Phaser.Sprite.prototype);
 PlayerTrace.prototype.constructor = PlayerTrace;
 
 PlayerTrace.prototype.update = function() {
+    // Destroy the trace when the player doesn't exist anymore
+    if (!this.player) {
+        this.destroy();
+        return;
+    }
+
     this.bmd.clear(); // Removes the trace
 
     // Draws the trace starting from the end (bottom of the screen),

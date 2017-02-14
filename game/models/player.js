@@ -1,10 +1,10 @@
 // Represents the ball that catches the notes
-function Player(game, x, y, velocity) {
+function Player(game, x, y) {
 	Phaser.Sprite.call(this, game, x, y,'PlayerWhite');
 	this.game = game;
 	this.game.add.existing(this);
 
-	this.defaultHorizontalVelocity = velocity;
+	this.defaultHorizontalVelocity = 1000;
 	this.hasPowerup = false;
 	this.lastColor = 'White'; // To recover the last color after the powerup effect ceases
 	this.life = PlayerData.MAX_LIFE;
@@ -53,6 +53,12 @@ Player.prototype.initializeInput = function() {
 }
 
 Player.prototype.update = function() {
+	// Destroy the player when it's too far from the screen
+	if (this.y < -50) {
+		this.destroy();
+		return;
+	}
+
 	this.trace.update();
 
 	// Warp at the left/right borders of the screen
@@ -75,12 +81,6 @@ Player.prototype.update = function() {
 Player.prototype.changeDirection = function() {
 	this.body.velocity.x *= -1;
 }
-
-/*Player.prototype.changeDirectionTouch = function() {
-	if (this.game.input.activePointer == this.game.input.pointer1) {
-		this.body.velocity.x *= -1;
-	}
-}*/
 
 Player.prototype.changeColor = function(color) {
 	this.lastColor = color; // Save last color in case that player catches a powerup

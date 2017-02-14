@@ -41,7 +41,7 @@ EndGameMessage.prototype.goToMainMenu = function() {
 	this.game.input.onDown.remove(this.goToMainMenu, this);
 	
 	// Hide 'Press Space' sprite
-	this.game.pressSpace.alpha = 0;
+	this.game.pressSpaceAnimation.alpha = 0;
 	
 	// Start menu screen state
 	this.game.state.start('MainMenu');
@@ -54,5 +54,5 @@ EndGameMessage.prototype.enableGoToMainMenuInput = function() {
 	this.game.input.onDown.add(this.goToMainMenu, this);
 	
 	// Show 'Press Space' sprite
-	this.game.pressSpace.alpha = 1;
+	this.game.pressSpaceAnimation.alpha = 1;
 }

@@ -62,11 +62,11 @@ Chart.prototype.createNote = function () {
 	// Obtain the first note index in the queue
 	this.noteToCreateIndex = this.notesIndexToBeCreated.shift() - 1;
 	this.currentNoteBeingCreated = new Note(this.game,
-		ChartData.positions[this.noteToCreateIndex], // x
+		ChartData.notePositions[this.noteToCreateIndex], // x
 		0, // y
 		this.noteVelocity, // velocity
 		this.tempoMS, // tempo
-		ChartData.colors[this.noteToCreateIndex]); // color
+		ChartData.noteColors[this.noteToCreateIndex]); // color
 	
 	this.add(this.currentNoteBeingCreated); // add note to the chart group
 
@@ -175,8 +175,10 @@ Chart.prototype.showWinScreen = function() {
 	if (this.gameState != ChartData.GAME_STATE['WIN']) {
 		this.gameState = ChartData.GAME_STATE['WIN'];
 		this.game.scoreUI.displayToastsAndCenterText();
-		this.game.tosted.center();
 		this.game.add.audio('win').play();
+
+		var tostedMessage = new EndGameMessage(this.game, 'Tosted');
+		tostedMessage.center();
 	};
 }
 
@@ -184,8 +186,10 @@ Chart.prototype.lose = function() {
 	if (this.gameState != ChartData.GAME_STATE['LOSE']) {
 		this.gameState = ChartData.GAME_STATE['LOSE'];
 		this.callAll('changeColorToWhite');
-		this.game.gameOver.center();
 		this.game.add.audio('lost').play();
+
+		var gameOverMessage = new EndGameMessage(this.game, 'GameOver');
+		gameOverMessage.center();
 	}
 }
 
