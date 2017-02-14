@@ -5,7 +5,9 @@ Game = {
   States: States
 };
 
-Songs = []
+// Array containing all the songs chart data.
+// Should be changed after the API and web server are implemented
+Songs = [];
 
 // Initializes the Phaser game.
 window.game = game = new Phaser.Game(800, 600, Phaser.AUTO, '');

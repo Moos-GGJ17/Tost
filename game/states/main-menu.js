@@ -1,16 +1,15 @@
 // Contains all the objects used in the main menu/song selection screen
 States.MainMenu = {
 	
-	// This is loaded before create
+	// This is called before create
 	init: function(){
 		this.game.renderer.renderSession.roundPixels = true;
+		this.game.stage.backgroundColor = '0xFEEC70';
 		this.initializeCassette();
 	},
 	
-	// Creates all the necessary objects (cassette, UI elements, input events)
+	// Creates all the UI objects and defines the input events
 	create: function(){
-		this.game.stage.backgroundColor = '0xFEEC70';
-
 		this.createToaster();
 		this.createInstructions();
 
