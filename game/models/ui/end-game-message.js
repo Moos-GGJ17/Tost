@@ -34,7 +34,7 @@ EndGameMessage.prototype.center = function() {
 }
 
 EndGameMessage.prototype.goToMainMenu = function() {
-	this.game.chart.stop(); // Free memory removing chart
+	this.game.chart.deepDestroy(); // Free memory removing chart
 
 	// Remove spacebar and touch/click events, could be changed if UI buttons are implemented
 	this.restartButton.onDown.remove(this.goToMainMenu, this);

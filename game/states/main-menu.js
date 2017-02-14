@@ -5,11 +5,11 @@ States.MainMenu = {
 	init: function(){
 		this.game.renderer.renderSession.roundPixels = true;
 		this.game.stage.backgroundColor = '0xFEEC70';
-		this.initializeCassette();
 	},
 	
 	// Creates all the UI objects and defines the input events
 	create: function(){
+		this.initializeCassette();
 		this.createToaster();
 		this.createInstructions();
 

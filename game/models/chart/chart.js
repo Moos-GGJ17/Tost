@@ -178,10 +178,11 @@ Chart.prototype.calculateNotesHitPercentage = function() {
 
 // Show win screen if player didn't lose
 Chart.prototype.showWinScreen = function() {
-	if (this.gameState != ChartData.GAME_STATE['WIN']) {
+	if (this.gameState === ChartData.GAME_STATE['PLAYING']) {
 		this.gameState = ChartData.GAME_STATE['WIN'];
 		this.game.scoreUI.displayToastsAndCenterText();
 		this.game.add.audio('win').play();
+		this.music.stop();
 
 		var tostedMessage = new EndGameMessage(this.game, 'Tosted');
 		tostedMessage.center();
@@ -189,19 +190,19 @@ Chart.prototype.showWinScreen = function() {
 }
 
 Chart.prototype.showLoseScreen = function() {
-	if (this.gameState != ChartData.GAME_STATE['LOSE']) {
+	if (this.gameState === ChartData.GAME_STATE['PLAYING']) {
 		this.gameState = ChartData.GAME_STATE['LOSE'];
 		this.callAll('changeColorToWhite'); // Change all notes currently on screen to white
 		this.game.add.audio('lost').play();
+		this.music.stop();
 
 		var gameOverMessage = new EndGameMessage(this.game, 'GameOver');
 		gameOverMessage.center();
 	}
 }
 
-// Stops and destroys everything related to the chart
-Chart.prototype.stop = function() {
-	this.music.stop();
+// Destroys everything related to the chart
+Chart.prototype.deepDestroy = function() {
 	this.music.destroy();
 	this.powerups.destroy();
 	this.callAll('destroy');
