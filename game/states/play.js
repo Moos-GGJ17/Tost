@@ -12,8 +12,6 @@ States.Play = {
 
 		// Game objects are updated only if this variable is true
 		this.startedPlaying = false;
-
-		console.log('New play state');
 	},
 	
 

@@ -11,8 +11,10 @@ PowerupTypes.fast.apply = function() {
 }
 
 PowerupTypes.fast.cease = function() {
-	this.game.player.body.velocity.x /= 2; // Decreases player speed
-	this.game.player.removePowerupSpriteAndColor(); // Remove powerup sprite from player
+	if (this.game.player) {
+		this.game.player.body.velocity.x /= 2; // Decreases player speed
+		this.game.player.removePowerupSpriteAndColor(); // Remove powerup sprite from player
+	}
 	this.destroy();
 }
 
@@ -26,8 +28,10 @@ PowerupTypes.slow.apply = function() {
 }
 
 PowerupTypes.slow.cease = function() {
-	this.game.player.removePowerupSpriteAndColor(); // Decreases player speed
-	this.game.player.body.velocity.x *= 2; // Remove powerup sprite from player
+	if (this.game.player) {
+		this.game.player.removePowerupSpriteAndColor(); // Decreases player speed
+		this.game.player.body.velocity.x *= 2; // Remove powerup sprite from player
+	}
 	this.destroy();
 }
 
