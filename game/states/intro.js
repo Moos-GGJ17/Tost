@@ -35,7 +35,7 @@ States.Intro = {
 		console.log(Songs[0]);*/
 		this.game.trackIndex = 0;
 		this.changedSong = false;
-		this.cassette = new Cassette(this.game, this.game.world.centerX, this.game.world.centerY * 6 / 5, Songs[this.game.trackIndex]);
+		this.cassette = new Cassette(this.game, this.game.world.centerX, this.game.world.centerY * 6 / 5, Songs[this.game.trackIndex].filename);
 
 		this.logoImage = this.game.add.sprite(this.game.world.centerX, this.game.world.height, 'Logo');
 		this.logoImage.anchor.x = 0.5;
@@ -61,12 +61,12 @@ States.Intro = {
 			if (this.game.trackIndex < 0) {
 				this.game.trackIndex = Songs.length - 1;
 			}
-			this.cassette.hide(Songs[this.game.trackIndex]);
+			this.cassette.hideAndSetSongFilename(Songs[this.game.trackIndex].filename);
 			this.startPlaying();
 		} else if ((this.spaceButton.isDown || this.game.input.pointer1.isDown) && !this.changedSong) {
 			this.changedSong = true;
 			this.game.trackIndex = (this.game.trackIndex + 1) % Songs.length;
-			this.cassette.hide(Songs[this.game.trackIndex]);
+			this.cassette.hideAndSetSongFilename(Songs[this.game.trackIndex].filename);
 		}
 	},
 
