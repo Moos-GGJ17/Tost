@@ -53,6 +53,8 @@ Chart.prototype.load = function (chart) {
 
 	this.started = true;
 	this.gameState = ChartData.GAME_STATE['PLAYING'];
+
+	this.powerups.startCreatingPowerups();
 }
 
 // Creates the next note in the chart

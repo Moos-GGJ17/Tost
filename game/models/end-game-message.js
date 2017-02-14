@@ -44,7 +44,7 @@ EndGameMessage.prototype.goToMainMenu = function() {
 	this.game.pressSpace.alpha = 0;
 	
 	// Start menu screen state
-	this.game.state.start('Intro');
+	this.game.state.start('MainMenu');
 }
 
 EndGameMessage.prototype.enableGoToMainMenuInput = function() {

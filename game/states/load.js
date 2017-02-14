@@ -22,9 +22,9 @@ States.Load = {
 		this.game.load.spritesheet('CityDayGray', 'assets/images/backgrounds/city-day-gray-8.jpg', 424, 600);
 		this.game.load.spritesheet('CityNightGray', 'assets/images/backgrounds/city-night-gray-8.jpg', 424, 600);
 
-		this.game.load.image('Logo', 'assets/images/intro.png');
-		this.game.load.image('Instr1', 'assets/images/ui/intro1.png');
-		this.game.load.image('Instr2', 'assets/images/ui/intro2.png');
+		this.game.load.image('Toaster', 'assets/images/ui/toaster.png');
+		this.game.load.image('SongSelectInstr1', 'assets/images/ui/song-selection/instructions-1.png');
+		this.game.load.image('SongSelectInstr2', 'assets/images/ui/song-selection/instructions-2.png');
 
 		this.game.load.image('Blank', 'assets/images/blank.png');
 
@@ -72,7 +72,7 @@ States.Load = {
 	},
 	// Starts the game ;)
 	create: function(){
-		this.state.start('Intro');
+		this.state.start('MainMenu');
 		//this.state.start('Play');
 	}
 };

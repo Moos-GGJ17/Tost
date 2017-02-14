@@ -37,9 +37,15 @@ Cassette.prototype.createTweens = function() {
 	// Moves the cassette down, simulating a hide effect
 	this.tweens.hide = this.game.add.tween(this);
 	this.tweens.hide.to( { x : this.game.world.centerX, y : this.game.world.height * 9 / 10}, 1000, Phaser.Easing.Linear.None, false);
+
+	// Moves the cassette down, simulating a hide effect, and destroy the cassette afterwards
+	this.tweens.hideAndDestroy = this.game.add.tween(this);
+	this.tweens.hideAndDestroy.to( { x : this.game.world.centerX, y : this.game.world.height * 9 / 10}, 1000, Phaser.Easing.Linear.None, false);
 	
 	// After the cassette is hidden, the cassette with a new image and music is shown
 	this.tweens.hide.onComplete.add(this.finishedHide, this);
+
+	this.tweens.hideAndDestroy.onComplete.add(this.finishedHideAndDestroy, this);
 }
 
 Cassette.prototype.show = function() {
@@ -59,6 +65,11 @@ Cassette.prototype.hideAndSetSongFilename = function(songFilename) {
 	this.songFilename = songFilename;
 }
 
+Cassette.prototype.hideAndDestroy = function() {
+	this.music.fadeOut(1000);
+	this.tweens.hideAndDestroy.start();
+}
+
 // After the cassette is hidden, it should change the image and music
 // We assume that the filename has changed properly before calling this function
 Cassette.prototype.finishedHide = function() {
@@ -70,6 +81,13 @@ Cassette.prototype.finishedHide = function() {
 	this.music.fadeIn(1000, true, 'Preview');
 	
 	this.show();
+}
+
+// Stops the music and destroys the cassettes after the 'HideAndDestroy' finishes
+Cassette.prototype.finishedHideAndDestroy = function() {
+	this.music.stop();
+	this.music.destroy();
+	this.destroy();
 }
 
 Cassette.prototype.updateImage = function() {

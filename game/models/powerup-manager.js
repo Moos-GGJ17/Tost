@@ -16,7 +16,7 @@ PowerupManager.prototype.constructor = PowerupManager;
 PowerupManager.prototype.generateRandomPowerup = function() {
 	var type = Math.floor(Math.random() * PowerupTypes.count); // Random powerup type
 	var x = Math.random() * this.game.width * 3 / 4 + this.game.width / 8; // Random x position within game threshold
-	var velocity = Math.random() * 50 + this.game.chart.velocity - 25; // Random acceptable velocity
+	var velocity = Math.random() * 50 + this.game.chart.noteVelocity - 25; // Random acceptable velocity
 	var powerup; // New powerup to be created
 
 	//console.log('Creating powerup' + type);

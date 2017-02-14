@@ -88,7 +88,7 @@ States.Play = {
 			this.game.pressSpace.alpha = 0;
 			this.instructions.destroy();
 			this.instructionsSpace.destroy();
-			this.game.chart.load(Songs[this.game.trackIndex]);
+			this.game.chart.load(Songs[this.game.songToLoadIndex]);
 		}
 	},
 
