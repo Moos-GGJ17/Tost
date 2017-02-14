@@ -19,8 +19,6 @@ PowerupManager.prototype.generateRandomPowerup = function() {
 	var velocity = Math.random() * 50 + this.game.chart.noteVelocity - 25; // Random acceptable velocity
 	var powerup; // New powerup to be created
 
-	//console.log('Creating powerup' + type);
-
 	switch (type) {
 		case 0: // Slow powerup
 			powerup = PowerupFactory.createSlow(this.game, x, 0, velocity);

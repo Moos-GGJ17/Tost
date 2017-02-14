@@ -29,9 +29,10 @@ ChartData.GAME_STATE = {
 	'PAUSE': 'Pause'
 }
 
+// Percentage of notes hits used as a base to define the different score ranks
 ChartData.SCORE_BASE = {
-	'GOLD': 95,
-	'THREE_TOASTS': 85,
-	'TWO_TOASTS': 60,
-	'ONE_TOAST': 30
+	'GOLD': 0.95,
+	'THREE_TOASTS': 0.85,
+	'TWO_TOASTS': 0.60,
+	'ONE_TOAST': 0.30
 }

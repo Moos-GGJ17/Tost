@@ -26,7 +26,7 @@ function Chart(game) {
 	this.noteToCreateIndex = 0;
 	this.currentNoteBeingCreated = null;
 
-	this.volumeDown = false;
+	this.volumeIsDown = false; // Used to alternate music volume when a note misses
 
 	this.powerups = new PowerupManager(this.game);
 }
@@ -129,6 +129,10 @@ Chart.prototype.update = function() {
 					this.createNoteBasedOnMusicTime();
 				}
 			}
+
+			if (this.game.player.life <= 0) {
+				this.showLoseScreen();
+			}
 		} else {
 			this.powerups.stop();
 		}
@@ -152,22 +156,24 @@ Chart.prototype.hitNote = function() {
 	this.numberOfNotesHit++;
 }
 
+// Turn volume down for a moment when a note misses
 Chart.prototype.missNote = function() {
 	this.game.time.events.repeat(Phaser.Timer.SECOND / 4, 2, this.switchVolume, this);
 }
 
+// Switch music volume down and up, used when a note misses
 Chart.prototype.switchVolume = function() {
-	if (!this.volumeDown) {
+	if (!this.volumeIsDown) {
 		this.music.volume = 0;
-		this.volumeDown = true;
+		this.volumeIsDown = true;
 	} else {
 		this.music.volume = this.game.player.calculateLifePercentage();
-		this.volumeDown = false;
+		this.volumeIsDown = false;
 	}
 }
 
 Chart.prototype.calculateNotesHitPercentage = function() {
-	return 100 * this.numberOfNotesHit / ChartData.maxNumberOfNotes;
+	return this.numberOfNotesHit / ChartData.maxNumberOfNotes;
 }
 
 // Show win screen if player didn't lose
@@ -182,10 +188,10 @@ Chart.prototype.showWinScreen = function() {
 	};
 }
 
-Chart.prototype.lose = function() {
+Chart.prototype.showLoseScreen = function() {
 	if (this.gameState != ChartData.GAME_STATE['LOSE']) {
 		this.gameState = ChartData.GAME_STATE['LOSE'];
-		this.callAll('changeColorToWhite');
+		this.callAll('changeColorToWhite'); // Change all notes currently on screen to white
 		this.game.add.audio('lost').play();
 
 		var gameOverMessage = new EndGameMessage(this.game, 'GameOver');

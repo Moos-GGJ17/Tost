@@ -4,7 +4,7 @@ function Player(game, x, y) {
 	this.game = game;
 	this.game.add.existing(this);
 
-	this.defaultHorizontalVelocity = 1000;
+	this.DEFAULT_HORIZONTAL_VELOCITY = 1000;
 	this.hasPowerup = false;
 	this.lastColor = 'White'; // To recover the last color after the powerup effect ceases
 	this.life = PlayerData.MAX_LIFE;
@@ -27,7 +27,7 @@ Player.prototype.initialize = function() {
 	this.game.physics.arcade.enable(this);
 	this.immovable = true; // Don't receive impacts from other bodies
 	this.body.setCircle(this.width / 2, 0, 0); // Circular body with the same size as the sprite
-	this.body.velocity.x = this.defaultHorizontalVelocity;
+	this.body.velocity.x = this.DEFAULT_HORIZONTAL_VELOCITY;
 
 	this.initializeBottomLine();
 	this.initializeInput();
@@ -100,6 +100,7 @@ Player.prototype.setPowerupSpriteAndColor = function(powerup, color) {
 
 Player.prototype.removePowerupSpriteAndColor = function() {
 	this.hasPowerup = false;
+	// Load previous color and texture
 	this.loadTexture('Player' + this.lastColor);
 	this.trace.changeColor(this.lastColor);
 }
@@ -111,9 +112,6 @@ Player.prototype.increaseLifeBy = function(amountToIncrease) {
 
 Player.prototype.decreaseLifeBy = function(amountToDecrease) {
 	this.life -= amountToDecrease;
-	if (this.life <= 0) {
-		this.game.chart.lose();
-	}
 }
 
 Player.prototype.increaseScoreBy = function(amountToIncrease) {

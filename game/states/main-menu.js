@@ -54,17 +54,18 @@ States.MainMenu = {
 	update: function() {
 		if (this.inputIsBeingHold()) {
 			this.play();
-		} else if (this.inputHasBeendPressed() && !this.songIsBeingChanged) {
+		} else if (this.inputHasBeenPressed()) {
 			this.changeSong();
 		}
 	},
 
+	// Returns true if input has been held for more than 1 second
 	inputIsBeingHold: function() {
 		return (this.spaceButton.isDown && this.spaceButton.duration >= 1000) ||
 			   (this.game.input.isDown && this.game.input.duration >= 1000);
 	},
 
-	inputHasBeendPressed: function() {
+	inputHasBeenPressed: function() {
 		return this.spaceButton.isDown || this.game.input.isDown;
 	},
 
@@ -72,16 +73,19 @@ States.MainMenu = {
 		return Songs[this.game.songToLoadIndex].filename;
 	},
 
+	// To prevent changing song multiple times when the input has been pressed only once
 	setSongIsBeingChangedToFalse: function() {
 		this.songIsBeingChanged = false;
 	},
 
 	changeSong: function() {
-		this.songIsBeingChanged = true;
+		if (!this.songIsBeingChanged) {
+			this.songIsBeingChanged = true;
 
-		// Circle cycling
-		this.game.songToLoadIndex = (this.game.songToLoadIndex + 1) % Songs.length;
-		this.cassette.hideAndSetSongFilename(this.getCurrentSongFilename());
+			// Circle cycling
+			this.game.songToLoadIndex = (this.game.songToLoadIndex + 1) % Songs.length;
+			this.cassette.hideAndSetSongFilename(this.getCurrentSongFilename());
+		}
 	},
 
 	play: function() {

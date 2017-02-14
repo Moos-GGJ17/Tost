@@ -66,7 +66,8 @@ ScoreUI.prototype.createTweens = function() {
 	this.tweens.enlarge = this.game.add.tween(this.scale);
 	this.tweens.enlarge.to( { x : 1, y : 1 }, 500, Phaser.Easing.Linear.None, false);
 	this.tweens.center = this.game.add.tween(this);
-	this.tweens.center.to( { x : this.game.world.width / 2, y : this.game.world.height * 2 / 3/* + this.game.tosted.height / 2*/}, 500, Phaser.Easing.Linear.None, false);
+	this.tweens.center.to( { x : this.game.world.width / 2, y : this.game.world.height / 2 },
+		500, Phaser.Easing.Linear.None, false);
 }
 
 ScoreUI.prototype.centerScoreNumbersText = function(notesHitPercentage) {
@@ -76,12 +77,12 @@ ScoreUI.prototype.centerScoreNumbersText = function(notesHitPercentage) {
     // Update the text bounds so that it fits inside the second toast
 	this.numbersText.setTextBounds(
         this.game.world.width / 2 - this.firstToast.width / 2 - 5,
-        this.game.world.height / 2,// + this.game.tosted.height / 2,
+        this.game.world.height / 2,
         this.firstToast.width,
         this.firstToast.height);
 
     // Change the numbers text to diplay the percentage of notes hit
-    this.numbersText.text = Math.round(notesHitPercentage) + '%';
+    this.numbersText.text = Math.round(notesHitPercentage * 100) + '%';
 	this.numbersText.fontSize = 32;
 	if (this.hasGoldenToasts) { // White doesn't look good with golden
 		this.numbersText.fill = "#000000";

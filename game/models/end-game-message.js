@@ -26,7 +26,7 @@ EndGameMessage.prototype.createTweens = function() {
 	this.tweens.center = this.game.add.tween(this);
 	this.tweens.center.to( { x : this.game.world.width / 2, y : this.game.world.height / 3}, 500, Phaser.Easing.Linear.None, false);
 	// After the animation ends, input is enabled
-	this.tweens.center.onComplete.add(this.enableGoToMainMenuInput, this);
+	this.tweens.center.onComplete.add(this.waitAndEnableInput, this);
 }
 
 EndGameMessage.prototype.center = function() {
@@ -45,6 +45,10 @@ EndGameMessage.prototype.goToMainMenu = function() {
 	
 	// Start menu screen state
 	this.game.state.start('MainMenu');
+}
+
+EndGameMessage.prototype.waitAndEnableInput = function() {
+	this.game.time.events.add(2 * Phaser.Timer.SECOND, this.enableGoToMainMenuInput, this);
 }
 
 EndGameMessage.prototype.enableGoToMainMenuInput = function() {
