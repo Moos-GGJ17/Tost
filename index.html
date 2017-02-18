@@ -5,13 +5,21 @@
 	<!--<link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">-->
 	<style type="text/css">
 		@font-face {
-  		font-family: '8-BIT WONDER';
-  		font-style: normal;
-  		font-weight: 400;
-  		src: local('8-BIT WONDER'),
-       		local('8-BIT WONDER'),
-       		url(assets/fonts/8-BIT WONDER.ttf) format('truetype');
-	}
+  			font-family: '8-BIT WONDER';
+  			font-style: normal;
+  			font-weight: 400;
+  			src: local('8-BIT WONDER'),
+		   		url('assets/fonts/8-BIT WONDER.ttf') format('truetype');
+		}
+
+		body {
+			background-image: url(assets/images/background.jpg);
+			background-size: 100% auto;
+			background-position: 0% 0%;
+			background-attachment: fixed;
+			background-color: #000;
+			background-repeat: no-repeat;
+		}
 	</style>
 
 	<script type="text/javascript" src="lib/phaser.min.js" ></script>
@@ -51,6 +59,6 @@
 	<script type="text/javascript" src="assets/charts/sorry.js"></script>
 	<script type="text/javascript" src="assets/charts/never.js"></script>
 </head>
-<body style="background-image: url(assets/images/background.jpg); background-size: 100% auto; background-position: 0% 0%; background-attachment: fixed;">
+<body>
 </body>
 </html>
