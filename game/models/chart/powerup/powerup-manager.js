@@ -31,7 +31,6 @@ PowerupManager.prototype.generateRandomPowerup = function() {
 	}
 
 	if (powerup) {
-		console.log(powerup);
 		this.add(powerup);
 	}
 }
