@@ -59,14 +59,17 @@ Chart.prototype.load = function (chart) {
 
 // Creates the next note in the chart
 Chart.prototype.createNote = function () {
+	this.notesTimeToBeCreated.shift(); // Remove current time from queue
+	//this.notesTimeToBeCreated.shift(); // Remove current time from queue
 	// Obtain the first note index in the queue
-	this.noteToCreateIndex = this.notesIndexToBeCreated.shift() - 1;
+	this.noteToCreateIndex = this.notesIndexToBeCreated.shift();// - 1;
+	//this.notesIndexToBeCreated.shift();// - 1;
 	this.currentNoteBeingCreated = new Note(this.game,
 		ChartData.notePositions[this.noteToCreateIndex], // x
 		0, // y
 		this.noteVelocity, // velocity
 		this.tempoMS, // tempo
-		ChartData.noteColors[this.noteToCreateIndex]); // color
+		ChartData.NOTE_COLORS[this.noteToCreateIndex]); // color
 	
 	this.add(this.currentNoteBeingCreated); // add note to the chart group
 
@@ -78,7 +81,6 @@ Chart.prototype.createNote = function () {
 // If true, create note
 Chart.prototype.createNoteBasedOnComputerTime = function () {
 	if (this.game.time.totalElapsedSeconds() - this.chartLoadedTime >= this.notesTimeToBeCreated[0] / 1000) {
-		this.notesTimeToBeCreated.shift();
 		this.createNote();
 	}
 }
@@ -88,7 +90,6 @@ Chart.prototype.createNoteBasedOnComputerTime = function () {
 // If true, create note
 Chart.prototype.createNoteBasedOnMusicTime = function () {
 	if (this.music.currentTime + this.playMusicTimeout >= this.notesTimeToBeCreated[0]) {
-		this.notesTimeToBeCreated.shift();
 		this.createNote();
 	}
 }
