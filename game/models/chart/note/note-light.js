@@ -1,10 +1,10 @@
+// Light that each note of the chart have, shines based on the tempo
 function NoteLight(game, parent) {
 	Phaser.Sprite.call(this, game, parent.x, parent.y,'NoteLight');
 	this.game = game;
 	this.game.add.existing(this);
 
-	this.parent = parent;
-	this.tempo = parent.tempo;
+	this.parent = parent; // Note that contains this light
 	this.timer = this.game.time.create(false);
 	this.initialize();
 }
@@ -13,15 +13,20 @@ NoteLight.prototype = Object.create(Phaser.Sprite.prototype);
 NoteLight.prototype.constructor = NoteLight;
 
 NoteLight.prototype.initialize = function() {
+	// Arcade physics basic configuration, doesn't need to check collisions
 	this.game.physics.arcade.enable(this);
 	this.immovable = true;
+
+	// Destroy when out of bounds
 	this.checkWorldBounds = true;
 	this.events.onOutOfBounds.add(this.destroy, this);
 
+	// Centers the light with the note
 	this.x = - (this.width - this.parent.width) / 2;
 	this.y = - (this.height - this.parent.height) / 2;
+	
+	// Light starts hidden
 	this.alpha = 0;
-	//this.body.velocity.y = this.parent.initialVelocity;
 
 	this.createTweens();
 }
@@ -34,13 +39,11 @@ NoteLight.prototype.createTweens = function() {
 	this.tweens.hide = this.game.add.tween(this);
 	this.tweens.hide.to( { alpha: 0 }, 100, Phaser.Easing.Linear.None, false);
 
+	// Hide/dark the light after it shines
 	this.tweens.shine.onComplete.add(this.hide, this);
 
-	/**var aux = this;
-	setTimeout(function() {
-		aux.timer.loop(aux.tempo - 200, aux.tweens.shine.start, aux);
-	}, 100);*/
-	this.timer.loop((this.tempo - 200)*2, this.shine, this);
+	// Starts a loop that shines the light based on the tempo
+	this.timer.loop(this.parent.tempo, this.shine, this);
 	this.timer.start();
 }
 

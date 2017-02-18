@@ -5,15 +5,25 @@ Game = {
   States: States
 };
 
-Songs = []
+// Array containing all the songs chart data.
+// Should be changed after the API and web server are implemented
+Songs = [];
+
+var GAME_BOUNDS = {
+  x: 800,
+  y: 600
+};
 
 // Initializes the Phaser game.
-window.game = game = new Phaser.Game(800, 600, Phaser.AUTO, '');
+window.game = game = new Phaser.Game(GAME_BOUNDS.x, GAME_BOUNDS.y, Phaser.AUTO, '');
+
+// Calculate the horizontal positions where the notes will be displayed
+ChartData.calculateNotePositions(GAME_BOUNDS.x);
 
 // Adds the necessary states to the game.
 game.state.add('Boot', Game.States.Boot);
 game.state.add('Load', Game.States.Load);
-game.state.add('Intro', Game.States.Intro);
+game.state.add('MainMenu', Game.States.MainMenu);
 game.state.add('Play', Game.States.Play);
 
 // Starts the initial state.
