@@ -15,7 +15,7 @@ States.Load = {
 		background.animations.play('Loading', 2, true);
 
 		// Songs audio
-		this.game.load.audio('last-kiss', 'assets/audio/songs/last-kiss.mp3');
+		this.game.load.audio('PumpedUpKicks', 'assets/audio/songs/pumped-up-kicks.m4a');
 		//this.game.load.audio('ibiza', 'assets/audio/songs/ibiza.mp3');
 		//this.game.load.audio('sorry', 'assets/audio/songs/sorry.mp3');
 		//this.game.load.audio('never', 'assets/audio/songs/never.mp3');
@@ -68,7 +68,7 @@ States.Load = {
 		this.game.load.spritesheet('PressSpace', 'assets/images/ui/space.png', 395, 393);
 
 		// Songs cassettes
-		this.game.load.image('last-kissCassette', 'assets/images/songs/funkytown.png');
+		this.game.load.image('PumpedUpKicksCassette', 'assets/images/songs/funkytown.png');
 		//this.game.load.image('ibizaCassette', 'assets/images/songs/ibiza.png');
 		//this.game.load.image('sorryCassette', 'assets/images/songs/sorry.png');
 		//this.game.load.image('neverCassette', 'assets/images/songs/never.png');
