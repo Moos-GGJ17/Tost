@@ -1,16 +1,27 @@
 // JSON that contains data abount the position and color of the notes to be displayed on screen
 ChartData = {};
 
-ChartData.noteColors = ['Blue', 'Cyan', 'Gray', 'Purple', 'Red', 'Yellow'];
+//ChartData.NOTE_COLORS = ['Blue', 'Cyan', 'Gray', 'Purple', 'Red', 'Yellow', 'Yellow'];
+ChartData.NOTE_COLORS = {
+	'c': 'Blue',
+	'd': 'Cyan',
+	'e': 'Gray',
+	'f': 'Purple',
+	'g': 'Red',
+	'a': 'Yellow',
+	'b': 'Yellow'
+};
 
-ChartData.notePositions = [];
+ChartData.NOTES = ['c', 'd', 'e', 'f', 'g', 'a', 'b'];
+
+ChartData.notePositions = {};
 
 ChartData.maxNumberOfNotes = 0;
 
 // Calculate positions based on the given width, so the positions are evenly distributed
 ChartData.calculateNotePositions = function(width) {
-	for (var i = 0; i < ChartData.noteColors.length; i++) {
-		ChartData.notePositions[i] = width * (i + 1) / (ChartData.noteColors.length + 2);
+	for (var i = 0; i < ChartData.NOTES.length; i++) {
+		ChartData.notePositions[ChartData.NOTES[i]] = width * (i + 1) / (ChartData.NOTES.length + 2);
 	}
 }
 

@@ -15,10 +15,10 @@ States.Load = {
 		background.animations.play('Loading', 2, true);
 
 		// Songs audio
-		this.game.load.audio('funkytown', 'assets/audio/songs/funkytown.mp3');
-		this.game.load.audio('ibiza', 'assets/audio/songs/ibiza.mp3');
-		this.game.load.audio('sorry', 'assets/audio/songs/sorry.mp3');
-		this.game.load.audio('never', 'assets/audio/songs/never.mp3');
+		this.game.load.audio('PumpedUpKicks', 'assets/audio/songs/pumped-up-kicks.m4a');
+		//this.game.load.audio('ibiza', 'assets/audio/songs/ibiza.mp3');
+		//this.game.load.audio('sorry', 'assets/audio/songs/sorry.mp3');
+		//this.game.load.audio('never', 'assets/audio/songs/never.mp3');
 
 		// Backgrounds
 		this.game.load.spritesheet('CityDay', 'assets/images/backgrounds/city-day-8.jpg', 424, 600);
@@ -68,10 +68,10 @@ States.Load = {
 		this.game.load.spritesheet('PressSpace', 'assets/images/ui/space.png', 395, 393);
 
 		// Songs cassettes
-		this.game.load.image('funkytownCassette', 'assets/images/songs/funkytown.png');
-		this.game.load.image('ibizaCassette', 'assets/images/songs/ibiza.png');
-		this.game.load.image('sorryCassette', 'assets/images/songs/sorry.png');
-		this.game.load.image('neverCassette', 'assets/images/songs/never.png');
+		this.game.load.image('PumpedUpKicksCassette', 'assets/images/songs/funkytown.png');
+		//this.game.load.image('ibizaCassette', 'assets/images/songs/ibiza.png');
+		//this.game.load.image('sorryCassette', 'assets/images/songs/sorry.png');
+		//this.game.load.image('neverCassette', 'assets/images/songs/never.png');
 
 		// In-game audios
 		this.game.load.audio('powerup', 'assets/audio/powerup.wav');
