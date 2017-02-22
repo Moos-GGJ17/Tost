@@ -14,9 +14,23 @@ ChartData.NOTE_COLORS = {
 
 ChartData.NOTES = ['c', 'd', 'e', 'f', 'g', 'a', 'b'];
 
+ChartData.convertNoteToIndex = function(note) {
+	switch (note) {
+		case 'c': return 0;
+		case 'd': return 1;
+		case 'e': return 2;
+		case 'f': return 3;
+		case 'g': return 4;
+		case 'a': return 5;
+		case 'b': return 6;
+	}
+}
+
 ChartData.notePositions = {};
 
 ChartData.maxNumberOfNotes = 0;
+
+ChartData.NOTE_VELOCITY = 200; // y-velocity of the notes
 
 // Calculate positions based on the given width, so the positions are evenly distributed
 ChartData.calculateNotePositions = function(width) {
