@@ -1,23 +1,23 @@
-function NoteGenerator(game, tempo, notesIndexToBeCreated, notesTimeToBeCreated) {
+function NoteGenerator(game, difficulty, chart) {
     Phaser.Group.call(this, game);
 	this.game = game;
 
-	this.tempo = tempo; // [ms] based on the bpm of the song that is currently playing
+	this.tempo = 1000 * 60 / chart.bpm; // [ms] based on the bpm of the song that is currently playing
+	this.notesIndexToBeCreated = chart.notes.slice(); // ['c','d','e','f','g','a','b']
+	this.notesTimeToBeCreated = chart.times.slice(); // [ms]
 
-	this.notesIndexToBeCreated = notesIndexToBeCreated; // [0 - 5]
-	this.notesTimeToBeCreated = notesTimeToBeCreated; // [ms]
-
-	// Auxiliar variables used in createNote function
+	// Auxiliar variables used in note creation
 	this.noteToCreateIndex = 0;
 	this.noteToCreateTime = 0;
+	this.calculatedDistanceBetweenNotesBetweenNotes = 0;
 	this.currentNoteBeingCreated = null;
 
-	this.lastNoteCreatedIndex = 3;
-	this.lastNoteCreatedTime = 0;
+	// Variables used to compare the next note being created
+	this.lastNoteCreatedIndex = 3; // 0 - 6
+ 	this.lastNoteCreatedTime = 0; // [ms]
 
-	this.timeToChangeNote = 75; // Time needed for the player to move to the next note [ms]
-
-	console.log("Testing note generator " + this.timeToChangeNote + " ms");
+	this.timeToChangeNote = 125 - 10 * difficulty; // Time needed for the player to move to the next note [ms]
+	this.noteMinDistance = 50 * (ChartData.MAX_DIFFICULTY - difficulty); // Minimum distance between notes [ms]
 }
 
 NoteGenerator.prototype = Object.create(Phaser.Group.prototype);
@@ -25,50 +25,62 @@ NoteGenerator.prototype.constructor = NoteGenerator;
 
 NoteGenerator.prototype.createNoteBasedOnTimeInMiliseconds = function (currentTime) {
 	if (currentTime >= this.notesTimeToBeCreated[0]) {
-		this.createNote();
+		this.checkDistanceAndCreateNote();
+	}
+}
+
+// If the minumum time has elapsed, calculates the distance threshold between the current and next note,
+// and creates a note based on this distance
+NoteGenerator.prototype.checkDistanceAndCreateNote = function() {
+	this.noteToCreateTime = this.notesTimeToBeCreated.shift(); // Obtain the first note time from queue
+	this.noteToCreateIndex = this.notesIndexToBeCreated.shift(); // Obtain the first note index in the queue
+
+	if ((this.noteToCreateTime - this.lastNoteCreatedTime) > this.noteMinDistance) {
+		// Calculate distance between the notes so it doesn't create notes that are too far away
+		this.calculatedDistanceBetweenNotes = this.recalculateNoteIndexDistance(this.noteToCreateIndex, this.noteToCreateTime);
+		this.noteToCreateIndex = ChartData.NOTES[this.calculatedDistanceBetweenNotes];
+
+		this.createNote(this.noteToCreateIndex);
+
+		// save new note data for next comparison
+		this.lastNoteCreatedIndex = this.calculatedDistanceBetweenNotes;
+		this.lastNoteCreatedTime = this.noteToCreateTime;
 	}
 }
 
 // Creates the next note in the chart
-NoteGenerator.prototype.createNote = function () {
-	this.noteToCreateTime = this.notesTimeToBeCreated.shift(); // Remove current time from queue
-	//this.notesTimeToBeCreated.shift(); // Remove current time from queue
-	// Obtain the first note index in the queue
-	this.noteToCreateIndex = this.notesIndexToBeCreated.shift();// - 1;
-	var calculatedDistance = this.calculateAndNoteIndexDistance(this.noteToCreateIndex, this.noteToCreateTime);
-	this.noteToCreateIndex = ChartData.NOTES[calculatedDistance];
-	//this.notesIndexToBeCreated.shift();// - 1;
+NoteGenerator.prototype.createNote = function (noteIndex) {	
+	ChartData.increaseMaxNumberOfNotes();
+
 	this.currentNoteBeingCreated = new Note(this.game,
-		ChartData.notePositions[this.noteToCreateIndex], // x
+		ChartData.notePositions[noteIndex], // x
 		0, // y
 		ChartData.NOTE_VELOCITY, // velocity
 		this.tempo, // tempo
-		ChartData.NOTE_COLORS[this.noteToCreateIndex]); // color
+		ChartData.NOTE_COLORS[noteIndex]); // color
 	
-	this.add(this.currentNoteBeingCreated); // add note to the chart group
-	this.lastNoteCreatedIndex = calculatedDistance;
-	this.lastNoteCreatedTime = this.noteToCreateTime;
-
-	//this.checkEndOfChart();
+	this.add(this.currentNoteBeingCreated); // add note to this group
 }
 
-NoteGenerator.prototype.calculateAndNoteIndexDistance = function(newNote, newNoteTime) {
-	var newNoteIndex = ChartData.convertNoteToIndex(newNote) - 3;
+// Checks if the 
+NoteGenerator.prototype.recalculateNoteIndexDistance = function(nextNote, nextNoteTime) {
+	// Used for cyclic distance calculation, so bounds are [-3  3] instead of [0  6]
 	this.lastNoteCreatedIndex -= 3;
+	var nextNoteIndex = ChartData.convertNoteToIndex(nextNote) - 3;
 
-	var distance = newNoteIndex - this.lastNoteCreatedIndex;
-	var deltaTime = (newNoteTime - this.lastNoteCreatedTime) / this.timeToChangeNote;
-	while (distance != 0 && Math.abs(deltaTime / distance) < 1) {
+	var distance = nextNoteIndex - this.lastNoteCreatedIndex;
+	var deltaTime = (nextNoteTime - this.lastNoteCreatedTime) / this.timeToChangeNote;
+	while (distance != 0 && Math.abs(deltaTime / distance) < 1) { // Keep reducing the distance if the time isn't enough to reach the next note
 		if (distance > 0) {
 			distance--;
-			newNoteIndex--;
+			nextNoteIndex--;
 		} else {
 			distance++;
-			newNoteIndex++;
+			nextNoteIndex++;
 		}
 	}
 
-	return newNoteIndex + 3;
+	return nextNoteIndex + 3; // Used for note creation, bounds are [0  6]
 }
 
 NoteGenerator.prototype.hasFinishedCreatingNotes = function() {

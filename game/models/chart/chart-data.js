@@ -31,6 +31,7 @@ ChartData.notePositions = {};
 ChartData.maxNumberOfNotes = 0;
 
 ChartData.NOTE_VELOCITY = 200; // y-velocity of the notes
+ChartData.MAX_DIFFICULTY = 5;
 
 // Calculate positions based on the given width, so the positions are evenly distributed
 ChartData.calculateNotePositions = function(width) {
@@ -39,8 +40,12 @@ ChartData.calculateNotePositions = function(width) {
 	}
 }
 
-ChartData.setMaxNumberOfNotes = function(numberOfNotes) {
-	ChartData.maxNumberOfNotes = numberOfNotes;
+ChartData.resetMaxNumberOfNotes = function() {
+	ChartData.maxNumberOfNotes = 0;
+}
+
+ChartData.increaseMaxNumberOfNotes = function() {
+	ChartData.maxNumberOfNotes++;
 }
 
 ChartData.LIFE_GAIN_WHEN_NOTE_HIT = 0.2;
