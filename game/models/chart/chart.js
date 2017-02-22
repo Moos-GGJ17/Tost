@@ -3,9 +3,8 @@ function Chart(game) {
 	Phaser.Group.call(this, game);
 	this.game = game;
 
-	this.noteVelocity = 200; // y-velocity of the notes
-	this.tempoMS = 0; // [ms] based on the bpm of the song that is currently playing
-	this.chartLoadedTime = 0; // [s] time of the computer when the notes started being created
+	//this.tempoMS = 0; // [ms] based on the bpm of the song that is currently playing
+	this.chartLoadedTime = 0; // [s] time of the computer when the notes started to be created
 
 	this.numberOfNotesHit = 0;
 	this.gameState = ChartData.GAME_STATE['PAUSE'];
@@ -17,18 +16,14 @@ function Chart(game) {
 	this.started = false;
 
 	// Time to wait before the music starts, notes are already being created
-	this.playMusicTimeout = this.game.player.y / this.noteVelocity * 1000;
-
-	this.notesIndexToBeCreated = []; // [0 - 5]
-	this.notesTimeToBeCreated = []; // [ms]
-
-	// Auxiliar variables used in createNote function
-	this.noteToCreateIndex = 0;
-	this.currentNoteBeingCreated = null;
+	this.playMusicTimeout = this.game.player.y / ChartData.NOTE_VELOCITY * 1000;
 
 	this.volumeIsDown = false; // Used to alternate music volume when a note misses
 
+	this.elapsedTime = 0; // Used to create a note
+
 	this.powerups = new PowerupManager(this.game);
+	//this.noteGenerator = new NoteGenerator(this.game);
 }
 
 Chart.prototype = Object.create(Phaser.Group.prototype);
@@ -37,10 +32,12 @@ Chart.prototype.constructor = Chart;
 // Load a chart with the given data as a parameter and start creating notes
 Chart.prototype.load = function (chart) {
 	// Save important chart data
-	this.tempoMS = 1000 * 60 / chart.bpm;
-	this.notesIndexToBeCreated = chart.notes.slice();
-	this.notesTimeToBeCreated = chart.times.slice();
 	this.music = this.game.add.audio(chart.filename);
+
+	this.noteGenerator = new NoteGenerator(
+		this.game,
+		3, // difficulty
+		chart); // JSON containing the note, time to create each note and bpm
 
 	// Start playing the music after the timeout
 	this.game.time.events.add(this.playMusicTimeout, this.playMusic, this);
@@ -49,7 +46,7 @@ Chart.prototype.load = function (chart) {
 	this.chartLoadedTime = this.game.time.totalElapsedSeconds();
 	
 	// Sets the max score based on the amount of notes to be created
-	ChartData.setMaxNumberOfNotes(chart.notes.length);
+	ChartData.resetMaxNumberOfNotes();
 
 	this.started = true;
 	this.gameState = ChartData.GAME_STATE['PLAYING'];
@@ -57,53 +54,21 @@ Chart.prototype.load = function (chart) {
 	this.powerups.startCreatingPowerups();
 }
 
-// Creates the next note in the chart
-Chart.prototype.createNote = function () {
-	this.notesTimeToBeCreated.shift(); // Remove current time from queue
-	//this.notesTimeToBeCreated.shift(); // Remove current time from queue
-	// Obtain the first note index in the queue
-	this.noteToCreateIndex = this.notesIndexToBeCreated.shift();// - 1;
-	//this.notesIndexToBeCreated.shift();// - 1;
-	this.currentNoteBeingCreated = new Note(this.game,
-		ChartData.notePositions[this.noteToCreateIndex], // x
-		0, // y
-		this.noteVelocity, // velocity
-		this.tempoMS, // tempo
-		ChartData.NOTE_COLORS[this.noteToCreateIndex]); // color
-	
-	this.add(this.currentNoteBeingCreated); // add note to the chart group
-
-	this.checkEndOfChart();
-}
-
-// Check if the current time [s] is bigger than or equal to the time of the next note to be created [ms],
-// using the time when the chart was loaded as a starting point
-// If true, create note
-Chart.prototype.createNoteBasedOnComputerTime = function () {
-	if (this.game.time.totalElapsedSeconds() - this.chartLoadedTime >= this.notesTimeToBeCreated[0] / 1000) {
-		this.createNote();
-	}
-}
-
-// Check if the music elapsed time is bigger than or equal to the time of the next note to be created
-// Both times are in ms
-// If true, create note
-Chart.prototype.createNoteBasedOnMusicTime = function () {
-	if (this.music.currentTime + this.playMusicTimeout >= this.notesTimeToBeCreated[0]) {
-		this.createNote();
-	}
-}
-
 // Stop music playing and powerup generation if there aren't more notes to be created
+// Returns true if there are no more notes to be created, else false
 Chart.prototype.checkEndOfChart = function() {
-	if (this.notesIndexToBeCreated.length == 0) {
+	if (this.noteGenerator.hasFinishedCreatingNotes()) {
 		this.powerups.stop();
 		this.music.fadeOut(this.playMusicTimeout * 2);
 
 		// Wait 2 times the time that a note needs to reach the end of the screen to display
 		// the win screen, player can still lose if there are some notes in screen
 		this.game.time.events.add(this.playMusicTimeout * 2, this.showWinScreen, this);
+
+		return true;
 	}
+
+	return false;
 }
 
 Chart.prototype.playMusic = function() {
@@ -116,19 +81,20 @@ Chart.prototype.update = function() {
 	if (this.started) {
 		if (!this.gameHasEnded()) {
 			// Update all the notes and powerups, check for collision with player
-			this.callAll('update');
+			this.noteGenerator.update();
 			this.powerups.update();
 			
 			// Check if there are more notes to be created
-			if (this.notesIndexToBeCreated.length > 0) {
-				// If the music did't start playing, create notes based on computer time,
+			if (!this.checkEndOfChart()) {
+				// If the music didn't start playing, create notes based on computer time,
 				// else create notes based on music time
 				if (!this.music.isPlaying && !this.musicAlreadyPlayed) {
-					this.createNoteBasedOnComputerTime();
+					this.elapsedTime = (this.game.time.totalElapsedSeconds() - this.chartLoadedTime) * 1000;
 				} else {
 					this.musicAlreadyPlayed = true;
-					this.createNoteBasedOnMusicTime();
+					this.elapsedTime = this.music.currentTime + this.playMusicTimeout
 				}
+				this.noteGenerator.createNoteBasedOnTimeInMiliseconds(this.elapsedTime);
 			}
 
 			if (this.game.player.life <= 0) {
@@ -145,7 +111,7 @@ Chart.prototype.gameHasEnded = function() {
 }
 
 Chart.prototype.debug = function() {
-	this.callAll('debug');
+	this.noteGenerator.debug();
 }
 
 Chart.prototype.setVolume = function(volume) {
@@ -177,7 +143,6 @@ Chart.prototype.calculateNotesHitPercentage = function() {
 	return this.numberOfNotesHit / ChartData.maxNumberOfNotes;
 }
 
-// Show win screen if player didn't lose
 Chart.prototype.showWinScreen = function() {
 	if (this.gameState === ChartData.GAME_STATE['PLAYING']) {
 		this.gameState = ChartData.GAME_STATE['WIN'];
@@ -206,6 +171,6 @@ Chart.prototype.showLoseScreen = function() {
 Chart.prototype.deepDestroy = function() {
 	this.music.destroy();
 	this.powerups.destroy();
-	this.callAll('destroy');
+	this.noteGenerator.destroy();
 	this.destroy();
 }
