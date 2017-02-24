@@ -16,8 +16,8 @@ function NoteGenerator(game, difficulty, chart) {
 	this.lastNoteCreatedIndex = 3; // 0 - 6
  	this.lastNoteCreatedTime = 0; // [ms]
 
-	this.timeToChangeNote = 125 - 10 * difficulty; // Time needed for the player to move to the next note [ms]
-	this.noteMinDistance = 50 * (ChartData.MAX_DIFFICULTY - difficulty); // Minimum distance between notes [ms]
+	this.timeToChangeNote = 575 - 100 * difficulty; // Time needed for the player to move to the next note [ms]
+	this.noteMinDistance = 100 * (ChartData.MAX_DIFFICULTY - difficulty + 1); // Minimum distance between notes [ms]
 }
 
 NoteGenerator.prototype = Object.create(Phaser.Group.prototype);
