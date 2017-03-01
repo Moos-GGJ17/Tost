@@ -20,17 +20,17 @@ States.Play = {
 		this.game.stage.backgroundColor = '0x000000';
 		
 		// Load background animations
-		this.background = this.game.add.sprite(0, 0, 'CityDay');
-		this.background.animations.add('Play');
+		this.background = this.game.add.sprite(0, 0, Songs[this.game.songToLoadIndex].filename + 'Background');
+		/*this.background.animations.add('Play');
 		this.background.animations.play('Play', 5, true);
-		this.background.scale.setTo(this.game.width / this.background.width, this.game.height / this.background.height);
+		this.background.scale.setTo(this.game.width / this.background.width, this.game.height / this.background.height);*/
 		
 		// Gray background alpha is increased when player's life decreases.
 		// Should be changed with proper sprite tinting
-		this.backgroundGray = this.game.add.sprite(0, 0, 'CityDayGray');
-		this.backgroundGray.animations.add('Play');
+		this.backgroundGray = this.game.add.sprite(0, 0, Songs[this.game.songToLoadIndex].filename + 'BackgroundGray');
+		/*this.backgroundGray.animations.add('Play');
 		this.backgroundGray.animations.play('Play', 5, true);
-		this.backgroundGray.scale.setTo(this.game.width / this.backgroundGray.width, this.game.height / this.backgroundGray.height);
+		this.backgroundGray.scale.setTo(this.game.width / this.backgroundGray.width, this.game.height / this.backgroundGray.height);*/
 		this.backgroundGray.alpha = 0;
 
 		// Instruction UI elements
