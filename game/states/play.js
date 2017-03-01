@@ -19,19 +19,14 @@ States.Play = {
 	create: function(){
 		this.game.stage.backgroundColor = '0x000000';
 		
-		// Load background animations
+		// Background with reduced saturation that shows when the player is losing
+		this.backgroundGrayBMD = this.game.make.bitmapData();
+		this.backgroundGrayBMD.load(Songs[this.game.songToLoadIndex].filename + 'Background');
+		this.backgroundGrayBMD.addToWorld(0, 0);
+		this.backgroundGrayBMD.shiftHSL(null, -1.0, null);
+
+		// Colored background that loses alpha when the player is losing
 		this.background = this.game.add.sprite(0, 0, Songs[this.game.songToLoadIndex].filename + 'Background');
-		/*this.background.animations.add('Play');
-		this.background.animations.play('Play', 5, true);
-		this.background.scale.setTo(this.game.width / this.background.width, this.game.height / this.background.height);*/
-		
-		// Gray background alpha is increased when player's life decreases.
-		// Should be changed with proper sprite tinting
-		this.backgroundGray = this.game.add.sprite(0, 0, Songs[this.game.songToLoadIndex].filename + 'BackgroundGray');
-		/*this.backgroundGray.animations.add('Play');
-		this.backgroundGray.animations.play('Play', 5, true);
-		this.backgroundGray.scale.setTo(this.game.width / this.backgroundGray.width, this.game.height / this.backgroundGray.height);*/
-		this.backgroundGray.alpha = 0;
 
 		// Instruction UI elements
 		this.game.pressSpaceAnimation = this.game.add.sprite(this.game.world.width / 2, this.game.world.height * 3 / 4, 'PressSpace');
@@ -86,9 +81,9 @@ States.Play = {
 			this.game.player.update();
 			this.game.scoreUI.update();
 
-			// Increase gray background alpha based on player's life
+			// Decrease colored background alpha based on player's life
 			if (this.game.player.life < PlayerData.MAX_LIFE - 1) {
-				this.backgroundGray.alpha = 1 - this.game.player.life / (PlayerData.MAX_LIFE - 1);
+				this.background.alpha = this.game.player.life / (PlayerData.MAX_LIFE - 1);
 			}
 		}
 	},
