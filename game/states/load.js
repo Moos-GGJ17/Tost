@@ -37,15 +37,19 @@ States.Load = {
 		this.game.load.image('PlayerPurple', 'assets/images/player/purple.png');
 		this.game.load.image('PlayerRed', 'assets/images/player/red.png');
 		this.game.load.image('PlayerYellow', 'assets/images/player/yellow.png');
+		this.game.load.image('PlayerOrange', 'assets/images/player/orange.png');
+		this.game.load.image('PlayerPink', 'assets/images/player/pink.png');
 
 		// Chart notes
+		this.game.load.image('NoteWhite', 'assets/images/notes/white.png');
 		this.game.load.image('NoteBlue', 'assets/images/notes/blue.png');
 		this.game.load.image('NoteCyan', 'assets/images/notes/cyan.png');
 		this.game.load.image('NoteGray', 'assets/images/notes/gray.png');
 		this.game.load.image('NotePurple', 'assets/images/notes/purple.png');
 		this.game.load.image('NoteRed', 'assets/images/notes/red.png');
 		this.game.load.image('NoteYellow', 'assets/images/notes/yellow.png');
-		this.game.load.image('NoteWhite', 'assets/images/notes/white.png');
+		this.game.load.image('NoteOrange', 'assets/images/notes/orange.png');
+		this.game.load.image('NotePink', 'assets/images/notes/pink.png');
 		this.game.load.image('NoteLight', 'assets/images/notes/light.png');
 
 		// Powerups
@@ -72,6 +76,10 @@ States.Load = {
 		//this.game.load.image('ibizaCassette', 'assets/images/songs/ibiza.png');
 		//this.game.load.image('sorryCassette', 'assets/images/songs/sorry.png');
 		//this.game.load.image('neverCassette', 'assets/images/songs/never.png');
+
+		// Song backgrounds
+		this.game.load.image('PumpedUpKicksBackground', 'assets/images/backgrounds/pumped-up-kicks.png');
+		this.game.load.image('PumpedUpKicksBackgroundGray', 'assets/images/backgrounds/pumped-up-kicks-gray.png');
 
 		// In-game audios
 		this.game.load.audio('powerup', 'assets/audio/powerup.wav');

@@ -5,11 +5,11 @@ ChartData = {};
 ChartData.NOTE_COLORS = {
 	'c': 'Blue',
 	'd': 'Cyan',
-	'e': 'Gray',
+	'e': 'Orange',
 	'f': 'Purple',
 	'g': 'Red',
 	'a': 'Yellow',
-	'b': 'Yellow'
+	'b': 'Pink'
 };
 
 ChartData.NOTES = ['c', 'd', 'e', 'f', 'g', 'a', 'b'];
