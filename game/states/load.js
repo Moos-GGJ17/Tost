@@ -73,8 +73,7 @@ States.Load = {
 
 		// Song backgrounds
 		this.game.load.image('PumpedUpKicksBackground', 'assets/images/backgrounds/pumped-up-kicks.png');
-		this.game.load.image('PumpedUpKicksBackgroundGray', 'assets/images/backgrounds/pumped-up-kicks-gray.png');
-
+		
 		// In-game audios
 		this.game.load.audio('powerup', 'assets/audio/powerup.wav');
 		this.game.load.audio('error', 'assets/audio/error.wav');
