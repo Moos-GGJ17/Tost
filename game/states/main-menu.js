@@ -16,8 +16,6 @@ States.MainMenu = {
 		// Creates a key object using the SPACEBAR to control the time it's being pressed
 		// and execute the corresponding action (handled in the update function)
 		this.spaceButton = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
-		// Used to prevent changing song multiple times while pressing the spacebar only once
-		this.spaceButton.onUp.add(this.setSongIsBeingChangedToFalse, this);
 	},
 
 	initializeCassette: function() {
@@ -56,17 +54,19 @@ States.MainMenu = {
 			this.play();
 		} else if (this.inputHasBeenPressed()) {
 			this.changeSong();
+		} else {
+			this.setSongIsBeingChangedToFalse();
 		}
 	},
 
 	// Returns true if input has been held for more than 1 second
 	inputIsBeingHold: function() {
 		return (this.spaceButton.isDown && this.spaceButton.duration >= 1000) ||
-			   (this.game.input.isDown && this.game.input.duration >= 1000);
+			   (this.game.input.activePointer.isDown && this.game.input.activePointer.duration >= 1000); // touch-click
 	},
 
 	inputHasBeenPressed: function() {
-		return this.spaceButton.isDown || this.game.input.isDown;
+		return this.spaceButton.isDown || this.game.input.activePointer.isDown; // space || touch-click 
 	},
 
 	getCurrentSongFilename: function() {
