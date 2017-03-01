@@ -112,6 +112,7 @@ Player.prototype.increaseLifeBy = function(amountToIncrease) {
 
 Player.prototype.decreaseLifeBy = function(amountToDecrease) {
 	this.life -= amountToDecrease;
+	this.life = Math.min(this.life, 0);
 }
 
 Player.prototype.increaseScoreBy = function(amountToIncrease) {
