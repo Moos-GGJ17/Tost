@@ -1,3 +1,9 @@
+WebFont.load({
+	custom: {
+		families: ['PressStart2P']
+	}
+});
+
 var Game, game;
 
 // Contains general Game info, such as the states.
