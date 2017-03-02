@@ -20,12 +20,12 @@ ScoreUI.prototype.initialize = function() {
 // Creates a text on the top left corner of the screen, that displays the score
 ScoreUI.prototype.createNumbersText = function() {
     var numbersTextStyle = {
-		font: "48px Arial",
+		font: "40px PressStart2P",
 		fill: "#e0e0e0",
 		boundsAlignH: "center",
 		boundsAlignV: "middle"
 	}
-	this.numbersText = this.game.add.text(10, 0, "0", numbersTextStyle);
+	this.numbersText = this.game.add.text(10, 10, "0", numbersTextStyle);
 }
 
 // Creates the toasts one after another with the same horizontal distance separation
