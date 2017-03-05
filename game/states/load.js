@@ -23,6 +23,9 @@ States.Load = {
 		// Blank sprite used in some collisions
 		this.game.load.image('Blank', 'assets/images/blank.png');
 
+		// A black 1px x 1px sprite
+		this.game.load.image('Black', 'assets/images/black.png');
+
 		// Player
 		this.game.load.image('PlayerWhite', 'assets/images/player/white.png');
 		this.game.load.image('PlayerBlue', 'assets/images/player/blue.png');

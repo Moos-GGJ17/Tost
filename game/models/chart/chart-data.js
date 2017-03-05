@@ -66,3 +66,10 @@ ChartData.SCORE_BASE = {
 	'TWO_TOASTS': 0.60,
 	'ONE_TOAST': 0.30
 }
+
+ChartData.DIFFICULTY = {
+	'EASY': 2,
+	'HARD': 5
+};
+
+ChartData.currentDifficulty = 'EASY';

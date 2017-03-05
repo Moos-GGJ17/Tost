@@ -36,7 +36,7 @@ Chart.prototype.load = function (chart) {
 
 	this.noteGenerator = new NoteGenerator(
 		this.game,
-		4, // difficulty
+		ChartData.DIFFICULTY[ChartData.currentDifficulty], // difficulty
 		chart); // JSON containing the note, time to create each note and bpm
 
 	// Start playing the music after the timeout
