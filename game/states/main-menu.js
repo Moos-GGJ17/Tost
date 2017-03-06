@@ -13,6 +13,8 @@ States.MainMenu = {
 		this.createToaster();
 		this.createInstructions();
 
+		this.difficultySelector = new DifficultySelector(this.game);
+
 		// Creates a key object using the SPACEBAR to control the time it's being pressed
 		// and execute the corresponding action (handled in the update function)
 		this.spaceButton = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
@@ -50,12 +52,19 @@ States.MainMenu = {
 	},
 
 	update: function() {
-		if (this.inputIsBeingHold()) {
+		// handle song selection and changing only if difficulty selector is hidden
+		if (this.difficultySelector.alpha === 0) {
+			if (this.inputIsBeingHold()) {
+				this.selectDifficulty();
+			} else if (this.inputHasBeenPressed()) {
+				this.changeSong();
+			} else {
+				this.setSongIsBeingChangedToFalse();
+			}
+		}
+
+		if (this.difficultySelector.hasSelectedDifficulty) { // start game when a difficulty has been selected
 			this.play();
-		} else if (this.inputHasBeenPressed()) {
-			this.changeSong();
-		} else {
-			this.setSongIsBeingChangedToFalse();
 		}
 	},
 
@@ -88,9 +97,7 @@ States.MainMenu = {
 		}
 	},
 
-	play: function() {
-		this.cassette.music.stop();
-
+	selectDifficulty: function() {
 		// Because the song index is changed each time the input is pressed,
 		// if you hold the input down to begin playing, the song changes,
 		// so it's necessary to change to the previous song before playing
@@ -99,6 +106,11 @@ States.MainMenu = {
 			this.game.songToLoadIndex = Songs.length - 1;
 		}
 
+		this.difficultySelector.show();		
+	},
+
+	play: function() {
+		this.cassette.music.stop();
 		this.cassette.hideAndDestroy();
 		this.state.start('Play');
 	}

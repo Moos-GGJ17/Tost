@@ -14,6 +14,18 @@ States.Load = {
 		background.animations.add('Loading');
 		background.animations.play('Loading', 2, true);
 
+		var textStyle = {
+			font: "54px PressStart2P",
+			boundsAlignH: "center",
+			boundsAlignV: "middle",
+			fill: '#000000'
+		}
+		//	Progress report
+    	this.textProgress = this.game.add.text(this.game.world.centerX - 50, this.game.world.height * 4 / 5, '0%', textStyle);
+
+		this.game.load.onFileComplete.add(this.fileComplete, this);
+    	//this.game.load.onLoadComplete.add(this.loadComplete, this);
+
 		// Songs audio
 		this.game.load.audio('PumpedUpKicks', 'assets/audio/songs/pumped-up-kicks.m4a');
 		//this.game.load.audio('ibiza', 'assets/audio/songs/ibiza.mp3');
@@ -22,6 +34,9 @@ States.Load = {
 
 		// Blank sprite used in some collisions
 		this.game.load.image('Blank', 'assets/images/blank.png');
+
+		// A black 1px x 1px sprite
+		this.game.load.image('Black', 'assets/images/black.png');
 
 		// Player
 		this.game.load.image('PlayerWhite', 'assets/images/player/white.png');
@@ -84,5 +99,10 @@ States.Load = {
 	// Shows the main menu/song selection screen after all the assets loaded properly
 	create: function(){
 		this.state.start('MainMenu');
-	}
+	},
+
+	// Update the progress text each time a file has loaded
+	fileComplete: function(progress, cacheKey, success, totalLoaded, totalFiles) {
+		this.textProgress.setText(progress + "%");
+	},
 };
