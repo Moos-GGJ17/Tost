@@ -1,3 +1,10 @@
+# Node 
 node_modules
+npm-debug.log
+
+# Visual Studio Code 
 .vscode
+
+# Project directory
 .temporal
+build
