@@ -5,23 +5,28 @@ States.Load = {
 	init: function() {
 		// Custom loader used to load fonts
 		//this.game.load = new CustomLoader(game);
+    this.game.stage.backgroundColor = '#feeb83';
 	},
 
 	// Loads the assets.
 	preload: function() {
 		// Creates the loading animation
-		var background = this.game.add.sprite(0, 0, 'Loading');
+    
+    var loaderPosX = (this.game.world.width - LOADING_MEASURES.width) / 2;
+    var loaderPosY = (this.game.world.height - LOADING_MEASURES.height) / 2;
+		var background = this.game.add.sprite(loaderPosX, loaderPosY , 'Loading');
+
 		background.animations.add('Loading');
 		background.animations.play('Loading', 2, true);
 
 		var textStyle = {
-			font: "54px PressStart2P",
+			font: "40px PressStart2P",
 			boundsAlignH: "center",
 			boundsAlignV: "middle",
 			fill: '#000000'
 		}
 		//	Progress report
-    	this.textProgress = this.game.add.text(this.game.world.centerX - 50, this.game.world.height * 4 / 5, '0%', textStyle);
+    this.textProgress = this.game.add.text(this.game.world.centerX, loaderPosY + LOADING_MEASURES.height + 20, '0%', textStyle);
 
 		this.game.load.onFileComplete.add(this.fileComplete, this);
     	//this.game.load.onLoadComplete.add(this.loadComplete, this);

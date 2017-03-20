@@ -20,6 +20,11 @@ var GAME_BOUNDS = {
   y: window.innerHeight
 };
 
+var LOADING_MEASURES = {
+  width: 300,
+  height: 212
+};
+
 // Initializes the Phaser game.
 window.game = game = new Phaser.Game(GAME_BOUNDS.x, GAME_BOUNDS.y, Phaser.AUTO, '');
 
