@@ -16,8 +16,8 @@ Game = {
 Songs = [];
 
 var GAME_BOUNDS = {
-  x: 800,
-  y: 600
+  x: window.innerWidth,
+  y: window.innerHeight
 };
 
 // Initializes the Phaser game.
