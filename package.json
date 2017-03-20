@@ -18,6 +18,8 @@
   "homepage": "https://github.com/Moos-GGJ17/Tost#readme",
   "dependencies": {
     "express": "^4.14.0",
-    "fontfaceobserver": "^2.0.7"
+    "fontfaceobserver": "^2.0.7",
+    "browser-sync": "^2.11.1",
+    "gulp": "^3.9.0"
   }
 }
