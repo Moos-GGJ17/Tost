@@ -20,6 +20,12 @@
     "express": "^4.14.0",
     "fontfaceobserver": "^2.0.7",
     "browser-sync": "^2.11.1",
-    "gulp": "^3.9.0"
+    "gulp": "^3.9.0",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-stylus": "^2.3.0",
+    "gulp-uglify": "^2.0.0",
+    "gulp-wrap": "^0.13.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-load-plugins": "^1.2.0"
   }
 }
