@@ -39,3 +39,14 @@ game.state.add('Play', Game.States.Play);
 
 // Starts the initial state.
 game.state.start('Boot');
+
+window.addEventListener("orientationchange", changeMeasures);
+window.addEventListener("resize", changeMeasures);
+
+function changeMeasures() {
+  var currentState = game.state.current;
+  game.scale.setGameSize(window.innerWidth, window.innerHeight);  
+  game.state.remove(game.state[currentState]);
+  game.state.add(currentState,Game.States[currentState]);
+  game.state.start('MainMenu');
+}
