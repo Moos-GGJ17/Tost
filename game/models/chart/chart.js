@@ -16,7 +16,7 @@ function Chart(game) {
 	this.started = false;
 
 	// Time to wait before the music starts, notes are already being created
-	this.playMusicTimeout = this.game.player.y / ChartData.NOTE_VELOCITY * 1000;
+	this.playMusicTimeout = this.game.player.y / ChartData.defaultNoteVelocity * 1000;
 
 	this.volumeIsDown = false; // Used to alternate music volume when a note misses
 

@@ -12,3 +12,10 @@ PlayerData.COLORS_RGB = {
 }
 
 PlayerData.MAX_LIFE = 5;
+
+PlayerData.defaultHorizontalVelocity = 1000;
+
+// Calculates the x-velocity of the player, based on a given width
+PlayerData.calculateHorizontalVelocity = function(width) {
+    PlayerData.defaultHorizontalVelocity = 1000 * width / 800;
+}

@@ -28,8 +28,10 @@ var LOADING_MEASURES = {
 // Initializes the Phaser game.
 window.game = game = new Phaser.Game(GAME_BOUNDS.x, GAME_BOUNDS.y, Phaser.AUTO, '');
 
-// Calculate the horizontal positions where the notes will be displayed
+// Calculate some variables that vary based on the screen size
 ChartData.calculateNotePositions(GAME_BOUNDS.x);
+ChartData.calculateNoteVelocity(GAME_BOUNDS.y);
+PlayerData.calculateHorizontalVelocity(GAME_BOUNDS.x);
 
 // Adds the necessary states to the game.
 game.state.add('Boot', Game.States.Boot);
