@@ -1,6 +1,6 @@
 WebFont.load({
 	custom: {
-		families: ['PressStart2P']
+		families: ['8-BITWONDER']
 	}
 });
 

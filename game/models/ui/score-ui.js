@@ -20,7 +20,7 @@ ScoreUI.prototype.initialize = function() {
 // Creates a text on the top left corner of the screen, that displays the score
 ScoreUI.prototype.createNumbersText = function() {
     var numbersTextStyle = {
-		font: "40px PressStart2P",
+		font: "40px 8-BITWONDER",
 		fill: "#e0e0e0",
 		boundsAlignH: "center",
 		boundsAlignV: "middle"

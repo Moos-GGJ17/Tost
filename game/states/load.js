@@ -20,7 +20,7 @@ States.Load = {
 		background.animations.play('Loading', 2, true);
 
 		var textStyle = {
-			font: "40px PressStart2P",
+			font: "40px 8-BITWONDER",
 			boundsAlignH: "center",
 			boundsAlignV: "middle",
 			fill: '#000000'

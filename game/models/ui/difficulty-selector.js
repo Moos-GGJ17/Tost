@@ -24,7 +24,7 @@ DifficultySelector.prototype.initializeBackground = function() {
 
 DifficultySelector.prototype.initializeTexts = function() {
     var textStyle = {
-		font: "54px PressStart2P",
+		font: "54px 8-BITWONDER",
 		boundsAlignH: "center",
 		boundsAlignV: "middle"
 	}
