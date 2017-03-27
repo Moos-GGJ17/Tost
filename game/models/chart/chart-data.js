@@ -30,8 +30,13 @@ ChartData.notePositions = {};
 
 ChartData.maxNumberOfNotes = 0;
 
-ChartData.NOTE_VELOCITY = 200; // y-velocity of the notes
+ChartData.defaultNoteVelocity = 200; // y-velocity of the notes
 ChartData.MAX_DIFFICULTY = 5;
+
+// Calculate the y-velocity of the notes based on a given height
+ChartData.calculateNoteVelocity = function(height) {
+	ChartData.defaultNoteVelocity = 200 * height / 600;
+}
 
 // Calculate positions based on the given width, so the positions are evenly distributed
 ChartData.calculateNotePositions = function(width) {

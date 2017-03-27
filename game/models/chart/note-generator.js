@@ -55,7 +55,7 @@ NoteGenerator.prototype.createNote = function (noteIndex) {
 	this.currentNoteBeingCreated = new Note(this.game,
 		ChartData.notePositions[noteIndex], // x
 		0, // y
-		ChartData.NOTE_VELOCITY, // velocity
+		ChartData.defaultNoteVelocity, // velocity
 		this.tempo, // tempo
 		ChartData.NOTE_COLORS[noteIndex]); // color
 	
