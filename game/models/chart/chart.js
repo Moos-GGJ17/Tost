@@ -22,7 +22,7 @@ function Chart(game) {
 
 	this.elapsedTime = 0; // Used to create a note
 
-	this.powerups = new PowerupManager(this.game);
+	//this.powerups = new PowerupManager(this.game);
 	//this.noteGenerator = new NoteGenerator(this.game);
 }
 
@@ -51,14 +51,14 @@ Chart.prototype.load = function (chart) {
 	this.started = true;
 	this.gameState = ChartData.GAME_STATE['PLAYING'];
 
-	this.powerups.startCreatingPowerups();
+	//this.powerups.startCreatingPowerups();
 }
 
 // Stop music playing and powerup generation if there aren't more notes to be created
 // Returns true if there are no more notes to be created, else false
 Chart.prototype.checkEndOfChart = function() {
 	if (this.noteGenerator.hasFinishedCreatingNotes()) {
-		this.powerups.stop();
+		//this.powerups.stop();
 		this.music.fadeOut(this.playMusicTimeout * 2);
 
 		// Wait 2 times the time that a note needs to reach the end of the screen to display
@@ -82,7 +82,7 @@ Chart.prototype.update = function() {
 		if (!this.gameHasEnded()) {
 			// Update all the notes and powerups, check for collision with player
 			this.noteGenerator.update();
-			this.powerups.update();
+			//this.powerups.update();
 			
 			// Check if there are more notes to be created
 			if (!this.checkEndOfChart()) {
@@ -101,7 +101,7 @@ Chart.prototype.update = function() {
 				this.showLoseScreen();
 			}
 		} else {
-			this.powerups.stop();
+			//this.powerups.stop();
 		}
 	}	
 }
@@ -170,7 +170,7 @@ Chart.prototype.showLoseScreen = function() {
 // Destroys everything related to the chart
 Chart.prototype.deepDestroy = function() {
 	this.music.destroy();
-	this.powerups.destroy();
+	//this.powerups.destroy();
 	this.noteGenerator.destroy();
 	this.destroy();
 }
