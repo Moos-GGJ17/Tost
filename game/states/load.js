@@ -14,10 +14,10 @@ States.Load = {
     
     var loaderPosX = (this.game.world.width - LOADING_MEASURES.width) / 2;
     var loaderPosY = (this.game.world.height - LOADING_MEASURES.height) / 2;
-		var background = this.game.add.sprite(loaderPosX, loaderPosY , 'Loading');
+		this.background = this.game.add.sprite(loaderPosX, loaderPosY , 'Loading');
 
-		background.animations.add('Loading');
-		background.animations.play('Loading', 2, true);
+		this.background.animations.add('Loading');
+		this.background.animations.play('Loading', 2, true);
 
 		var textStyle = {
 			font: "40px 8-BITWONDER",
@@ -110,4 +110,9 @@ States.Load = {
 	fileComplete: function(progress, cacheKey, success, totalLoaded, totalFiles) {
 		this.textProgress.setText(progress + "%");
 	},
+
+	shutdown: function() {
+		this.background.destroy();
+		this.textProgress.destroy();
+	}
 };

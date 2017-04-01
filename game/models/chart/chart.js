@@ -169,7 +169,10 @@ Chart.prototype.showLoseScreen = function() {
 
 // Destroys everything related to the chart
 Chart.prototype.deepDestroy = function() {
+	this.music.stop();
 	this.music.destroy();
+	this.errorAudio.stop();
+	this.errorAudio.destroy();
 	//this.powerups.destroy(true);
 	this.noteGenerator.destroy(true);
 	this.destroy(true);

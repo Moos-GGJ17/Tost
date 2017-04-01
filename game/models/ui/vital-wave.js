@@ -68,3 +68,8 @@ VitalWave.prototype.switchColorsBetweenRedAndWhite = function() {
 		this.color = PlayerData.COLORS_RGB['White'];
 	}
 }
+
+VitalWave.prototype.deepDestroy = function() {
+	this.bmd.destroy();
+	this.destroy();
+}

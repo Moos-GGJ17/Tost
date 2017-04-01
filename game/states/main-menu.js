@@ -113,5 +113,15 @@ States.MainMenu = {
 		this.cassette.music.stop();
 		this.cassette.hideAndDestroy();
 		this.state.start('Play');
+	},
+
+	shutdown: function() {
+		if (this.cassette) {
+			this.cassette.finishedHideAndDestroy();
+		}
+		this.toaster.destroy();
+		this.instr1.destroy();
+		this.instr2.destroy();
+		this.difficultySelector.destroy(true);
 	}
 };

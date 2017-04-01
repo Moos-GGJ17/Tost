@@ -92,5 +92,17 @@ States.Play = {
 	render: function() {
 		//this.game.player.debug();
 		//this.game.chart.debug();
+	},
+
+	shutdown: function() {
+		this.background.destroy();
+		this.backgroundGrayBMD.destroy();
+		this.game.pressSpaceAnimation.destroy();
+		this.instrBottom.destroy();
+		this.instrTop.destroy();
+		this.game.vitalWave.deepDestroy();
+		this.game.scoreUI.destroy(true);
+		this.game.player.destroy();
+		this.game.chart.deepDestroy();
 	}
 };
