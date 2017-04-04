@@ -13,7 +13,7 @@ States.MainMenu = {
 		//this.createToaster();
 		//this.createInstructions();
 
-		this.songSelector = new SongSelector(this.game, [{}, {}, {}]);
+		this.songSelector = new SongSelector(this.game, Songs);
 		this.difficultySelector = new DifficultySelector(this.game);
 
 		// Creates a key object using the SPACEBAR to control the time it's being pressed
