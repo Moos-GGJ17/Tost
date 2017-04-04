@@ -28,13 +28,15 @@ SongSelector.prototype.initialize = function() {
 }
 
 SongSelector.prototype.initializeTexts = function() {
-    this.selectSongText = this.game.add.text(0, 0, "SELECT A SONG", TextStyles.L);
+    this.selectSongText = this.game.add.text(this.game.world.centerX, this.game.world.height / 5, "SELECT A SONG", TextStyles.L);
     this.selectSongText.fill = TextColors.WHITE;
-    this.selectSongText.setTextBounds(this.game.world.centerX - 200, this.game.world.height / 5 - 50, 400, 100);
+    this.selectSongText.anchor.set(0.5);
+    //this.selectSongText.setTextBounds(this.game.world.centerX - 200, this.game.world.height / 5 - 50, 400, 100);
 
-    this.songNameText = this.game.add.text(0, 0, "", TextStyles.S);
+    this.songNameText = this.game.add.text(this.game.world.centerX, this.game.world.height * 3 / 4, "", TextStyles.S);
     this.songNameText.fill = TextColors.WHITE;
-    this.songNameText.setTextBounds(this.game.world.centerX - 300, this.game.world.height * 4 / 5 - 50, 600, 100);
+    this.songNameText.anchor.set(0.5);
+    //this.songNameText.setTextBounds(this.game.world.centerX - 300, this.game.world.height * 3 / 4 - 50, 600, 100);
 
     this.updateSongNameText();
 }

@@ -35,12 +35,16 @@ States.Play = {
 		this.game.pressSpaceAnimation.animations.add('Press');
 		this.game.pressSpaceAnimation.animations.play('Press', 3, true);
 
-		this.instrTop = this.game.add.sprite(this.game.world.width / 2, this.game.world.height / 3, 'GameplayInstr1');
-		this.instrTop.anchor.setTo(0.5, 0);
+		this.instrText = this.game.add.text(this.game.world.centerX, this.game.world.centerY, "TOUCH THE SCREEN\nTO CHANGE THE\nDIRECTION", TextStyles.M);
+		this.instrText.fill = TextColors.WHITE;
+		this.instrText.anchor.set(0.5);
 
-		this.instrBottom = this.game.add.sprite(this.game.world.width / 2, this.game.world.height *7 / 8, 'GameplayInstr2');
-		this.instrBottom.anchor.setTo(0.5, 0);
-		this.instrBottom.scale.setTo(0.5, 0.5);
+		//this.instrTop = this.game.add.sprite(this.game.world.width / 2, this.game.world.height / 3, 'GameplayInstr1');
+		//this.instrTop.anchor.setTo(0.5, 0);
+
+		//this.instrBottom = this.game.add.sprite(this.game.world.width / 2, this.game.world.height *7 / 8, 'GameplayInstr2');
+		//this.instrBottom.anchor.setTo(0.5, 0);
+		//this.instrBottom.scale.setTo(0.5, 0.5);
 
 		// Listen to input after two seconds
 		this.game.time.events.add(2 * Phaser.Timer.SECOND, this.startListeningToInput, this);
@@ -64,8 +68,9 @@ States.Play = {
 
 		// Hide/destroy instructions UI elements
 		this.game.pressSpaceAnimation.alpha = 0;
-		this.instrTop.destroy();
-		this.instrBottom.destroy();
+		this.instrText.destroy();
+		//this.instrTop.destroy();
+		//this.instrBottom.destroy();
 
 		// Remove unused input events
 		this.playButton.onDown.remove(this.play, this);
@@ -98,8 +103,9 @@ States.Play = {
 		this.background.destroy();
 		this.backgroundGrayBMD.destroy();
 		this.game.pressSpaceAnimation.destroy();
-		this.instrBottom.destroy();
-		this.instrTop.destroy();
+		this.instrText.destroy();
+		//this.instrBottom.destroy();
+		//this.instrTop.destroy();
 		this.game.vitalWave.deepDestroy();
 		this.game.scoreUI.destroy(true);
 		this.game.player.destroy();

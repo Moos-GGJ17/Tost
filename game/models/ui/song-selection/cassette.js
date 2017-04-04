@@ -4,6 +4,9 @@ function Cassette(game, x, y, filename) {
 	Phaser.Sprite.call(this, game, x, y, filename + 'Cassette');
 	this.game = game;
 
+	const scaleMeasure = (this.game.world.width / 2) / this.width;
+	this.scale.setTo(scaleMeasure, scaleMeasure);
+
 	this.cassetteDistance = this.width * 6 / 5;
 	this.canSelectSong = true;
 	this.initialize();
