@@ -16,7 +16,7 @@ SongSelector.prototype.constructor = SongSelector;
 
 SongSelector.prototype.initialize = function() {
     this.initializeCassettes();
-
+    this.initializeTexts();
     this.loadSongPreview();
     
     // Center cassettes
@@ -24,8 +24,19 @@ SongSelector.prototype.initialize = function() {
     this.y = this.game.world.centerY - this.cassettes[0].height / 2;
 
     this.swipeHandler = new Swipe(this.game);
-
     this.difficultySelector = new DifficultySelector(this.game);
+}
+
+SongSelector.prototype.initializeTexts = function() {
+    this.selectSongText = this.game.add.text(0, 0, "SELECT A SONG", TextStyles.L);
+    this.selectSongText.fill = TextColors.WHITE;
+    this.selectSongText.setTextBounds(this.game.world.centerX - 200, this.game.world.height / 5 - 50, 400, 100);
+
+    this.songNameText = this.game.add.text(0, 0, "", TextStyles.S);
+    this.songNameText.fill = TextColors.WHITE;
+    this.songNameText.setTextBounds(this.game.world.centerX - 300, this.game.world.height * 4 / 5 - 50, 600, 100);
+
+    this.updateSongNameText();
 }
 
 SongSelector.prototype.loadSongPreview = function() {
@@ -108,6 +119,7 @@ SongSelector.prototype.moveCassettesLeft = function() {
         this.updateCassettesEvents();
         this.songPreview.onFadeComplete.addOnce(this.loadSongPreview, this);
         this.songPreview.fadeOut(250);
+        this.updateSongNameText();
     }
 }
 
@@ -120,6 +132,7 @@ SongSelector.prototype.moveCassettesRight = function() {
         this.updateCassettesEvents();
         this.songPreview.onFadeComplete.addOnce(this.loadSongPreview, this);
         this.songPreview.fadeOut(250);
+        this.updateSongNameText();
     }
 }
 
@@ -153,6 +166,10 @@ SongSelector.prototype.updateCassettesImages = function() {
     this.cassettes[4].updateImage(this.allSongs[this.calculateNextSongIndex(this.calculateNextSongIndex(this.currentSongIndex))].filename);
 }
 
+SongSelector.prototype.updateSongNameText = function() {
+    this.songNameText.text = this.allSongs[this.currentSongIndex].name;
+}
+
 SongSelector.prototype.enableInput = function() {
     this.inputEnabled = true;
     this.checkCassettesPosition();
@@ -161,6 +178,8 @@ SongSelector.prototype.enableInput = function() {
 SongSelector.prototype.deepDestroy = function() {
     this.songPreview.stop();
     this.songPreview.destroy();
+    this.selectSongText.destroy();
+    this.songNameText.destroy();
     this.difficultySelector.destroy(true);
     this.destroy(true);
 }
