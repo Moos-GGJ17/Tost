@@ -107,7 +107,7 @@ States.Play = {
 		//this.instrBottom.destroy();
 		//this.instrTop.destroy();
 		this.game.vitalWave.deepDestroy();
-		this.game.scoreUI.destroy(true);
+		this.game.scoreUI.deepDestroy();
 		this.game.player.destroy();
 		this.game.chart.deepDestroy();
 	}
