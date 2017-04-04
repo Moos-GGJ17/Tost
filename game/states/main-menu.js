@@ -13,7 +13,7 @@ States.MainMenu = {
 		//this.createToaster();
 		//this.createInstructions();
 
-		this.songSelector = new SongSelector(this.game, Songs);
+		this.game.songSelector = new SongSelector(this.game, Songs);
 		this.game.hasSelectedSong = false;
 		this.game.hasSelectedDifficulty = false;
 		//this.difficultySelector = new DifficultySelector(this.game);
@@ -65,7 +65,7 @@ States.MainMenu = {
 				this.setSongIsBeingChangedToFalse();
 			}
 		}*/
-		this.songSelector.update();
+		this.game.songSelector.update();
 		if (this.game.hasSelectedSong && this.game.hasSelectedDifficulty) {
 			this.play();
 		}
@@ -129,7 +129,7 @@ States.MainMenu = {
 		this.toaster.destroy();
 		this.instr1.destroy();
 		this.instr2.destroy();*/
-		this.songSelector.deepDestroy(true);
+		this.game.songSelector.deepDestroy(true);
 		//this.difficultySelector.destroy(true);
 	}
 };

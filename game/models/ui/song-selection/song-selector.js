@@ -100,30 +100,36 @@ SongSelector.prototype.update = function() {
 }
 
 SongSelector.prototype.moveCassettesLeft = function() {
-    this.inputEnabled = false;
-    this.callAll('moveLeft');
-    this.cassettes.push(this.cassettes.shift());
-    this.currentSongIndex = this.calculateNextSongIndex(this.currentSongIndex);
-    this.updateCassettesEvents();
-    this.songPreview.onFadeComplete.addOnce(this.loadSongPreview, this);
-    this.songPreview.fadeOut(250);
+    if (this.inputEnabled) {
+        this.inputEnabled = false;
+        this.callAll('moveLeft');
+        this.cassettes.push(this.cassettes.shift());
+        this.currentSongIndex = this.calculateNextSongIndex(this.currentSongIndex);
+        this.updateCassettesEvents();
+        this.songPreview.onFadeComplete.addOnce(this.loadSongPreview, this);
+        this.songPreview.fadeOut(250);
+    }
 }
 
 SongSelector.prototype.moveCassettesRight = function() {
-    this.inputEnabled = false;
-    this.callAll('moveRight');
-    this.cassettes.unshift(this.cassettes.pop());
-    this.currentSongIndex = this.calculatePreviousSongIndex(this.currentSongIndex);
-    this.updateCassettesEvents();
-    this.songPreview.onFadeComplete.addOnce(this.loadSongPreview, this);
-    this.songPreview.fadeOut(250);
+    if (this.inputEnabled) {
+        this.inputEnabled = false;
+        this.callAll('moveRight');
+        this.cassettes.unshift(this.cassettes.pop());
+        this.currentSongIndex = this.calculatePreviousSongIndex(this.currentSongIndex);
+        this.updateCassettesEvents();
+        this.songPreview.onFadeComplete.addOnce(this.loadSongPreview, this);
+        this.songPreview.fadeOut(250);
+    }
 }
 
 SongSelector.prototype.selectSong = function() {
-    this.inputEnabled = false;
-    this.game.hasSelectedSong = true;
-    this.game.songToLoadIndex = this.currentSongIndex;
-    this.difficultySelector.show();		
+    if (this.inputEnabled) {
+        this.inputEnabled = false;
+        this.game.hasSelectedSong = true;
+        this.game.songToLoadIndex = this.currentSongIndex;
+        this.difficultySelector.show();		
+    }
 }
 
 SongSelector.prototype.checkCassettesPosition = function() {

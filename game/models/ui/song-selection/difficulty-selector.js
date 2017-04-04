@@ -24,23 +24,23 @@ DifficultySelector.prototype.initializeBackground = function() {
 
 DifficultySelector.prototype.initializeTexts = function() {
     var textStyle = {
-		font: "54px 8-BITWONDER",
+		font: "24px 8-BITWONDER",
 		boundsAlignH: "center",
 		boundsAlignV: "middle"
 	}
 
     // easy difficulty text/button
-    this.easy = game.add.text(100, this.game.world.centerY - 20, "EASY", textStyle);
-    this.easy.fill = "#0d7377";
-    this.easy.events.onInputOver.add(this.increaseFontSize, this);
-    this.easy.events.onInputOut.add(this.reduceFontSize, this);
+    this.easy = game.add.text(this.game.world.width - 150, this.game.world.centerY - 40, "EASY", textStyle);
+    this.easy.fill = "#e0e0e0";
+    //this.easy.events.onInputOver.add(this.increaseFontSize, this);
+    //this.easy.events.onInputOut.add(this.reduceFontSize, this);
     this.easy.events.onInputDown.add(this.selectEasyDifficulty, this);
 
     // hard difficulty text/button
-    this.hard = game.add.text(this.game.world.centerX + 100, this.game.world.centerY - 20, "HARD", textStyle);
+    this.hard = game.add.text(this.game.world.width - 150, this.game.world.centerY + 40, "HARD", textStyle);
     this.hard.fill = "#ef5350";
-    this.hard.events.onInputOver.add(this.increaseFontSize, this);
-    this.hard.events.onInputOut.add(this.reduceFontSize, this);
+    //this.hard.events.onInputOver.add(this.increaseFontSize, this);
+    //this.hard.events.onInputOut.add(this.reduceFontSize, this);
     this.hard.events.onInputDown.add(this.selectHardDifficulty, this);
 
     this.add(this.easy);
@@ -54,6 +54,9 @@ DifficultySelector.prototype.hide = function() {
     this.background.inputEnabled = false;
     this.game.hasSelectedSong = false;
     this.game.hasSelectedDifficulty = false;
+    if (this.game.songSelector) {
+        this.game.songSelector.enableInput();
+    }
 }
 
 DifficultySelector.prototype.show = function() {
