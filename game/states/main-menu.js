@@ -9,18 +9,19 @@ States.MainMenu = {
 	
 	// Creates all the UI objects and defines the input events
 	create: function(){
-		this.initializeCassette();
-		this.createToaster();
-		this.createInstructions();
+		//this.initializeCassette();
+		//this.createToaster();
+		//this.createInstructions();
 
+		this.songSelector = new SongSelector(this.game, [{}, {}, {}]);
 		this.difficultySelector = new DifficultySelector(this.game);
 
 		// Creates a key object using the SPACEBAR to control the time it's being pressed
 		// and execute the corresponding action (handled in the update function)
-		this.spaceButton = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+		//this.spaceButton = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 	},
 
-	initializeCassette: function() {
+	/*initializeCassette: function() {
 		this.game.songToLoadIndex = 0;
 		this.songIsBeingChanged = false; // Used to handle the input down events and prevent changing songs
 										 // multiple times while holding the button down
@@ -49,11 +50,11 @@ States.MainMenu = {
 		this.instr2.anchor.x = 0.5;
 		this.instr2.anchor.y = 0;
 		this.instr2.scale.setTo(0.7, 0.7);
-	},
+	},*/
 
 	update: function() {
 		// handle song selection and changing only if difficulty selector is hidden
-		if (this.difficultySelector.alpha === 0) {
+		/*if (this.difficultySelector.alpha === 0) {
 			if (this.inputIsBeingHold()) {
 				this.selectDifficulty();
 			} else if (this.inputHasBeenPressed()) {
@@ -61,7 +62,8 @@ States.MainMenu = {
 			} else {
 				this.setSongIsBeingChangedToFalse();
 			}
-		}
+		}*/
+		this.songSelector.update();
 
 		if (this.difficultySelector.hasSelectedDifficulty) { // start game when a difficulty has been selected
 			this.play();
@@ -69,7 +71,7 @@ States.MainMenu = {
 	},
 
 	// Returns true if input has been held for more than 1 second
-	inputIsBeingHold: function() {
+	/*inputIsBeingHold: function() {
 		return (this.spaceButton.isDown && this.spaceButton.duration >= 1000) ||
 			   (this.game.input.activePointer.isDown && this.game.input.activePointer.duration >= 1000); // touch-click
 	},
@@ -95,7 +97,7 @@ States.MainMenu = {
 			this.game.songToLoadIndex = (this.game.songToLoadIndex + 1) % Songs.length;
 			this.cassette.hideAndSetSongFilename(this.getCurrentSongFilename());
 		}
-	},
+	},*/
 
 	selectDifficulty: function() {
 		// Because the song index is changed each time the input is pressed,
@@ -110,18 +112,19 @@ States.MainMenu = {
 	},
 
 	play: function() {
-		this.cassette.music.stop();
-		this.cassette.hideAndDestroy();
+		//this.cassette.music.stop();
+		//this.cassette.hideAndDestroy();
 		this.state.start('Play');
 	},
 
 	shutdown: function() {
-		if (this.cassette) {
+		/*if (this.cassette) {
 			this.cassette.finishedHideAndDestroy();
 		}
 		this.toaster.destroy();
 		this.instr1.destroy();
-		this.instr2.destroy();
+		this.instr2.destroy();*/
+		this.songSelector.destroy(true);
 		this.difficultySelector.destroy(true);
 	}
 };
