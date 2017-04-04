@@ -3,7 +3,7 @@ function DifficultySelector(game) {
 	Phaser.Group.call(this, game);
 	this.game = game;
 
-    this.hasSelectedDifficulty = false; // the game starts when the difficulty has been selected
+    //this.hasSelectedDifficulty = false; // the game starts when the difficulty has been selected
 
     this.initializeBackground();
     this.initializeTexts();
@@ -52,6 +52,8 @@ DifficultySelector.prototype.hide = function() {
     this.easy.inputEnabled = false;
     this.hard.inputEnabled = false;
     this.background.inputEnabled = false;
+    this.game.hasSelectedSong = false;
+    this.game.hasSelectedDifficulty = false;
 }
 
 DifficultySelector.prototype.show = function() {
@@ -71,12 +73,12 @@ DifficultySelector.prototype.reduceFontSize = function(item) {
 
 DifficultySelector.prototype.selectEasyDifficulty = function() {
     ChartData.currentDifficulty = 'EASY';
-    this.hide();
-    this.hasSelectedDifficulty = true;
+    //this.hide();
+    this.game.hasSelectedDifficulty = true;
 }
 
 DifficultySelector.prototype.selectHardDifficulty = function() {
     ChartData.currentDifficulty = 'HARD';
-    this.hide();
-    this.hasSelectedDifficulty = true;
+    //this.hide();
+    this.game.hasSelectedDifficulty = true;
 }

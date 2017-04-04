@@ -6,6 +6,7 @@ function SongSelector(game, songs) {
     this.allSongs = songs;
     this.currentSongIndex = 0;
     this.cassettes = [];
+    this.inputEnabled = true;
 
     this.initialize();
 }
@@ -23,9 +24,15 @@ SongSelector.prototype.initialize = function() {
     this.y = this.game.world.centerY - this.cassettes[0].height / 2;
 
     this.swipeHandler = new Swipe(this.game);
+
+    this.difficultySelector = new DifficultySelector(this.game);
 }
 
 SongSelector.prototype.loadSongPreview = function() {
+    if (this.songPreview) {
+        this.songPreview.onDecoded.remove(this.playSongPreview, this);
+        this.songPreview.stop();
+    }
     this.songPreview = this.game.add.audio(this.allSongs[this.currentSongIndex].filename);
     this.songPreview.addMarker('Preview', 20, 15, 1, true);
     this.songPreview.onDecoded.add(this.playSongPreview, this);
@@ -70,27 +77,30 @@ SongSelector.prototype.calculatePreviousSongIndex = function(index) {
 }
 
 SongSelector.prototype.update = function() {
-    const direction = this.swipeHandler.check();
-    if (direction !== null) {
-        switch(direction.direction) {
-            case this.swipeHandler.DIRECTION_LEFT:
-                this.moveCassettesLeft();
-                break;
-            case this.swipeHandler.DIRECTION_RIGHT:
-                this.moveCassettesRight();
-                break;
-            case this.swipeHandler.DIRECTION_UP:
-            case this.swipeHandler.DIRECTION_DOWN:
-            case this.swipeHandler.DIRECTION_UP_LEFT:
-            case this.swipeHandler.DIRECTION_UP_RIGHT:
-            case this.swipeHandler.DIRECTION_DOWN_LEFT:
-            case this.swiswipeHandlerpe.DIRECTION_DOWN_RIGHT:
-            default:
+    if (this.inputEnabled) {
+        const direction = this.swipeHandler.check();
+        if (direction !== null) {
+            switch(direction.direction) {
+                case this.swipeHandler.DIRECTION_LEFT:
+                    this.moveCassettesLeft();
+                    break;
+                case this.swipeHandler.DIRECTION_RIGHT:
+                    this.moveCassettesRight();
+                    break;
+                case this.swipeHandler.DIRECTION_UP:
+                case this.swipeHandler.DIRECTION_DOWN:
+                case this.swipeHandler.DIRECTION_UP_LEFT:
+                case this.swipeHandler.DIRECTION_UP_RIGHT:
+                case this.swipeHandler.DIRECTION_DOWN_LEFT:
+                case this.swiswipeHandlerpe.DIRECTION_DOWN_RIGHT:
+                default:
+            }
         }
     }
 }
 
 SongSelector.prototype.moveCassettesLeft = function() {
+    this.inputEnabled = false;
     this.callAll('moveLeft');
     this.cassettes.push(this.cassettes.shift());
     this.currentSongIndex = this.calculateNextSongIndex(this.currentSongIndex);
@@ -100,12 +110,27 @@ SongSelector.prototype.moveCassettesLeft = function() {
 }
 
 SongSelector.prototype.moveCassettesRight = function() {
+    this.inputEnabled = false;
     this.callAll('moveRight');
     this.cassettes.unshift(this.cassettes.pop());
     this.currentSongIndex = this.calculatePreviousSongIndex(this.currentSongIndex);
     this.updateCassettesEvents();
     this.songPreview.onFadeComplete.addOnce(this.loadSongPreview, this);
     this.songPreview.fadeOut(250);
+}
+
+SongSelector.prototype.selectSong = function() {
+    this.inputEnabled = false;
+    this.game.hasSelectedSong = true;
+    this.game.songToLoadIndex = this.currentSongIndex;
+    this.difficultySelector.show();		
+}
+
+SongSelector.prototype.checkCassettesPosition = function() {
+    for (let i = 0; i < 5; i++) {
+        this.cassettes[i].x = this.cassettes[0].cassetteDistance * i;
+        this.cassettes[i].resetTweens();
+    }
 }
 
 SongSelector.prototype.updateCassettesEvents = function() {
@@ -122,6 +147,14 @@ SongSelector.prototype.updateCassettesImages = function() {
     this.cassettes[4].updateImage(this.allSongs[this.calculateNextSongIndex(this.calculateNextSongIndex(this.currentSongIndex))].filename);
 }
 
-SongSelector.prototype.selectSong = function() {
-    console.log('Selected');
+SongSelector.prototype.enableInput = function() {
+    this.inputEnabled = true;
+    this.checkCassettesPosition();
+}
+
+SongSelector.prototype.deepDestroy = function() {
+    this.songPreview.stop();
+    this.songPreview.destroy();
+    this.difficultySelector.destroy(true);
+    this.destroy(true);
 }

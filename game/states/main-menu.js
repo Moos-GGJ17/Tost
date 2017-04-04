@@ -14,7 +14,9 @@ States.MainMenu = {
 		//this.createInstructions();
 
 		this.songSelector = new SongSelector(this.game, Songs);
-		this.difficultySelector = new DifficultySelector(this.game);
+		this.game.hasSelectedSong = false;
+		this.game.hasSelectedDifficulty = false;
+		//this.difficultySelector = new DifficultySelector(this.game);
 
 		// Creates a key object using the SPACEBAR to control the time it's being pressed
 		// and execute the corresponding action (handled in the update function)
@@ -64,10 +66,13 @@ States.MainMenu = {
 			}
 		}*/
 		this.songSelector.update();
-
-		if (this.difficultySelector.hasSelectedDifficulty) { // start game when a difficulty has been selected
+		if (this.game.hasSelectedSong && this.game.hasSelectedDifficulty) {
 			this.play();
 		}
+
+		/*if (this.difficultySelector.hasSelectedDifficulty) { // start game when a difficulty has been selected
+			this.play();
+		}*/
 	},
 
 	// Returns true if input has been held for more than 1 second
@@ -103,12 +108,12 @@ States.MainMenu = {
 		// Because the song index is changed each time the input is pressed,
 		// if you hold the input down to begin playing, the song changes,
 		// so it's necessary to change to the previous song before playing
-		this.game.songToLoadIndex --;
+		/*this.game.songToLoadIndex --;
 		if (this.game.songToLoadIndex < 0) {
 			this.game.songToLoadIndex = Songs.length - 1;
 		}
 
-		this.difficultySelector.show();		
+		this.difficultySelector.show();		*/
 	},
 
 	play: function() {
@@ -124,7 +129,7 @@ States.MainMenu = {
 		this.toaster.destroy();
 		this.instr1.destroy();
 		this.instr2.destroy();*/
-		this.songSelector.destroy(true);
-		this.difficultySelector.destroy(true);
+		this.songSelector.deepDestroy(true);
+		//this.difficultySelector.destroy(true);
 	}
 };

@@ -2,7 +2,6 @@
 // This cassette is reused when a song changes
 function Cassette(game, x, y, filename) {
 	Phaser.Sprite.call(this, game, x, y, filename + 'Cassette');
-	this.scale.setTo(0.2, 0.2);
 	this.game = game;
 
 	this.cassetteDistance = this.width * 6 / 5;
@@ -27,15 +26,21 @@ Cassette.prototype.createTweens = function() {
 }
 
 Cassette.prototype.resetTweens = function() {
-	this.checkPosition();
+	//this.checkPosition();
 
 	this.tweens.moveLeft = this.game.add.tween(this);
 	this.tweens.moveLeft.to( {x : this.x - this.cassetteDistance }, 300, Phaser.Easing.Linear.None, false);
-	this.tweens.moveLeft.onComplete.addOnce(this.resetTweens, this);
+	this.tweens.moveLeft.onComplete.addOnce(this.notifyTweenEndToParent, this);
 
 	this.tweens.moveRight = this.game.add.tween(this);
 	this.tweens.moveRight.to( {x : this.x + this.cassetteDistance }, 300, Phaser.Easing.Linear.None, false);
-	this.tweens.moveRight.onComplete.addOnce(this.resetTweens, this);
+	this.tweens.moveRight.onComplete.addOnce(this.notifyTweenEndToParent, this);
+}
+
+Cassette.prototype.notifyTweenEndToParent = function() {
+	if (this.parent) {
+		this.parent.enableInput();
+	}
 }
 
 Cassette.prototype.checkPosition = function() {
