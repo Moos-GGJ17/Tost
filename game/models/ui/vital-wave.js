@@ -1,14 +1,16 @@
 // Graphic representation of player's life as a wave
 function VitalWave(game, x, y) {
 	Phaser.Sprite.call(this, game, x, y,'Blank');
+	this.y -= 2;
 	this.game = game;
 	this.game.add.existing(this);
 
 	// Wave data
-	this.AMPLITUDE = 5;
-	this.MAX_TRACE_WIDTH = 15;
-	this.WAVE_LENGTH = 16;
-	this.WAVE_FREQUENCY = 10;
+	this.AMPLITUDE = 2;
+	this.TRACE_WIDTH = 6;
+	this.MAX_TRACE_WIDTH = 10;
+	this.WAVE_LENGTH = 8;
+	this.WAVE_FREQUENCY = 8;
 
 	this.ANIMATION_TIMEOUT = 100; // Time in ms in which the wave will be redrawn
 
@@ -22,10 +24,10 @@ VitalWave.prototype.constructor = Player;
 
 VitalWave.prototype.initialize = function() {
 	// Calulates sin based on the wave's length and frequency
-	this.data = this.game.math.sinCosGenerator(this.game.width / this.WAVE_LENGTH, 1, 1, this.WAVE_FREQUENCY);
+	this.data = this.game.math.sinCosGenerator(this.game.world.centerX, 1, 1, this.WAVE_FREQUENCY);
 
 	// Bitmapdata where the wave will be drawn
-    this.bmd = this.game.add.bitmapData(this.game.width, this.game.height);
+    this.bmd = this.game.add.bitmapData(this.game.world.width, this.game.world.height);
     this.bmd.addToWorld();
 
 	// Redraw the wave each ANIMATION_TIMEOUT ms
@@ -38,17 +40,17 @@ VitalWave.prototype.redraw = function() {
 	var currentWidth = 0; // Wave is drawn with squares, this represents the current square width, used in the loop
 
 	// Draw two out-of-phase waves covering all the screen horizontally
-	for (var i = 0; i < this.WAVE_LENGTH * this.WAVE_FREQUENCY; i++) {
-		currentWidth = Math.floor(Math.random() * this.MAX_TRACE_WIDTH) + 1; // Random width between 1 and MAX_TRACE_WIDTH
-		this.bmd.rect(i * this.WAVE_LENGTH, // x
+	for (var i = 0; i < this.game.world.centerX - 10; i+= this.TRACE_WIDTH) {
+		//currentWidth = Math.floor(Math.random() * this.MAX_TRACE_WIDTH) + 1; // Random width between 1 and MAX_TRACE_WIDTH
+		this.bmd.rect(i + this.x, // x
 			this.y + this.data.sin[i] * this.game.player.life * this.AMPLITUDE, // y
-			currentWidth, // width
-			currentWidth, // height
+			this.TRACE_WIDTH, // width
+			this.TRACE_WIDTH, // height
 			'rgb(' + this.color + ')'); // color
-		this.bmd.rect(i * this.WAVE_LENGTH, // x
+		this.bmd.rect(i + this.x, // x
 			this.y - this.data.sin[i] * this.game.player.life * this.AMPLITUDE, // y
-			currentWidth, // width
-			currentWidth, // height
+			this.TRACE_WIDTH, // width
+			this.TRACE_WIDTH, // height
 			'rgb(' + this.color + ')'); // color
 	}
 

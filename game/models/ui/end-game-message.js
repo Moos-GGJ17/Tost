@@ -15,6 +15,9 @@ EndGameMessage.prototype.constructor = EndGameMessage;
 EndGameMessage.prototype.initialize = function() {
 	this.anchor.setTo(0.5, 0.5); // Anchor set in the middle of the sprite
 	this.y = -this.height; // Hide the sprite just in top of the screen
+	
+	const scaleMeasure = (this.game.world.width * 3 / 4) / this.width;
+	this.scale.setTo(scaleMeasure, scaleMeasure);
 
 	this.createTweens();
 }
@@ -44,7 +47,7 @@ EndGameMessage.prototype.goToMainMenu = function() {
 	this.game.pressSpaceAnimation.alpha = 0;
 	
 	// Start menu screen state
-	this.game.state.start('MainMenu');
+	this.game.state.start('MainMenu', true);
 }
 
 EndGameMessage.prototype.waitAndEnableInput = function() {
@@ -58,5 +61,6 @@ EndGameMessage.prototype.enableGoToMainMenuInput = function() {
 	this.game.input.onDown.add(this.goToMainMenu, this);
 	
 	// Show 'Press Space' sprite
+	this.game.world.bringToTop(this.game.pressSpaceAnimation);
 	this.game.pressSpaceAnimation.alpha = 1;
 }

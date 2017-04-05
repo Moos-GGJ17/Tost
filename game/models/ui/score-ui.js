@@ -13,19 +13,17 @@ ScoreUI.prototype = Object.create(Phaser.Group.prototype);
 ScoreUI.prototype.constructor = ScoreUI;
 
 ScoreUI.prototype.initialize = function() {
+	this.grayBar = this.game.add.graphics();
+    this.grayBar.beginFill(0x000000, 0.2);
+    this.grayBar.drawRect(0, 0, this.game.world.width, 50);
     this.createNumbersText();
 	this.createTweens();
 }
 
 // Creates a text on the top left corner of the screen, that displays the score
 ScoreUI.prototype.createNumbersText = function() {
-    var numbersTextStyle = {
-		font: "40px 8-BITWONDER",
-		fill: "#e0e0e0",
-		boundsAlignH: "center",
-		boundsAlignV: "middle"
-	}
-	this.numbersText = this.game.add.text(10, 10, "0", numbersTextStyle);
+	this.numbersText = this.game.add.text(11, 11, "0", TextStyles.XL);
+	this.numbersText.fill = TextColors.WHITE;
 }
 
 // Creates the toasts one after another with the same horizontal distance separation
@@ -92,11 +90,17 @@ ScoreUI.prototype.centerScoreNumbersText = function(notesHitPercentage) {
 ScoreUI.prototype.displayToastsAndCenterText = function() {
     var notesHitPercentage = this.game.chart.calculateNotesHitPercentage();
 	this.createToasts(notesHitPercentage);
-	this.centerScoreNumbersText(notesHitPercentage);
+	//this.centerScoreNumbersText(notesHitPercentage);
 }
 
 ScoreUI.prototype.update = function() {
 	if (this.game.chart.gameState === ChartData.GAME_STATE['PLAYING']) {
 		this.numbersText.text = this.game.player.score + '';
 	}
+}
+
+ScoreUI.prototype.deepDestroy = function() {
+	this.numbersText.destroy();
+	this.grayBar.destroy();
+	this.destroy(true);
 }
