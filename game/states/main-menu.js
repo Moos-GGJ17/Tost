@@ -4,7 +4,7 @@ States.MainMenu = {
 	// This is called before create
 	init: function(){
 		this.game.renderer.renderSession.roundPixels = true;
-		this.game.stage.backgroundColor = '0xFEEC70';
+		//this.game.stage.backgroundColor = '0xFEEC70';
 	},
 	
 	// Creates all the UI objects and defines the input events
@@ -12,6 +12,10 @@ States.MainMenu = {
 		//this.initializeCassette();
 		//this.createToaster();
 		//this.createInstructions();
+
+		this.background = this.game.add.sprite(0, 0, 'YellowBackground2');
+		const backgroundScaleMeasure = this.game.world.height / this.background.height;
+		this.background.scale.setTo(backgroundScaleMeasure, backgroundScaleMeasure);
 
 		this.game.songSelector = new SongSelector(this.game, Songs);
 		this.game.hasSelectedSong = false;

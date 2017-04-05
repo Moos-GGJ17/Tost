@@ -84,6 +84,8 @@ States.Load = {
 		this.game.load.image('GameplayInstr1', 'assets/images/ui/instructions.png');
 		this.game.load.image('GameplayInstr2', 'assets/images/ui/instructions-space.png');
 		this.game.load.spritesheet('PressSpace', 'assets/images/ui/space.png', 395, 393);
+		this.game.load.image('YellowBackground1', 'assets/images/ui/yellow-background-1.png');
+		this.game.load.image('YellowBackground2', 'assets/images/ui/yellow-background-2.png');
 
 		// Songs cassettes
 		this.game.load.image('PumpedUpKicksCassette', 'assets/images/songs/pumped-up-kicks.png');

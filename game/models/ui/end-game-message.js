@@ -61,5 +61,6 @@ EndGameMessage.prototype.enableGoToMainMenuInput = function() {
 	this.game.input.onDown.add(this.goToMainMenu, this);
 	
 	// Show 'Press Space' sprite
+	this.game.world.bringToTop(this.game.pressSpaceAnimation);
 	this.game.pressSpaceAnimation.alpha = 1;
 }
