@@ -33,3 +33,10 @@ TextStyles.XL = {
     //boundsAlignV: "middle"
     align: "center"
 }
+
+TextStyles.XXL = {
+    font: "36px 8-BITWONDER",
+    //boundsAlignH: "center",
+    //boundsAlignV: "middle"
+    align: "center"
+}
