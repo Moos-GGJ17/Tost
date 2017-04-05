@@ -22,7 +22,7 @@ Note.prototype.initialize = function() {
 	this.body.setCircle(this.width / 2, 0, 0); // Circular body with same size as the sprite
 	this.body.velocity.y = this.defaultVelocity;
 
-	this.light = new NoteLight(this.game, this); // Light that blinks based on tempo
+	//this.light = new NoteLight(this.game, this); // Light that blinks based on tempo
 	this.game.world.bringToTop(this); // Bring note in top of light
 
 	// Destroy when out of bounds
@@ -54,6 +54,7 @@ Note.prototype.playerHit = function() {
 		this.isTuned = true;
 		this.changeColorToWhite();
 		this.tweens.disappear.start();
+		this.light = new NoteLight(this.game, this);
 
 		this.game.player.changeColor(this.color); // Player changes it's head color based on the hit note
 		this.game.player.increaseLifeBy(ChartData.LIFE_GAIN_WHEN_NOTE_HIT); // Increase player life
@@ -84,7 +85,10 @@ Note.prototype.changeColorToWhite = function() {
 
 // Destroys the note and it's respective light
 Note.prototype.deepDestroy = function() {
-	this.light.destroy();
+	if (this.light) {
+		this.light.destroy();
+		this.light = {};
+	}
 	this.destroy();
 }
 

@@ -5,7 +5,7 @@ function NoteLight(game, parent) {
 	this.game.add.existing(this);
 
 	this.parent = parent; // Note that contains this light
-	this.timer = this.game.time.create(false);
+	//this.timer = this.game.time.create(false);
 	this.initialize();
 }
 
@@ -29,22 +29,24 @@ NoteLight.prototype.initialize = function() {
 	this.alpha = 0;
 
 	this.createTweens();
+	this.shine();
 }
 
 NoteLight.prototype.createTweens = function() {
 	this.tweens = {};
 	this.tweens.shine = this.game.add.tween(this);
-	this.tweens.shine.to( { alpha: 0.5 }, 100, Phaser.Easing.Linear.None, false);
+	this.tweens.shine.to( { alpha: 0.8 }, 200, Phaser.Easing.Linear.None, false);
 
 	this.tweens.hide = this.game.add.tween(this);
-	this.tweens.hide.to( { alpha: 0 }, 100, Phaser.Easing.Linear.None, false);
+	this.tweens.hide.to( { alpha: 0 }, 800, Phaser.Easing.Linear.None, false);
 
 	// Hide/dark the light after it shines
-	this.tweens.shine.onComplete.add(this.hide, this);
+	this.tweens.shine.onComplete.addOnce(this.hide, this);
+	this.tweens.hide.onComplete.addOnce(this.deepDestroy, this);
 
 	// Starts a loop that shines the light based on the tempo
-	this.timer.loop(this.parent.tempo, this.shine, this);
-	this.timer.start();
+	//this.timer.loop(this.parent.tempo, this.shine, this);
+	//this.timer.start();
 }
 
 NoteLight.prototype.shine = function() {
@@ -53,4 +55,9 @@ NoteLight.prototype.shine = function() {
 
 NoteLight.prototype.hide = function() {
 	this.tweens.hide.start();
+}
+
+NoteLight.prototype.deepDestroy = function() {
+	this.tweens = {};
+	this.destroy();
 }
