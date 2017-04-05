@@ -15,6 +15,9 @@ EndGameMessage.prototype.constructor = EndGameMessage;
 EndGameMessage.prototype.initialize = function() {
 	this.anchor.setTo(0.5, 0.5); // Anchor set in the middle of the sprite
 	this.y = -this.height; // Hide the sprite just in top of the screen
+	
+	const scaleMeasure = (this.game.world.width * 3 / 4) / this.width;
+	this.scale.setTo(scaleMeasure, scaleMeasure);
 
 	this.createTweens();
 }
