@@ -5,7 +5,7 @@ function SongSelector(game, songs) {
 
     this.allSongs = songs;
     this.currentSongIndex = 0;
-    this.cassettes = [];
+    this.cassettes = new Array(5);
     this.inputEnabled = true;
 
     this.initialize();

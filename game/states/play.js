@@ -58,8 +58,8 @@ States.Play = {
 	},
 
 	play: function() {		
-		this.game.vitalWave = new VitalWave(this.game, 0, 100); // Displays the player's life
 		this.game.scoreUI = new ScoreUI(this.game); // Displays the score
+		this.game.vitalWave = new VitalWave(this.game, this.game.world.centerX, 25); // Displays the player's life
 		this.game.player = new Player(this.game, this.game.world.centerX / 2, this.game.world.height * 3 / 4);
 		this.game.chart = new Chart(this.game);
 
@@ -110,5 +110,11 @@ States.Play = {
 		this.game.scoreUI.deepDestroy();
 		this.game.player.destroy();
 		this.game.chart.deepDestroy();
+
+		this.game.pressSpaceAnimation = null;
+		this.game.vitalWave = null;
+		this.game.scoreUI = null;
+		this.game.player = null;
+		this.game.chart = null;
 	}
 };

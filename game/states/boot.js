@@ -8,7 +8,7 @@ States.Boot = {
 	},
 
 	create: function() {
-		this.state.start('Load');
+		this.state.start('Load', true);
 	}
 };
 

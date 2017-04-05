@@ -119,7 +119,7 @@ States.MainMenu = {
 	play: function() {
 		//this.cassette.music.stop();
 		//this.cassette.hideAndDestroy();
-		this.state.start('Play');
+		this.state.start('Play', true);
 	},
 
 	shutdown: function() {
@@ -130,6 +130,7 @@ States.MainMenu = {
 		this.instr1.destroy();
 		this.instr2.destroy();*/
 		this.game.songSelector.deepDestroy(true);
+		this.game.songSelector = null;
 		//this.difficultySelector.destroy(true);
 	}
 };

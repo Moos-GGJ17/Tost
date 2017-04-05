@@ -50,5 +50,5 @@ function changeMeasures() {
   game.scale.setGameSize(window.innerWidth, window.innerHeight);  
   game.state.remove(game.state[currentState]);
   game.state.add(currentState,Game.States[currentState]);
-  game.state.start('MainMenu');
+  game.state.start('MainMenu', true);
 }

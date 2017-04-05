@@ -103,7 +103,7 @@ States.Load = {
 
 	// Shows the main menu/song selection screen after all the assets loaded properly
 	create: function(){
-		this.state.start('MainMenu');
+		this.state.start('MainMenu', true);
 	},
 
 	// Update the progress text each time a file has loaded
