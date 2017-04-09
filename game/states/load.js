@@ -38,6 +38,11 @@ States.Load = {
 		this.game.load.onFileComplete.add(this.fileComplete, this);
     	//this.game.load.onLoadComplete.add(this.loadComplete, this);
 
+		// Calculate some variables that vary based on the screen size
+		ChartData.calculateNotePositions(GAME_BOUNDS.x);
+		ChartData.calculateNoteVelocity(GAME_BOUNDS.y);
+		PlayerData.calculateHorizontalVelocity(GAME_BOUNDS.x);
+
 		// Songs audio
 		this.game.load.audio('PumpedUpKicks', 'assets/audio/songs/pumped-up-kicks.m4a');
 		this.game.load.audio('BreakingTheLaw', 'assets/audio/songs/breaking-the-law.m4a');

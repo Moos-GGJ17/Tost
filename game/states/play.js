@@ -20,17 +20,19 @@ States.Play = {
 		this.game.stage.backgroundColor = '0x000000';
 		
 		// Background with reduced saturation that shows when the player is losing
-		this.backgroundGrayBMD = this.game.make.bitmapData();
+		let backgroundGrayBMD = this.game.make.bitmapData();
 		//this.backgroundGrayBMD.load(Songs[this.game.songToLoadIndex].filename + 'Background');
-		this.backgroundGrayBMD.load('YellowBackground1');
-		this.backgroundGrayBMD.shiftHSL(null, -1.0, null);
+		backgroundGrayBMD.load('YellowBackground1');
+		backgroundGrayBMD.shiftHSL(null, -1.0, null);
 		//this.backgroundGrayBMD.addToWorld(0, 0);
+		this.backgroundGray = this.game.add.sprite(0, 0, backgroundGrayBMD);
 
 		// Colored background that loses alpha when the player is losing
 		//this.background = this.game.add.sprite(0, 0, Songs[this.game.songToLoadIndex].filename + 'Background');
 		this.background = this.game.add.sprite(0, 0, 'YellowBackground1');
 		const backgroundScaleMeasure = this.game.world.height / this.background.height;
 		this.background.scale.setTo(backgroundScaleMeasure, backgroundScaleMeasure);
+		this.backgroundGray.scale.setTo(backgroundScaleMeasure, backgroundScaleMeasure);
 
 		// Instruction UI elements
 		this.game.pressSpaceAnimation = this.game.add.sprite(this.game.world.width / 2, this.game.world.height * 3 / 4, 'PressSpace');
@@ -62,8 +64,8 @@ States.Play = {
 	},
 
 	play: function() {
-		this.backgroundGrayBMD.addToWorld(0, 0);
-		this.game.world.bringToTop(this.background);
+		//this.backgroundGray.addToWorld(0, 0);
+		//this.game.world.bringToTop(this.background);
 		//this.background = this.game.add.sprite(0, 0, Songs[this.game.songToLoadIndex].filename + 'Background');
 		this.game.scoreUI = new ScoreUI(this.game); // Displays the score
 		this.game.vitalWave = new VitalWave(this.game, this.game.world.centerX, 25); // Displays the player's life
@@ -108,7 +110,7 @@ States.Play = {
 
 	shutdown: function() {
 		this.background.destroy();
-		this.backgroundGrayBMD.destroy();
+		this.backgroundGray.destroy();
 		this.game.pressSpaceAnimation.destroy();
 		this.instrText.destroy();
 		//this.instrBottom.destroy();
