@@ -30,10 +30,16 @@ States.Load = {
 		const backgroundScaleMeasure = this.game.world.height / this.background.height;
 		this.background.scale.setTo(backgroundScaleMeasure, backgroundScaleMeasure);
 
+		//	'Loading' pseudo-animation
+    	this.loadingText = this.game.add.text(this.game.world.centerX, this.game.world.height * 6 / 7, 'Loading', TextStyles.M);
+		this.loadingText.fill = TextColors.WHITE;
+		this.loadingText.anchor.set(0.5);
+		this.game.time.events.loop(Phaser.Timer.SECOND / 4, this.updateLoadingText, this);
+
 		//	Progress report
-    	this.textProgress = this.game.add.text(this.game.world.centerX, this.game.world.height * 2 / 7, '0%', TextStyles.XXL);
-		this.textProgress.fill = TextColors.WHITE;
-		this.textProgress.anchor.set(0.5);
+    	this.progressText = this.game.add.text(this.game.world.centerX, this.game.world.height * 2 / 7, '0%', TextStyles.XXL);
+		this.progressText.fill = TextColors.WHITE;
+		this.progressText.anchor.set(0.5);
 
 		this.game.load.onFileComplete.add(this.fileComplete, this);
     	//this.game.load.onLoadComplete.add(this.loadComplete, this);
@@ -123,11 +129,30 @@ States.Load = {
 
 	// Update the progress text each time a file has loaded
 	fileComplete: function(progress, cacheKey, success, totalLoaded, totalFiles) {
-		this.textProgress.setText(progress + "%");
+		this.progressText.setText(progress + "%");
+	},
+
+	updateLoadingText: function() {
+		switch (this.loadingText.text) {
+			case 'Loading':
+				this.loadingText.setText(' Loading.');
+				break;
+			case ' Loading.':
+				this.loadingText.setText('  Loading..');
+				break;
+			case '  Loading..':
+				this.loadingText.setText('   Loading...');
+				break;
+			case '   Loading...':
+				this.loadingText.setText('Loading');
+				break;
+			default:
+				this.loadingText.setText('Loading');
+		}
 	},
 
 	shutdown: function() {
 		this.background.destroy();
-		this.textProgress.destroy();
+		this.progressText.destroy();
 	}
 };
