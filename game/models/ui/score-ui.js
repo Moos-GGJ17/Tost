@@ -46,6 +46,8 @@ ScoreUI.prototype.createToasts = function(notesHitPercentage) {
 
 	this.toasts.x = this.game.world.centerX;
 	this.toasts.y = this.game.world.centerY - firstToast.height / 2;
+
+	this.game.world.bringToTop(this.toasts);
 }
 
 // Paint the toasts accordingly of the percentage of notes hit
@@ -112,6 +114,8 @@ ScoreUI.prototype.update = function() {
 ScoreUI.prototype.deepDestroy = function() {
 	this.scoreText.destroy();
 	this.grayBar.destroy();
-	this.toasts.destroy(true);
+	if (this.toasts) {
+		this.toasts.destroy(true);
+	}
 	this.destroy(true);
 }

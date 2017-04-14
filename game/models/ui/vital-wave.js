@@ -14,7 +14,7 @@ function VitalWave(game, x, y) {
 
 	this.ANIMATION_TIMEOUT = 100; // Time in ms in which the wave will be redrawn
 
-	this.color = PlayerData.COLORS_RGB.White;
+	this.color = TextColors.WHITE;
 
 	this.initialize();
 }
@@ -46,12 +46,12 @@ VitalWave.prototype.redraw = function() {
 			this.y + this.data.sin[i] * this.game.player.life * this.AMPLITUDE, // y
 			this.TRACE_WIDTH, // width
 			this.TRACE_WIDTH, // height
-			'rgb(' + this.color + ')'); // color
+			this.color); // color
 		this.bmd.rect(i + this.x, // x
 			this.y - this.data.sin[i] * this.game.player.life * this.AMPLITUDE, // y
 			this.TRACE_WIDTH, // width
 			this.TRACE_WIDTH, // height
-			'rgb(' + this.color + ')'); // color
+			this.color); // color
 	}
 
 	// Rotate the array of sin values, to simulate the wave movement each time the waves are drawn
@@ -64,10 +64,10 @@ VitalWave.prototype.missNote = function() {
 }
 
 VitalWave.prototype.switchColorsBetweenRedAndWhite = function() {
-	if (this.color === PlayerData.COLORS_RGB['White']) {
-		this.color = PlayerData.COLORS_RGB['Red'];
+	if (this.color === TextColors.WHITE) {
+		this.color = TextColors.RED;
 	} else {
-		this.color = PlayerData.COLORS_RGB['White'];
+		this.color = TextColors.WHITE;
 	}
 }
 

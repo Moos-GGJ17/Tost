@@ -6,11 +6,18 @@ function EndGameMessage(game, spriteKey) {
 	this.game = game;
 	this.game.add.existing(this);
 	
+	this.initializeGradient();
 	this.initialize();
 }
 
 EndGameMessage.prototype = Object.create(Phaser.Sprite.prototype);
 EndGameMessage.prototype.constructor = EndGameMessage;
+
+EndGameMessage.prototype.initializeGradient = function() {
+	let purpleGradient = this.game.add.sprite(0, 0, 'PurpleGradientLeft');
+    const purpleGradientScaleMeasure = this.game.world.height / purpleGradient.height;
+    purpleGradient.scale.setTo(1, purpleGradientScaleMeasure);
+}
 
 EndGameMessage.prototype.initialize = function() {
 	this.anchor.setTo(0.5, 0.5); // Anchor set in the middle of the sprite
@@ -18,6 +25,7 @@ EndGameMessage.prototype.initialize = function() {
 	
 	const scaleMeasure = (this.game.world.width * 3 / 4) / this.width;
 	this.scale.setTo(scaleMeasure, scaleMeasure);
+	this.game.world.bringToTop(this);
 
 	this.createTweens();
 }

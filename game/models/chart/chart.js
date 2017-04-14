@@ -146,12 +146,13 @@ Chart.prototype.calculateNotesHitPercentage = function() {
 Chart.prototype.showWinScreen = function() {
 	if (this.gameState === ChartData.GAME_STATE['PLAYING']) {
 		this.gameState = ChartData.GAME_STATE['WIN'];
-		this.game.scoreUI.displayToastsAndCenterText();
 		this.game.add.audio('win').play();
 		this.music.stop();
 
 		var tostedMessage = new EndGameMessage(this.game, 'Tosted');
 		tostedMessage.center();
+		
+		this.game.scoreUI.displayToastsAndCenterText();
 	};
 }
 

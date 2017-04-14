@@ -34,6 +34,11 @@ States.Play = {
 		this.background.scale.setTo(backgroundScaleMeasure, backgroundScaleMeasure);
 		this.backgroundGray.scale.setTo(backgroundScaleMeasure, backgroundScaleMeasure);
 
+		// Purple gradient
+		this.purpleGradient = this.game.add.sprite(0, 0, 'PurpleGradientLeft');
+		const purpleGradientScaleMeasure = this.game.world.height / this.purpleGradient.height;
+		this.purpleGradient.scale.setTo(1, purpleGradientScaleMeasure);
+
 		// Instruction UI elements
 		this.game.pressSpaceAnimation = this.game.add.sprite(this.game.world.width / 2, this.game.world.height * 3 / 4, 'PressSpace');
 		this.game.pressSpaceAnimation.anchor.setTo(0.5, 0.5);
@@ -67,10 +72,10 @@ States.Play = {
 		//this.backgroundGray.addToWorld(0, 0);
 		//this.game.world.bringToTop(this.background);
 		//this.background = this.game.add.sprite(0, 0, Songs[this.game.songToLoadIndex].filename + 'Background');
-		this.game.scoreUI = new ScoreUI(this.game); // Displays the score
-		this.game.vitalWave = new VitalWave(this.game, this.game.world.centerX, 25); // Displays the player's life
 		this.game.player = new Player(this.game, this.game.world.centerX / 2, this.game.world.height * 3 / 4);
 		this.game.chart = new Chart(this.game);
+		this.game.scoreUI = new ScoreUI(this.game); // Displays the score
+		this.game.vitalWave = new VitalWave(this.game, this.game.world.centerX, 25); // Displays the player's life
 
 		// Load the chart of the song selected in the song selection screen
 		this.game.chart.load(Songs[this.game.songToLoadIndex]);
@@ -78,6 +83,7 @@ States.Play = {
 		// Hide/destroy instructions UI elements
 		this.game.pressSpaceAnimation.alpha = 0;
 		this.instrText.destroy();
+		this.purpleGradient.destroy();
 		//this.instrTop.destroy();
 		//this.instrBottom.destroy();
 
@@ -86,6 +92,9 @@ States.Play = {
 		this.game.input.onDown.remove(this.play, this);
 
 		this.startedPlaying = true;
+
+		//this.game.world.bringToTop(this.game.scoreUI);
+		//this.game.world.bringToTop(this.game.vitalWave);
 	},
 
 	// Updates all the game's objects.

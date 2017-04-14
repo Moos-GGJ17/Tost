@@ -1,6 +1,6 @@
 Songs.push({
-	"name" : "Breaking The Law",
-	"artist" : "Judas Priest",
+	"name" : "BREAKING THE LAW",
+	"artist" : "JUDAS PRIEST",
 	"filename": "BreakingTheLaw",
 	"bpm" : 120,
 	"notes" : [

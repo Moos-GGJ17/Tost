@@ -1,6 +1,7 @@
 TextColors = {
     YELLOW: "#FEE856",
     WHITE: "#FEFEFE",
+    RED: "#ef5350",
     LIGHT_YELLOW: "#FFE57F"
 };
 

@@ -38,7 +38,7 @@ States.Load = {
 		this.toaster.anchor.set(0.5);
 
 		//	'Loading' pseudo-animation
-    	this.loadingText = this.game.add.text(this.game.world.centerX, this.toaster.y + this.toaster.height * 3 / 4, 'Loading', TextStyles.M);
+    	this.loadingText = this.game.add.text(this.game.world.centerX, this.toaster.y + this.toaster.height * 3 / 4, 'LOADING', TextStyles.M);
 		this.loadingText.fill = TextColors.YELLOW;
 		this.loadingText.anchor.set(0.5);
 		this.game.time.events.loop(Phaser.Timer.SECOND / 4, this.updateLoadingText, this);
@@ -110,6 +110,9 @@ States.Load = {
 		this.game.load.image('GameplayInstr2', 'assets/images/ui/instructions-space.png');
 		this.game.load.spritesheet('PressSpace', 'assets/images/ui/space.png', 395, 393);
 		this.game.load.image('YellowBackground1', 'assets/images/ui/yellow-background-1.png');
+		this.game.load.image('PurpleGradientLeft', 'assets/images/ui/purple-gradient-left.png');
+		this.game.load.image('PurpleGradientRight', 'assets/images/ui/purple-gradient-right.png');
+		this.game.load.image('PurpleGradientBottom', 'assets/images/ui/purple-gradient-bottom.png');
 
 		// Songs cassettes
 		this.game.load.image('PumpedUpKicksCassette', 'assets/images/songs/pumped-up-kicks.png');
@@ -140,20 +143,20 @@ States.Load = {
 
 	updateLoadingText: function() {
 		switch (this.loadingText.text) {
-			case 'Loading':
-				this.loadingText.setText(' Loading.');
+			case 'LOADING':
+				this.loadingText.setText(' LOADING.');
 				break;
-			case ' Loading.':
-				this.loadingText.setText('  Loading..');
+			case ' LOADING.':
+				this.loadingText.setText('  LOADING..');
 				break;
-			case '  Loading..':
-				this.loadingText.setText('   Loading...');
+			case '  LOADING..':
+				this.loadingText.setText('   LOADING...');
 				break;
-			case '   Loading...':
-				this.loadingText.setText('Loading');
+			case '   LOADING...':
+				this.loadingText.setText('LOADING');
 				break;
 			default:
-				this.loadingText.setText('Loading');
+				this.loadingText.setText('LOADING');
 		}
 	},
 

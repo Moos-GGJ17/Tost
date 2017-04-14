@@ -15,6 +15,11 @@ SongSelector.prototype = Object.create(Phaser.Group.prototype);
 SongSelector.prototype.constructor = SongSelector;
 
 SongSelector.prototype.initialize = function() {
+    let purpleGradient = this.game.add.sprite(0, this.game.world.height, 'PurpleGradientBottom');
+    const purpleGradientScaleMeasure = this.game.world.width / purpleGradient.width;
+    purpleGradient.scale.setTo(purpleGradientScaleMeasure, 1);
+    purpleGradient.anchor.set(0, 1);
+
     this.initializeCassettes();
     this.initializeTexts();
     this.loadSongPreview();
