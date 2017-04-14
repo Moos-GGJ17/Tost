@@ -72,6 +72,11 @@ States.Play = {
 		//this.backgroundGray.addToWorld(0, 0);
 		//this.game.world.bringToTop(this.background);
 		//this.background = this.game.add.sprite(0, 0, Songs[this.game.songToLoadIndex].filename + 'Background');
+		this.purpleGradient.destroy();
+		this.purpleGradient = this.game.add.sprite(0, this.game.world.height, 'PurpleGradientBottom');
+		const purpleGradientScaleMeasure = this.game.world.width / this.purpleGradient.width;
+		this.purpleGradient.scale.setTo(purpleGradientScaleMeasure, 1);
+		this.purpleGradient.anchor.set(0, 1);
 		this.game.player = new Player(this.game, this.game.world.centerX / 2, this.game.world.height * 3 / 4);
 		this.game.chart = new Chart(this.game);
 		this.game.scoreUI = new ScoreUI(this.game); // Displays the score
@@ -83,7 +88,7 @@ States.Play = {
 		// Hide/destroy instructions UI elements
 		this.game.pressSpaceAnimation.alpha = 0;
 		this.instrText.destroy();
-		this.purpleGradient.destroy();
+		//this.purpleGradient.destroy();
 		//this.instrTop.destroy();
 		//this.instrBottom.destroy();
 
@@ -92,9 +97,6 @@ States.Play = {
 		this.game.input.onDown.remove(this.play, this);
 
 		this.startedPlaying = true;
-
-		//this.game.world.bringToTop(this.game.scoreUI);
-		//this.game.world.bringToTop(this.game.vitalWave);
 	},
 
 	// Updates all the game's objects.
@@ -106,7 +108,15 @@ States.Play = {
 
 			// Decrease colored background alpha based on player's life
 			if (this.game.player.life < PlayerData.MAX_LIFE - 1) {
-				this.background.alpha = this.game.player.life / (PlayerData.MAX_LIFE - 1);
+				let opacity = this.game.player.life / (PlayerData.MAX_LIFE - 1);
+				this.background.alpha = opacity;
+				this.purpleGradient.alpha = opacity;
+			}
+
+			// Remove purple gradient if player won
+			if (this.game.chart.gameState === ChartData.GAME_STATE['WIN'] ||
+				this.game.chart.gameState === ChartData.GAME_STATE['LOSE']) {
+				this.purpleGradient.alpha = 0;
 			}
 		}
 	},
@@ -120,6 +130,7 @@ States.Play = {
 	shutdown: function() {
 		this.background.destroy();
 		this.backgroundGray.destroy();
+		this.purpleGradient.destroy();
 		this.game.pressSpaceAnimation.destroy();
 		this.instrText.destroy();
 		//this.instrBottom.destroy();

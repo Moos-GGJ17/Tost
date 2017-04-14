@@ -124,6 +124,7 @@ SongSelector.prototype.moveCassettesLeft = function() {
         this.cassettes.push(this.cassettes.shift());
         this.currentSongIndex = this.calculateNextSongIndex(this.currentSongIndex);
         this.updateCassettesEvents();
+        this.updateCassettesImages();
         this.songPreview.onFadeComplete.addOnce(this.loadSongPreview, this);
         this.songPreview.fadeOut(250);
         this.updateSongNameText();
@@ -137,6 +138,7 @@ SongSelector.prototype.moveCassettesRight = function() {
         this.cassettes.unshift(this.cassettes.pop());
         this.currentSongIndex = this.calculatePreviousSongIndex(this.currentSongIndex);
         this.updateCassettesEvents();
+        this.updateCassettesImages();
         this.songPreview.onFadeComplete.addOnce(this.loadSongPreview, this);
         this.songPreview.fadeOut(250);
         this.updateSongNameText();

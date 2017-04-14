@@ -44,7 +44,7 @@ States.Load = {
 		this.game.time.events.loop(Phaser.Timer.SECOND / 4, this.updateLoadingText, this);
 
 		//	Progress report
-    	this.progressText = this.game.add.text(this.game.world.centerX, this.toaster.y - this.toaster.height * 3 / 4, '0%', TextStyles.XXL);
+    	this.progressText = this.game.add.text(this.game.world.centerX, this.toaster.y - this.toaster.height * 3 / 4, '0', TextStyles.XXL);
 		this.progressText.fill = TextColors.LIGHT_YELLOW;
 		this.progressText.anchor.set(0.5);
 
@@ -116,7 +116,7 @@ States.Load = {
 
 		// Songs cassettes
 		this.game.load.image('PumpedUpKicksCassette', 'assets/images/songs/pumped-up-kicks.png');
-		this.game.load.image('BreakingTheLawCassette', 'assets/images/songs/pumped-up-kicks.png');
+		this.game.load.image('BreakingTheLawCassette', 'assets/images/songs/breaking-the-law.png');
 		//this.game.load.image('ibizaCassette', 'assets/images/songs/ibiza.png');
 		//this.game.load.image('sorryCassette', 'assets/images/songs/sorry.png');
 		//this.game.load.image('neverCassette', 'assets/images/songs/never.png');
@@ -138,21 +138,21 @@ States.Load = {
 
 	// Update the progress text each time a file has loaded
 	fileComplete: function(progress, cacheKey, success, totalLoaded, totalFiles) {
-		this.progressText.setText(progress + "%");
+		this.progressText.setText(progress);
 	},
 
 	updateLoadingText: function() {
 		switch (this.loadingText.text) {
 			case 'LOADING':
-				this.loadingText.setText(' LOADING.');
+				this.loadingText.setText('.LOADING.');
 				break;
-			case ' LOADING.':
-				this.loadingText.setText('  LOADING..');
+			case '.LOADING.':
+				this.loadingText.setText('..LOADING..');
 				break;
-			case '  LOADING..':
-				this.loadingText.setText('   LOADING...');
+			case '..LOADING..':
+				this.loadingText.setText('...LOADING...');
 				break;
-			case '   LOADING...':
+			case '...LOADING...':
 				this.loadingText.setText('LOADING');
 				break;
 			default:
