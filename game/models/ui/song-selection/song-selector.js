@@ -29,7 +29,7 @@ SongSelector.prototype.initialize = function() {
 
 SongSelector.prototype.initializeTexts = function() {
     this.selectSongText = this.game.add.text(this.game.world.centerX, this.game.world.height / 5, "SELECT A SONG", TextStyles.L);
-    this.selectSongText.fill = TextColors.WHITE;
+    this.selectSongText.fill = TextColors.YELLOW;
     this.selectSongText.anchor.set(0.5);
     //this.selectSongText.setTextBounds(this.game.world.centerX - 200, this.game.world.height / 5 - 50, 400, 100);
 

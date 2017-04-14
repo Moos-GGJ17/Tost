@@ -30,15 +30,22 @@ States.Load = {
 		const backgroundScaleMeasure = this.game.world.height / this.background.height;
 		this.background.scale.setTo(backgroundScaleMeasure, backgroundScaleMeasure);
 
+		this.toaster = this.game.add.sprite(0, 0, 'Toaster');
+		const toasterScaleMeasure = (this.game.world.width / 2) / this.toaster.width;
+		this.toaster.scale.setTo(toasterScaleMeasure, toasterScaleMeasure);
+		this.toaster.x = this.game.world.centerX;
+		this.toaster.y = this.game.world.centerY - this.toaster.height / 4;
+		this.toaster.anchor.set(0.5);
+
 		//	'Loading' pseudo-animation
-    	this.loadingText = this.game.add.text(this.game.world.centerX, this.game.world.height * 6 / 7, 'Loading', TextStyles.M);
-		this.loadingText.fill = TextColors.WHITE;
+    	this.loadingText = this.game.add.text(this.game.world.centerX, this.toaster.y + this.toaster.height * 3 / 4, 'Loading', TextStyles.M);
+		this.loadingText.fill = TextColors.YELLOW;
 		this.loadingText.anchor.set(0.5);
 		this.game.time.events.loop(Phaser.Timer.SECOND / 4, this.updateLoadingText, this);
 
 		//	Progress report
-    	this.progressText = this.game.add.text(this.game.world.centerX, this.game.world.height * 2 / 7, '0%', TextStyles.XXL);
-		this.progressText.fill = TextColors.WHITE;
+    	this.progressText = this.game.add.text(this.game.world.centerX, this.toaster.y - this.toaster.height * 3 / 4, '0%', TextStyles.XXL);
+		this.progressText.fill = TextColors.LIGHT_YELLOW;
 		this.progressText.anchor.set(0.5);
 
 		this.game.load.onFileComplete.add(this.fileComplete, this);
@@ -95,7 +102,6 @@ States.Load = {
 		this.game.load.image('ToastGray', 'assets/images/toast/gray.png');
 
 		// UI
-		this.game.load.image('Toaster', 'assets/images/ui/toaster.png');
 		this.game.load.image('SongSelectInstr1', 'assets/images/ui/song-selection/instructions-1.png');
 		this.game.load.image('SongSelectInstr2', 'assets/images/ui/song-selection/instructions-2.png');
 		this.game.load.image('GameOver', 'assets/images/ui/game-over.png');
@@ -154,5 +160,7 @@ States.Load = {
 	shutdown: function() {
 		this.background.destroy();
 		this.progressText.destroy();
+		this.loadingText.destroy();
+		this.toaster.destroy();
 	}
 };

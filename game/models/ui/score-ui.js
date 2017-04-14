@@ -14,7 +14,7 @@ ScoreUI.prototype.constructor = ScoreUI;
 
 ScoreUI.prototype.initialize = function() {
 	this.grayBar = this.game.add.graphics();
-    this.grayBar.beginFill(0x000000, 0.2);
+    this.grayBar.beginFill(0xdfb330, 0.5);
     this.grayBar.drawRect(0, 0, this.game.world.width, 50);
     this.createScoreText();
 	//this.createTweens();

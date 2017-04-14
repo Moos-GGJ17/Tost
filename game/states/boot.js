@@ -15,6 +15,7 @@ States.Boot = {
         this.game.scale.leaveIncorrectOrientation.add(this.handleCorrectOrientation, this);
 
 		this.game.load.image('YellowBackground2', 'assets/images/ui/yellow-background-2.png');
+		this.game.load.image('Toaster', 'assets/images/ui/toaster.png');
 		//this.game.load.spritesheet('Loading', 'assets/images/loading-2.jpg', LOADING_MEASURES.width, LOADING_MEASURES.height);
 	},
 
