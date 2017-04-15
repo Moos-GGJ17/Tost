@@ -53,8 +53,8 @@ States.Load = {
 
 		// Calculate some variables that vary based on the screen size
 		ChartData.calculateNotePositions(GAME_BOUNDS.x);
-		ChartData.calculateNoteVelocity(GAME_BOUNDS.y);
-		PlayerData.calculateHorizontalVelocity(GAME_BOUNDS.x);
+		//ChartData.calculateNoteVelocity(GAME_BOUNDS.y);
+		//PlayerData.calculateHorizontalVelocity(GAME_BOUNDS.x);
 
 		// Songs audio
 		this.game.load.audio('PumpedUpKicks', 'assets/audio/songs/pumped-up-kicks.m4a');

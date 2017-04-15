@@ -17,5 +17,5 @@ PlayerData.defaultHorizontalVelocity = 1000;
 
 // Calculates the x-velocity of the player, based on a given width
 PlayerData.calculateHorizontalVelocity = function(width) {
-    PlayerData.defaultHorizontalVelocity = 1000 * width / 800;
+    PlayerData.defaultHorizontalVelocity = (800 + ChartData.DIFFICULTY[ChartData.currentDifficulty] * 50) * width / 800;
 }

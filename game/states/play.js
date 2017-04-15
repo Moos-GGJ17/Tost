@@ -72,6 +72,9 @@ States.Play = {
 		//this.backgroundGray.addToWorld(0, 0);
 		//this.game.world.bringToTop(this.background);
 		//this.background = this.game.add.sprite(0, 0, Songs[this.game.songToLoadIndex].filename + 'Background');
+		ChartData.calculateNoteVelocity(this.game.world.height);
+		PlayerData.calculateHorizontalVelocity(this.game.world.width);
+
 		this.purpleGradient.destroy();
 		this.purpleGradient = this.game.add.sprite(0, this.game.world.height, 'PurpleGradientBottom');
 		const purpleGradientScaleMeasure = this.game.world.width / this.purpleGradient.width;
