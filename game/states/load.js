@@ -108,7 +108,8 @@ States.Load = {
 		this.game.load.image('Tosted', 'assets/images/ui/tosted.png');
 		this.game.load.image('GameplayInstr1', 'assets/images/ui/instructions.png');
 		this.game.load.image('GameplayInstr2', 'assets/images/ui/instructions-space.png');
-		this.game.load.spritesheet('PressSpace', 'assets/images/ui/space.png', 395, 393);
+		//this.game.load.spritesheet('PressSpace', 'assets/images/ui/space.png', 395, 393);
+		this.game.load.spritesheet('TouchScreen', 'assets/images/ui/touch.png', 49, 109);
 		this.game.load.image('YellowBackground1', 'assets/images/ui/yellow-background-1.png');
 		this.game.load.image('PurpleGradientLeft', 'assets/images/ui/purple-gradient-left.png');
 		this.game.load.image('PurpleGradientRight', 'assets/images/ui/purple-gradient-right.png');

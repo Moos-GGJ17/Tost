@@ -40,11 +40,11 @@ States.Play = {
 		this.purpleGradient.scale.setTo(1, purpleGradientScaleMeasure);
 
 		// Instruction UI elements
-		this.game.pressSpaceAnimation = this.game.add.sprite(this.game.world.width / 2, this.game.world.height * 3 / 4, 'PressSpace');
-		this.game.pressSpaceAnimation.anchor.setTo(0.5, 0.5);
-		this.game.pressSpaceAnimation.scale.setTo(0.5, 0.5);
-		this.game.pressSpaceAnimation.animations.add('Press');
-		this.game.pressSpaceAnimation.animations.play('Press', 3, true);
+		this.game.touchScreenAnimation = this.game.add.sprite(this.game.world.width / 2, this.game.world.height * 3 / 4, 'TouchScreen');
+		this.game.touchScreenAnimation.anchor.setTo(0.5, 0.5);
+		//this.game.touchScreenAnimation.scale.setTo(0.5, 0.5);
+		this.game.touchScreenAnimation.animations.add('Touch');
+		this.game.touchScreenAnimation.animations.play('Touch', 10, true);
 
 		this.instrText = this.game.add.text(this.game.world.centerX, this.game.world.centerY, "TOUCH THE SCREEN\nTO CHANGE THE\nDIRECTION", TextStyles.M);
 		this.instrText.fill = TextColors.WHITE;
@@ -89,7 +89,7 @@ States.Play = {
 		this.game.chart.load(Songs[this.game.songToLoadIndex]);
 
 		// Hide/destroy instructions UI elements
-		this.game.pressSpaceAnimation.alpha = 0;
+		this.game.touchScreenAnimation.alpha = 0;
 		this.instrText.destroy();
 		//this.purpleGradient.destroy();
 		//this.instrTop.destroy();
@@ -134,7 +134,7 @@ States.Play = {
 		this.background.destroy();
 		this.backgroundGray.destroy();
 		this.purpleGradient.destroy();
-		this.game.pressSpaceAnimation.destroy();
+		this.game.touchScreenAnimation.destroy();
 		this.instrText.destroy();
 		//this.instrBottom.destroy();
 		//this.instrTop.destroy();
@@ -143,7 +143,7 @@ States.Play = {
 		this.game.player.destroy();
 		this.game.chart.deepDestroy();
 
-		this.game.pressSpaceAnimation = null;
+		this.game.touchScreenAnimation = null;
 		this.game.vitalWave = null;
 		this.game.scoreUI = null;
 		this.game.player = null;
