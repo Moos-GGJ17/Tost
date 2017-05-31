@@ -35,7 +35,7 @@ ChartData.MAX_DIFFICULTY = 5;
 
 // Calculate the y-velocity of the notes based on a given height
 ChartData.calculateNoteVelocity = function(height) {
-	ChartData.defaultNoteVelocity = 200 * height / 600;
+	ChartData.defaultNoteVelocity = (50 + ChartData.DIFFICULTY[ChartData.currentDifficulty] * 45) * height / 600;
 }
 
 // Calculate positions based on the given width, so the positions are evenly distributed

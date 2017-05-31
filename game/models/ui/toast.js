@@ -3,6 +3,9 @@ function Toast(game, x, y) {
 	Phaser.Sprite.call(this, game, x, y,'ToastGray');
 	this.game = game;
 	this.game.add.existing(this);
+
+	const scaleMeasure = (this.game.world.width / 4) / this.width;
+	this.scale.setTo(scaleMeasure, scaleMeasure);
 }
 
 Toast.prototype = Object.create(Phaser.Sprite.prototype);

@@ -5,16 +5,18 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <link rel="stylesheet" href="assets/styles/orientation.css">
   
 	<style type="text/css">
 	  @font-face {
 	    font-family:"8-BITWONDER";
-	    src: url('assets/fonts/8-BIT WONDER.ttf') format('truetype');
+	    src: url('assets/fonts/Press-Start-2P.ttf') format('truetype');
 	  }
 	</style>
 
 	<script type="text/javascript" src="lib/phaser.min.js" ></script>
 	<script type="text/javascript" src="lib/webfont.js" ></script>
+	<script type="text/javascript" src="lib/swipe.js" ></script>
 	<!--<script type="text/javascript" src="lib/fontfaceobserver.js" ></script>-->
 
 	<script type="text/javascript" src="game/models/custom-loader.js" ></script>
@@ -35,12 +37,14 @@
 	<script type="text/javascript" src="game/models/chart/chart.js" ></script>
 	<script type="text/javascript" src="game/models/chart/note-generator.js" ></script>
 
+	<script type="text/javascript" src="game/models/ui/text-style.js" ></script>
 	<script type="text/javascript" src="game/models/ui/vital-wave.js" ></script>
 	<script type="text/javascript" src="game/models/ui/end-game-message.js" ></script>
 	<script type="text/javascript" src="game/models/ui/toast.js" ></script>
 	<script type="text/javascript" src="game/models/ui/score-ui.js" ></script>
-	<script type="text/javascript" src="game/models/ui/cassette.js" ></script>
-	<script type="text/javascript" src="game/models/ui/difficulty-selector.js" ></script>
+	<script type="text/javascript" src="game/models/ui/song-selection/cassette.js" ></script>
+	<script type="text/javascript" src="game/models/ui/song-selection/song-selector.js" ></script>
+	<script type="text/javascript" src="game/models/ui/song-selection/difficulty-selector.js" ></script>
 
 	<script type="text/javascript" src="game/states/boot.js" ></script>
 	<script type="text/javascript" src="game/states/load.js" ></script>
@@ -49,11 +53,13 @@
 	<script type="text/javascript" src="game/main.js" ></script>
 
 	<script type="text/javascript" src="assets/charts/pumped-up-kicks.js"></script>
+	<script type="text/javascript" src="assets/charts/breaking-the-law.js"></script>
 	<!--<script type="text/javascript" src="assets/charts/ibiza.js"></script>
 	<script type="text/javascript" src="assets/charts/funkytown.js" ></script>
 	<script type="text/javascript" src="assets/charts/sorry.js"></script>
 	<script type="text/javascript" src="assets/charts/never.js"></script>-->
 </head>
 <body>
+	<div id="orientation-image"></div>
 </body>
 </html>

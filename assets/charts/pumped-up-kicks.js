@@ -1,6 +1,6 @@
 Songs.push({
-	"name" : "Pumped Up Kicks",
-	"artist" : "Foster the People",
+	"name" : "PUMPED UP KICKS",
+	"artist" : "FOSTER THE PEOPLE",
 	"filename": "PumpedUpKicks",
 	"bpm" : 120,
 	"notes" : [
